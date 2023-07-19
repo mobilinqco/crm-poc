@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.CustomControls.EditControls.Views.ImageItemControlView">
+    <ContentView.Content>
+        <Grid HorizontalOptions="Start">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+              <Image Grid.Column="0" HorizontalOptions="Start" IsEnabled="{Binding ControlEnabled}"
+                     Margin="10"  HeightRequest="120" Source="{Binding FileImageSource}">
+                 <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OnImageUploadButtonTapped}" NumberOfTapsRequired="1" />
+               </Image.GestureRecognizers>
+              </Image>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

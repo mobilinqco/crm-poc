@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    x:Class="ACRM.mobile.Views.Widgets.ClientReportView">
+    <ContentView.Content>
+        <Grid Margin="0,0,0,0"  >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+          <customControls:TemplatedContentControl Item="{Binding Content}"  ItemTemplate="{StaticResource DashboardTemplateSelector}" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                />
+         
+                </Grid>
+            <Grid Grid.Row="0" HeightRequest="55" IsVisible="{Binding ReportHeaderVisablity}">
+              <Frame Margin="0" CornerRadius="0" Padding="0"  BackgroundColor="Gray" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*">
+                                    </ColumnDefinition>
+                                  <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                  <ColumnDefinition Width="Auto"></ColumnDefinition>
+                      </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal" Grid.Column="0" HorizontalOptions="CenterAndExpand" IsVisible="{Binding ActionButtonVisablity}">
+                        <Button
+                            Margin="0"
+                            BackgroundColor="Transparent"
+                            Command="{Binding ReportActionCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            Text="{Binding TickIconText}"
+                            WidthRequest="45"
+                            TextColor="White" />
+                        <Button
+                            Margin="0"
+                            BackgroundColor="Transparent"
+                            Command="{Binding ReportActionCommand}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                            Text="{Binding ActionText}"
+                            TextColor="White" />
+                    </StackLayout>
+
+                    <Button
+                            IsVisible="{Binding SendByEmail}"
+                            Margin="0"
+                            Grid.Column="2"
+                            BackgroundColor="Transparent"
+                            Command="{Binding EmailButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            Text="{Binding EmailIconText}"
+                            WidthRequest="45"
+                            TextColor="White" />
+    
+                    
+                </Grid>
+       </Frame>
+                </Grid>
+            </Grid>
+    </ContentView.Content>
+</ContentView>

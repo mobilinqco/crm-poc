@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:CustomControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    x:Class="ACRM.mobile.Views.Widgets.RecordListView">
+    <ContentView.Resources>
+        <CustomControls:HasItemConverter x:Key="HasItemConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+          
+        <Grid HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand"
+              BackgroundColor="{StaticResource SearchPageBackground}"
+              Margin="0"
+              RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!--Search Bar-->
+            <views:SearchBar Grid.Row="0"
+                             Margin="{StaticResource SearchAndListMargins}"
+                             IsVisible="{Binding SearchAndListContentData.IsSearchBarVisible}" />
+
+            <!--Data-->
+            <Grid Grid.Row="1"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Search Results !-->
+                <StackLayout Grid.Row="0"
+                             IsVisible="{Binding SearchAndListContentData.SearchResults, Converter={StaticResource HasItemConverter}}"
+                             Margin="{StaticResource SearchAndListMargins}"
+                             VerticalOptions="FillAndExpand"
+                             HorizontalOptions="FillAndExpand">
+
+                    <syncfusion:SfListView x:Name="SearchResultsList"
+                                           HorizontalOptions="FillAndExpand"
+                                           VerticalOptions="FillAndExpand"
+                                           IsScrollingEnabled="False"
+                                           Orientation="Vertical"
+                                           SelectionMode="Single"
+                                           SelectionGesture="Tap"
+                                           AutoFitMode="DynamicHeight"
+                                           ItemsSource="{Binding SearchAndListContentData.SearchResults}" 
+                                           SelectedItem="{Binding SelectedSearchResult}"
+                                           TapCommand="{Binding RecordSelectedCommand}"
+                                           SelectionBackgroundColor="{StaticResource ItemSelectedColor}"
+                                           IsScrollBarVisible="False"
+                                           LoadMoreOption="Manual"
+                                           LoadMoreCommand="{Binding LoadMoreCommand}"
+                                           LoadMoreCommandParameter="{Binding Source={x:Reference Name=SearchResultsList}}"
+                                           LoadMorePosition="Bottom"
+                                           BackgroundColor="{StaticResource SearchPageBackground}">
+                        <syncfusion:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <CustomControls:RecordListViewCell/>
+                            </DataTemplate>
+                        </syncfusion:SfListView.ItemTemplate>
+                    </syncfusion:SfListView>
+                </StackLayout>
+
+                <!--No Result Display-->
+                <StackLayout Grid.Row="0"
+                             Margin="0,40,0,0"
+                             IsVisible="{Binding SearchAndListContentData.EnableNoResultsText}"
+                             HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="CenterAndExpand">
+                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Text="&#xF120D;"
+                               BackgroundColor="Transparent"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="CenterAndExpand"
+                               FontSize="{StaticResource NoResultIconFontSize}"
+                               FontFamily="{StaticResource MaterialDesignIcons}"
+                               TextColor="{StaticResource NoResultTextColor}"
+                               Margin="{StaticResource NoResultsLabelMargins}"/>
+
+                        <Label Grid.Row="1"
+                               Text="{Binding SearchAndListContentData.NoResultsText}"
+                               FontSize="{StaticResource NoResultFontSize}"
+                               TextColor="{StaticResource NoResultTextColor}"
+                               HorizontalOptions="Center"/>
+
+                    </Grid>
+                </StackLayout>
+
+                <!--Loading indicator-->
+                <StackLayout Grid.Row="0"
+                             Margin="0,40,0,0"
+                             IsVisible="{Binding IsLoading}"
+                             HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="CenterAndExpand">
+                <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                   Color="{StaticResource ProgressColor}"
+                                   IsVisible="{Binding IsLoading}" />
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

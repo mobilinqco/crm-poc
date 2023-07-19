@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ACRM.mobile.ViewModels.Base"
+             xmlns:utils="clr-namespace:ACRM.mobile.Utils"
+             xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+             x:Class="ACRM.mobile.Views.CustomNavigationBar">
+
+    <ContentView.BindingContext>
+        <local:NavigationBarBaseViewModel />
+    </ContentView.BindingContext>
+    <ContentView.Resources>
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+    </ContentView.Resources>
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <Grid BackgroundColor="{StaticResource BarBackgroundColor}"
+                  Margin="{StaticResource PageMenuTopMargin}"
+                  IsEnabled="{Binding IsBusy, Converter={StaticResource BoolNegationConverter}}"
+                  MinimumHeightRequest="{StaticResource CustomNavigationBarHeight}"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Orientation="Horizontal"
+                             Grid.Column="0"
+                             BackgroundColor="Transparent"
+                             HorizontalOptions="StartAndExpand"
+                             >
+
+                    <Image Source="{utils:ImageResource ACRM.mobile.Resources.SharedImages.aurea.png}"
+                           Margin="5,0,0,0"
+                           IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:NavigationBarBaseViewModel}}, Path=IsBackButtonVisible, Converter={StaticResource BoolNegationConverter}}"/>
+
+                    <Button x:Name="BackButton"
+                            Text="&#xF0731;"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:NavigationBarBaseViewModel}}, Path= BackButtonCommand}"
+                            VerticalOptions="Center"
+                            WidthRequest="{StaticResource NavigationBarButtonWidth}"
+                            BackgroundColor="Transparent"
+                            FontSize="{StaticResource TopMenuTitleTextFontSize}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            TextColor="{StaticResource TopMenuTitleFontColor}"
+                            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:NavigationBarBaseViewModel}}, Path=IsBackButtonVisible}"
+                            Margin="{StaticResource NavigationBarBackButtonMargins}"/>
+                        
+                    <Label Text="{Binding Source={RelativeSource AncestorType={x:Type local:NavigationBarBaseViewModel}}, Path=PageTitle}"
+                           TextColor="{StaticResource TopMenuTitleFontColor}"
+                           BackgroundColor="Transparent"
+                           FontSize="{StaticResource TopMenuTitleTextFontSize}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"
+                           FontAttributes="None"/>
+
+                </StackLayout>
+
+                <Grid x:Name="HeaderButtonsBar"
+                             HorizontalOptions="EndAndExpand"
+                             VerticalOptions="Center"
+                             BackgroundColor="Transparent"
+                             Grid.Column="1"
+                             ColumnSpacing="{StaticResource HeaderButtonsSpacing}"
+                             Margin="0,0,5,0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--dashboard-->
+                    <Button Command="{Binding Source={RelativeSource AncestorType={x:Type local:NavigationBarBaseViewModel}}, Path=GoToHomePageCommand}"
+                            HorizontalOptions="End"
+                            BackgroundColor="Transparent"
+                            WidthRequest="{StaticResource NavigationBarButtonWidth}"
+                            Grid.Column="0"
+                            TextColor="{StaticResource TopMenuTitleFontColor}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            Margin="0"
+                            Padding="0"
+                            Text="&#xF02DC;"/>
+
+                    <!--search-->
+                    <Button Command="{Binding Source={RelativeSource AncestorType={x:Type local:NavigationBarBaseViewModel}}, Path=ShowSearchPageCommand}"
+                            HorizontalOptions="End"
+                            WidthRequest="{StaticResource NavigationBarButtonWidth}"
+                            BackgroundColor="Transparent"
+                            Grid.Column="1"
+                            TextColor="{StaticResource TopMenuTitleFontColor}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            Margin="0"
+                            Padding="0"
+                            Text="&#xF0349;"/>
+
+                    <!--settings-->
+                    <Button Command="{Binding Source={RelativeSource AncestorType={x:Type local:NavigationBarBaseViewModel}}, Path=ShowSettingsCommand}"
+                            HorizontalOptions="End"
+                            BackgroundColor="Transparent"
+                            WidthRequest="{StaticResource NavigationBarButtonWidth}"
+                            TextColor="{StaticResource TopMenuTitleFontColor}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            Grid.Column="2"
+                            Margin="0"
+                            Padding="0"
+                            Text="&#xF1323;" />
+
+                    <!--conflicts-->
+                    <Button Command="{Binding Source={RelativeSource AncestorType={x:Type local:NavigationBarBaseViewModel}}, Path=ShowConflictsCommand}"
+                            HorizontalOptions="End"
+                            WidthRequest="{StaticResource NavigationBarButtonWidth}"
+                            BackgroundColor="Transparent"
+                            Grid.Column="3"
+                            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type local:NavigationBarBaseViewModel}}, Path=HasOfflineRequestsSyncConflicts}"
+                            TextColor="Red"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            Margin="0"
+                            Padding="0"
+                            Text="&#xF002A;"
+                            />
+                    
+                </Grid>
+            </Grid>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

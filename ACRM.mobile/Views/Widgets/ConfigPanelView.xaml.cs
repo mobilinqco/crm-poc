@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using Xamarin.Forms;
+
+namespace ACRM.mobile.Views.Widgets
+{
+    public partial class ConfigPanelView : ContentView
+    {
+        public ConfigPanelView()
+        {
+            InitializeComponent();
+        }
+    }
+}
+

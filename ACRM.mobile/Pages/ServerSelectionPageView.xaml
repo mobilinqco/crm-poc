@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    x:Class="ACRM.mobile.Pages.ServerSelectionPageView"
+    CloseWhenBackgroundIsClicked="False">
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="#9cdaf1"/>
+                <Setter Property="TextColor" Value="#7dbbe6"/>
+            </Style>
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+    
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Bottom"
+            PositionOut="Center"
+            ScaleIn="1"
+            ScaleOut="0.7"
+            DurationIn="300"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"/>
+    </pages:PopupPage.Animation>
+
+    <ScrollView HorizontalOptions="Center"
+                VerticalOptions="Center">
+        <AbsoluteLayout>
+            <Frame x:Name="FrameContainer"
+                   Margin="15"
+                   HorizontalOptions="Center"
+                   BackgroundColor="{StaticResource BackgroundColor}">
+                <syncfusion:SfListView
+                    x:Name="SearchResultsList"
+                    ItemsSource="{Binding AvailableCrmInstances}"
+                    SelectedItem="{Binding SelectedServer}"
+                    VerticalOptions="FillAndExpand"
+                    SelectionMode="Single"
+                    AutoFitMode="DynamicHeight"
+                    TapCommand="{Binding CrmInstanceSelectedCommand}"
+                    SelectionBackgroundColor="{StaticResource ItemSelectedColor}"
+                    BackgroundColor="{StaticResource BackgroundColor}">
+                    <syncfusion:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid VerticalOptions="Fill"
+                                      Margin="0, 1, 0, 1"
+                                      HorizontalOptions="Fill">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0"
+                                           Text="{Binding Name}"
+                                           HorizontalOptions="Fill"
+                                           TextColor="White"
+                                           HorizontalTextAlignment="Start"
+                                           VerticalTextAlignment="Center"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           HeightRequest="{StaticResource ServerListNameLabelHeight}"/>
+
+                                    <Label Grid.Row="1"
+                                           Text="{Binding Url}"
+                                           HorizontalOptions="Fill"
+                                           FontSize="12"
+                                           TextColor="White"
+                                           HeightRequest="{StaticResource ServerListUrlLabelHeight}"
+                                           LineBreakMode="TailTruncation"
+                                           Margin="0,0,0,1"/>
+
+                                    <BoxView Grid.Row="2"
+                                             HeightRequest="1"
+                                             BackgroundColor="DarkGray"
+                                             HorizontalOptions="Fill"
+                                             Margin="0"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+            </Frame>
+            <ContentView AbsoluteLayout.LayoutFlags="PositionProportional"
+                         AbsoluteLayout.LayoutBounds="1, 0, -1, -1">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OnCloseButtonTapped}"/>
+                </ContentView.GestureRecognizers>
+                <Label Text="&#xF0159;"
+                       x:Name="CloseImage"
+                       HeightRequest="30"
+                       WidthRequest="30"
+                       FontFamily="{StaticResource MaterialDesignIcons}"
+                       FontSize="{StaticResource PopupCloseButtonFontSize}"
+                       TextColor="{StaticResource PopupCloseButtonColor}"/>
+            </ContentView>
+        </AbsoluteLayout>
+    </ScrollView>
+</pages:PopupPage>

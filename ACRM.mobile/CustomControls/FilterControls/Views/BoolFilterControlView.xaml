@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.CustomControls.FilterControls.Views.BoolFilterControlView">
+    <ContentView.Content>
+         <Grid Margin="5">
+             <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" />
+                      <ColumnDefinition Width="*" />
+                     </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                     </Grid.RowDefinitions>
+             <Label Grid.Row="0" Grid.Column="0" Margin="5"
+               FontSize="18"
+               FontAttributes="{Binding LabelFontAttributes}"
+               HorizontalOptions="Fill"
+               TextColor="Gray"
+               BackgroundColor="Transparent"
+               LineBreakMode="TailTruncation"
+               HeightRequest="30"
+               VerticalTextAlignment="Center"
+               Text="{Binding Filter.FieldInfo.Name}"></Label>
+
+           <Switch  Grid.Row="0" Grid.Column="1" IsToggled="{Binding IsSelected}" HorizontalOptions="Center" VerticalOptions="Center" ></Switch>
+            <BoxView Grid.Row="1" Grid.Column="1" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+           
+        </Grid>
+    </ContentView.Content>
+</ContentView>

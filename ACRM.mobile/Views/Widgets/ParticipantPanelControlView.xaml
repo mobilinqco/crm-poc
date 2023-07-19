@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    xmlns:widgetmodel="clr-namespace:ACRM.mobile.UIModels;assembly=ACRM.mobile"
+    x:Class="ACRM.mobile.Views.Widgets.ParticipantPanelControlView">
+    <ContentView.Resources>
+        <customControls:StringToColorConverter x:Key="StrToColorConverter"/>
+        <valueConverters:NullToBoolConverter x:Key="NullToBoolConverter"/>
+    </ContentView.Resources>
+  <ContentView.Content>
+        <Grid Margin="0,20,0,0">
+            <StackLayout Margin="0,0,0,0" Spacing="0"  Orientation="Vertical">
+                <Grid Margin="0,0,0,0" ColumnSpacing="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="Auto" ></ColumnDefinition>
+                        <ColumnDefinition Width="Auto" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" FontSize="16"  TextColor="Black" LineBreakMode="TailTruncation" Margin="10,10,0,10" HorizontalOptions="StartAndExpand" Text="{Binding Title}"></Label>
+              
+                </Grid>
+                <BoxView HeightRequest="2" HorizontalOptions="FillAndExpand" BackgroundColor="Black"></BoxView>
+                <StackLayout BindableLayout.ItemsSource="{Binding Participants}"  
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                   <BindableLayout.ItemTemplate>
+                       <DataTemplate>
+                            <Grid HorizontalOptions="Fill" VerticalOptions="Fill" Margin="0,0,0,2" BackgroundColor="WhiteSmoke">
+                                <Grid.ColumnDefinitions>
+                                     <ColumnDefinition Width="Auto" ></ColumnDefinition>
+                                     <ColumnDefinition Width="Auto" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="Auto" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                                 <BoxView Grid.Column="0" WidthRequest="7" VerticalOptions="Fill" BackgroundColor="{Binding LeftMarginColor, Converter={StaticResource StrToColorConverter}}"> </BoxView>
+                                 <Grid Grid.Column="1" HeightRequest= "75" WidthRequest ="40">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Column="0"
+                                           HeightRequest="30"
+                                           Text="{Binding ImageSource.glyph}"
+                                           FontSize="{StaticResource HeaderButtonIconSize}"
+                                           FontFamily="{StaticResource HeaderButtonImagesFont}"
+                                           TextColor="{StaticResource HeaderButtonTextColor}"
+                                           IsVisible="{Binding ImageSource.image, Converter={StaticResource NullToBoolConverter}}"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"/>
+
+                                    <Image Grid.Column="0" Style="{StaticResource profileImageStyle}" Source="{Binding ImageSource.image}" IsVisible="{Binding ImageSource.glyph, Converter={StaticResource NullToBoolConverter}}" />
+                                </Grid>
+                                <Grid Grid.Column="2" VerticalOptions="FillAndExpand" Padding="10,10,0,10" >
+                                    <Grid.RowDefinitions>
+                                     <RowDefinition Height="Auto" ></RowDefinition>
+                                     <RowDefinition Height="Auto" ></RowDefinition>
+                                      <RowDefinition Height="Auto" ></RowDefinition>
+                    
+                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" FontSize="12" Text="{Binding Name}"></Label>
+                                    <Label Grid.Row="1" FontSize="12" Text="{Binding AcceptanceDisplayText}"></Label>
+                                    <Label Grid.Row="2" FontSize="12" Text="{Binding RequirementDisplayText}"></Label>
+                                </Grid>
+                     <Button Grid.Column="3" Margin="0" Grid.Row="0" Padding="0"
+                            
+                            BackgroundColor="Transparent"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type widgetmodel:ParticipantPanelControlModel}}, Path= OpenParticipantCommand}"
+                            CommandParameter="{Binding .}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="40"
+                            HorizontalOptions="Fill"
+                            Text="&#xf0056;"
+                            TextColor="{StaticResource BackgroundColor}"
+                            VerticalOptions="Center"
+                            WidthRequest="70"  />
+                            </Grid>
+                        </DataTemplate>
+                   </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
+

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:sfCB="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"   
+    x:Class="ACRM.mobile.CustomControls.EditControls.Views.TextEditorControlView">
+    <ContentView.Content>
+        <StackLayout Spacing="0">
+            <Editor AutoSize="TextChanges"  Text="{Binding StringValue}" IsEnabled="{Binding ControlEnabled}">
+                <Editor.Behaviors>
+                    <xct:EventToCommandBehavior EventName="TextChanged" Command="{Binding DataChangedEvent}" />
+                </Editor.Behaviors>
+            </Editor>
+        </StackLayout>       
+    </ContentView.Content>
+</ContentView>

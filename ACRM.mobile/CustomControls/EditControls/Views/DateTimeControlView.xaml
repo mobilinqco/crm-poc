@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    x:Class="ACRM.mobile.CustomControls.EditControls.Views.DateTimeControlView">
+    <ContentView.Content>
+        <StackLayout
+            BackgroundColor="Transparent"
+            Orientation="Vertical"
+            HorizontalOptions="Fill"
+            HeightRequest="40"
+            >
+             <customControls:ExtendedEntry IsEnabled="{Binding ControlEnabled}"
+                 FontSize="{StaticResource EditTextFontSize}"
+                 TextColor="{StaticResource EditTextdefaultColor}"
+                 IsReadOnly="True"
+                 InputTransparent="True"
+                 VerticalOptions="FillAndExpand"
+                 BorderWidth="0"
+                 BorderColor="Transparent"
+                 Text="{Binding DateTimeString, Mode=TwoWay}"
+                 />
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer
+                Command="{Binding DateSelectorEntryCommand}"
+                CommandParameter="{Binding Field}" />
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

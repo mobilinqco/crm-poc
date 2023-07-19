@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sfCB="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Class="ACRM.mobile.CustomControls.EditControls.Views.BoolControlView">
+    <ContentView.Content>
+        <sfCB:SfComboBox ShowBorder="False" IsEnabled="{Binding ControlEnabled}"
+                         BorderColor="LightGray"
+                         DataSource="{Binding AllowedValues}"
+                         DisplayMemberPath="DisplayValue"
+                         SelectedItem="{Binding SelectedValue}">
+            <sfCB:SfComboBox.Behaviors>
+                <xct:EventToCommandBehavior EventName="ValueChanged" Command="{Binding DataChangedEvent}" />
+            </sfCB:SfComboBox.Behaviors>
+         </sfCB:SfComboBox>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,1200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xfc="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.Core"
+             xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+             xmlns:EditControls="clr-namespace:ACRM.mobile.CustomControls.EditControls;assembly=ACRM.mobile"
+             xmlns:ConfigEditControls="clr-namespace:ACRM.mobile.CustomControls.SettingsEditControls"
+             xmlns:FilterControls="clr-namespace:ACRM.mobile.CustomControls.FilterControls;assembly=ACRM.mobile"
+             xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile"
+             xmlns:editviews="clr-namespace:ACRM.mobile.CustomControls.EditControls.Views;assembly=ACRM.mobile"
+             xmlns:filterviews="clr-namespace:ACRM.mobile.CustomControls.FilterControls.Views;assembly=ACRM.mobile"
+             xmlns:viewsWidgets="clr-namespace:ACRM.mobile.Views.Widgets;assembly=ACRM.mobile"
+             mc:Ignorable="d"
+             x:Class="ACRM.mobile.App">
+    <Application.Resources>
+
+         <!-- Font and Font Sizes -->
+        <OnPlatform x:Key="MaterialDesignIcons" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="Material Design Icons" />
+            <On Platform="Android" Value="Material Design Icons" />
+            <On Platform="UWP" Value="materialdesignicons-webfont.ttf#MaterialDesign" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="HeaderButtonImagesFont" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="GlyphIconsHalflingsRegular" />
+            <On Platform="Android" Value="GlyphIconsHalflingsRegular.ttf" />
+            <On Platform="WinPhone, UWP" Value="GlyphIconsHalflingsRegular.ttf#GlyphIconsHalflingsRegular" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="SmallFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="14" />
+            <On Platform="Android, UWP, WinRT, WinPhone" Value="11" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="TopMenuTitleTextFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="22"></On>
+            <On Platform="Android, WinPhone, UWP" Value="20"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="HeaderTableCaptionTextFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="18"></On>
+            <On Platform="Android, WinPhone, UWP" Value="18"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="OrganizerHeaderSubTextFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="14"></On>
+            <On Platform="Android, WinPhone, UWP" Value="14"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="NavigationBarButtonTextFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="26"></On>
+            <On Platform="Android, WinPhone, UWP" Value="24"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="SerialEntryBarButtonTextFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="16"></On>
+            <On Platform="Android, WinPhone, UWP" Value="14"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="ExtendedEntryTextFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="16"></On>
+            <On Platform="Android, WinPhone" Value="16"></On>
+            <On Platform="UWP" Value="16"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="HeaderInfoAreaTextFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="14"></On>
+            <On Platform="Android, WinPhone, UWP" Value="15"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="QueryTitleFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="24"></On>
+            <On Platform="Android, WinPhone, UWP" Value="28"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="NoResultFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="20"></On>
+            <On Platform="Android, WinPhone, UWP" Value="20"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="NoResultIconFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="64"></On>
+            <On Platform="Android, WinPhone, UWP" Value="76"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="PopupCloseButtonFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="24"></On>
+            <On Platform="Android" Value="24"></On>
+            <On Platform="WinPhone, UWP" Value="24"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="UserActionErrorFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="20"></On>
+            <On Platform="Android, WinPhone, UWP" Value="24"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="UserActionErrorIconFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="64"></On>
+            <On Platform="Android, WinPhone, UWP" Value="76"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="HeaderButtonIconSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="28"/>
+            <On Platform="Android, WinPhone, UWP" Value="28"/>
+            <On Platform="WinPhone, UWP" Value="28"/>
+        </OnPlatform>
+
+        <OnPlatform x:Key="DocIconSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="38"/>
+            <On Platform="Android, WinPhone, UWP" Value="38"/>
+            <On Platform="WinPhone, UWP" Value="38"/>
+        </OnPlatform>
+
+         <OnPlatform x:Key="DashboardTabItemSpace" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="3" />
+            <On Platform="Android" Value="3" />
+            <On Platform="UWP, WinRT, WinPhone" Value="3" />
+        </OnPlatform>
+
+     
+        <OnPlatform x:Key="HeaderButtonsSpacing" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="32" Desktop="32"></OnIdiom>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="8" Tablet="32" Desktop="22"></OnIdiom>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="8" Tablet="32" Desktop="22"></OnIdiom>
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="ToolsButtonLabelFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="12" Tablet="16" Desktop="22"></OnIdiom>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="12" Tablet="16" Desktop="22"></OnIdiom>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="12" Tablet="16" Desktop="22"></OnIdiom>
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="ToolsButtonIconLabelFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="16"></On>
+            <On Platform="Android, WinPhone, UWP" Value="16"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="ToolsSyncButtonFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="ToolsStatusIconFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="32" Desktop="32"></OnIdiom>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="20" Tablet="32" Desktop="32"></OnIdiom>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="32" Desktop="32"></OnIdiom>
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="NewOrEditViewButtonFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="20" Desktop="32"></OnIdiom>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="32" Desktop="32"></OnIdiom>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="24" Desktop="24"></OnIdiom>
+            </On>
+        </OnPlatform>
+
+
+        <OnPlatform x:Key="LinkIconFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="24" Tablet="26" Desktop="26"></OnIdiom>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="20" Tablet="22" Desktop="24"></OnIdiom>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="12" Tablet="8" Desktop="8"></OnIdiom>
+            </On>
+        </OnPlatform>
+
+
+        <OnPlatform x:Key="CalendarModesFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="18" Desktop="22"></OnIdiom>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="18" Desktop="22"></OnIdiom>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="18" Desktop="22"></OnIdiom>
+            </On>
+        </OnPlatform>
+        <OnPlatform x:Key="SerialEntryArrorIconFontSize" x:TypeArguments="x:Double">
+               <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="26" Tablet="36" Desktop="36"></OnIdiom>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="26" Tablet="36" Desktop="36"></OnIdiom>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="16" Desktop="16"></OnIdiom>
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="AppMenuSearchTypesFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="16" Desktop="22"></OnIdiom>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="16" Desktop="22"></OnIdiom>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="16" Desktop="22"></OnIdiom>
+            </On>
+        </OnPlatform>
+
+        <!-- Colors -->
+        <Color x:Key="DefaultBackground">#FF00000</Color>
+        <Color x:Key="TransparentShadowBackground">#0FFFFFFF</Color>
+        <Color x:Key="BackgroundColor">#4384b8</Color>
+        <Color x:Key="FullScreenMapViewBackground">#ffffff</Color>
+        <Color x:Key="BarBackgroundColor">#4384b8</Color>
+        
+        <Color x:Key="TopMenuTitleFontColor">#ffffff</Color>
+        <Color x:Key="SearchPageBackground">#ffffff</Color>
+        <Color x:Key="SearchBarIconColor">#E4E4E4</Color>
+        <Color x:Key="PlaceholderTextColor">#888888</Color>
+        <Color x:Key="EntryTextColor">Black</Color>
+        <Color x:Key="HeaderInfoAreaTextColor">Black</Color>
+        <Color x:Key="NoResultTextColor">Gray</Color>
+        <Color x:Key="HeaderButtonsSeparatorColor">LightGray</Color>
+        <Color x:Key="InfoAreasHeaderBackgroundColor">#4080b0</Color>
+        <Color x:Key="RelatedInfoAreasHeaderBackgroundColor">#eeeeee</Color>
+        <Color x:Key="RecordListViewCellBackgroundColor">#eeeeee</Color>
+        <Color x:Key="RecordListViewCellTextColor">#333333</Color>
+        <Color x:Key="PopupCloseButtonColor">Red</Color>
+        <Color x:Key="ErrorIconTextColor">Red</Color>
+        <Color x:Key="UserActionErrorTextColor">Black</Color>
+        <Color x:Key="HeaderButtonTextColor">#eeeeee</Color>
+        <Color x:Key="DocButtonTextColor">Gray</Color>
+        <Color x:Key="HeaderButtonsContainerBackgroundColor">#4384b8</Color>
+        <Color x:Key="GlobalSearchPlaceholderTextColor">#cccccc</Color>
+        <Color x:Key="NewOrEditViewButtonFontColor">Black</Color>
+        <Color x:Key="LinkButtonColor">#4384b8</Color>
+        <Color x:Key="LinkEmptyButtonColor">Gray</Color>
+
+       
+        <Color x:Key="ProgressColor">#4080b0</Color>
+        <Color x:Key="ItemSelectedColor">Transparent</Color>
+
+        <Color x:Key="HeaderGrey">#aaaaaa</Color>
+        <Color x:Key="PlainGrey">#aaaaaa</Color>
+        <Color x:Key="LightGrey">#cccccc</Color>
+        <Color x:Key="Insi">#eeeeee</Color>
+        <Color x:Key="EntryGrey">Gray</Color>
+
+        <!-- Size -->
+        <OnPlatform x:Key="LoginPageMarginColumnWidth" x:TypeArguments="xfc:GridLength">
+            <On Platform="iOS" Value="5*" />
+            <On Platform="Android" Value="5*" />
+            <On Platform="WinPhone, UWP" Value="5*"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="LoginPageContentColumnWidth" x:TypeArguments="xfc:GridLength">
+            <On Platform="iOS" Value="90*" />
+            <On Platform="Android" Value="90*" />
+            <On Platform="WinPhone, UWP" Value="90*"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="LoginPageInputRowHeight" x:TypeArguments="xfc:GridLength">
+            <On Platform="iOS" Value="55" />
+            <On Platform="Android" Value="55" />
+            <On Platform="WinPhone, UWP" Value="55"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="LoginPageButtonRowHeight" x:TypeArguments="xfc:GridLength">
+            <On Platform="iOS" Value="60" />
+            <On Platform="Android" Value="60" />
+            <On Platform="WinPhone, UWP" Value="60"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="LanguagePageSelectionListHeight" x:TypeArguments="xfc:GridLength">
+            <On Platform="iOS" Value="*" />
+            <On Platform="Android" Value="*" />
+            <On Platform="WinPhone, UWP" Value="*"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="LanguagePageApplyButtonHeight" x:TypeArguments="xfc:GridLength">
+            <On Platform="iOS" Value="Auto" />
+            <On Platform="Android" Value="Auto" />
+            <On Platform="WinPhone, UWP" Value="Auto"></On>
+        </OnPlatform>
+
+
+        <OnPlatform x:Key="LoginPageServerGridHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="45" />
+            <On Platform="Android" Value="45" />
+            <On Platform="WinPhone, UWP" Value="45"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="LoginPageServerLabelColumnWidth" x:TypeArguments="xfc:GridLength">
+            <On Platform="iOS" Value="*" />
+            <On Platform="Android" Value="*" />
+            <On Platform="WinPhone, UWP" Value="*"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="LoginPageBurgerButtonColumnWidth" x:TypeArguments="xfc:GridLength">
+            <On Platform="iOS" Value="Auto" />
+            <On Platform="Android" Value="Auto" />
+            <On Platform="WinPhone, UWP" Value="Auto"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="LoginPageCogButtonColumnWidth" x:TypeArguments="xfc:GridLength">
+            <On Platform="iOS" Value="Auto" />
+            <On Platform="Android" Value="Auto" />
+            <On Platform="WinPhone, UWP" Value="Auto"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="LoginPageBurgerButtonWidth" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="45" />
+            <On Platform="Android" Value="30" />
+            <On Platform="WinPhone, UWP" Value="50"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="LoginPageCogButtonWidth" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="45" />
+            <On Platform="Android" Value="30" />
+            <On Platform="WinPhone, UWP" Value="50"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="LoginPageUsernameFrameHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="45" />
+            <On Platform="Android" Value="45" />
+            <On Platform="WinPhone, UWP" Value="45"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="LoginPagePasswordFrameHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="45" />
+            <On Platform="Android" Value="45" />
+            <On Platform="WinPhone, UWP" Value="45"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="LoginPageButtonFrameHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="50" />
+            <On Platform="Android" Value="50" />
+            <On Platform="WinPhone, UWP" Value="50"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="LanguageSelectionPageButtonFrameHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="50" />
+            <On Platform="Android" Value="50" />
+            <On Platform="WinPhone, UWP" Value="50"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="AppToolsTabHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="70" />
+            <On Platform="Android" Value="50" />
+            <On Platform="WinPhone, UWP" Value="50"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="AppToolsPageBottomLayoutHeight" x:TypeArguments="xfc:GridLength">
+            <On Platform="iOS" Value="Auto" />
+            <On Platform="Android" Value="Auto" />
+            <On Platform="WinPhone, UWP" Value="Auto"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="AppToolsPageOnlineButtonWidth" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="40" />
+            <On Platform="Android" Value="40" />
+            <On Platform="WinPhone, UWP" Value="60"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="SearchBarFrameHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="45"></On>
+            <On Platform="Android" Value="45"></On>
+            <On Platform="WinPhone, UWP" Value="60"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="CustomNavigationBarHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="45"></On>
+            <On Platform="Android, WinPhone, UWP" Value="55"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="SearchBarIconSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="24"></On>
+            <On Platform="Android, WinPhone, UWP" Value="30"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="RecordListViewCellLabelTextSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="14"></On>
+            <On Platform="Android, WinPhone, UWP" Value="16"></On>
+        </OnPlatform>
+
+         <OnPlatform x:Key="SearchBarButtonWidth" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="25"></On>
+            <On Platform="Android" Value="60"></On>
+            <On Platform="WinPhone, UWP" Value="60"></On>
+         </OnPlatform>
+
+        <OnPlatform x:Key="NavigationBarButtonWidth" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="25"></On>
+            <On Platform="Android" Value="35"></On>
+            <On Platform="WinPhone, UWP" Value="60"></On>
+         </OnPlatform>
+        <OnPlatform x:Key="RecordListViewDetailsButtonWidth" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="20"></On>
+            <On Platform="Android" Value="40"></On>
+            <On Platform="WinPhone, UWP" Value="60"></On>
+         </OnPlatform>
+
+        <OnPlatform x:Key="ServerListNameLabelHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="18"></On>
+            <On Platform="Android" Value="20"></On>
+            <On Platform="WinPhone, UWP" Value="20"></On>
+         </OnPlatform>
+        <OnPlatform x:Key="ServerListUrlLabelHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="12"></On>
+            <On Platform="Android" Value="14"></On>
+            <On Platform="WinPhone, UWP" Value="14"></On>
+         </OnPlatform>
+
+        <OnPlatform x:Key="InfoAreaHeaderHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="60"></On>
+            <On Platform="Android" Value="70"></On>
+            <On Platform="WinPhone, UWP" Value="70"></On>
+         </OnPlatform>
+
+        <OnPlatform x:Key="AppSearchMenuInfoAreaRelatedHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="18"></On>
+            <On Platform="Android" Value="20"></On>
+            <On Platform="WinPhone, UWP" Value="20"></On>
+         </OnPlatform>
+
+        <OnPlatform x:Key="ToolsBottomBarHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="45"></On>
+            <On Platform="Android" Value="45"></On>
+            <On Platform="WinPhone, UWP" Value="45"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="ToolsSyncButtonHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="20" Tablet="40" Desktop="45"></OnIdiom>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="40" Tablet="60" Desktop="45"></OnIdiom>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="20" Tablet="40" Desktop="45"></OnIdiom>
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="ToolsViewHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="450" Tablet="700" Desktop="800"/>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="450" Tablet="700" Desktop="800"/>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="300" Tablet="600" Desktop="600"/>
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="ToolsViewWidth" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="300" Tablet="600" Desktop="400"/>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="350" Tablet="700" Desktop="800"/>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="300" Tablet="600" Desktop="600"/>
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="FancyLineHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS, Android, WinPhone, UWP" Value="4"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="FancyLineWidth" x:TypeArguments="x:Double">
+            <On Platform="iOS, Android, WinPhone, UWP" Value="4"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="NewOrEditViewButtonHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="20" Tablet="24" Desktop="45"/>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="20" Tablet="40" Desktop="45"/>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="20" Tablet="30" Desktop="30"/>
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="RecordListCellDataRowSpacing" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="4"/>
+            <On Platform="Android, WinPhone" Value="4"/>
+            <On Platform="UWP" Value="4"/>
+        </OnPlatform>
+
+        <OnPlatform x:Key="RecordListCellDataLabelHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="20"/>
+            <On Platform="Android, WinPhone" Value="20"/>
+            <On Platform="UWP" Value="20"/>
+        </OnPlatform>
+
+        <OnPlatform x:Key="InsightBoardItemHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="100"/>
+            <On Platform="Android, WinPhone" Value="100"/>
+            <On Platform="UWP" Value="100"/>
+        </OnPlatform>
+
+
+        <OnPlatform x:Key="InsightBoardCollectionViewHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="100" Tablet="100" Desktop="100"/>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="100" Tablet="100" Desktop="100"/>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="100" Tablet="100" Desktop="100"/>
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="InsightBoardItemWidth" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="180" Tablet="180" Desktop="180"/>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="180" Tablet="180" Desktop="180"/>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="180" Tablet="180" Desktop="180"/>
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="InsightBoardIconSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="20"/>
+            <On Platform="Android, WinPhone, UWP" Value="20"/>
+            <On Platform="WinPhone, UWP" Value="20"/>
+        </OnPlatform>
+
+        <!-- Margins -->
+        <OnPlatform x:Key="LoginServerLabelMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="10,0,5,0" />
+            <On Platform="Android" Value="10,0,5,0" />
+            <On Platform="UWP, WinRT, WinPhone" Value="10,0,5,0" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="LoginInputEntryMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="10,0,5,0" />
+            <On Platform="Android" Value="10,0,5,0" />
+            <On Platform="UWP, WinRT, WinPhone" Value="0,0,5,0" />
+        </OnPlatform>
+        
+        <OnPlatform x:Key="CogButtonMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,0,5,0" />
+            <On Platform="Android" Value="0,0,5,0" />
+            <On Platform="UWP, WinRT, WinPhone" Value="0,0,5,0" />
+        </OnPlatform>
+        <OnPlatform x:Key="BurgerButtonMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,0,0,0" />
+            <On Platform="Android" Value="0,0,0,0" />
+            <On Platform="UWP, WinRT, WinPhone" Value="0,0,0,0" />
+        </OnPlatform>
+        <OnPlatform x:Key="LoginButtonFrameMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,10,0,0" />
+            <On Platform="Android" Value="0,10,0,0" />
+            <On Platform="UWP, WinRT, WinPhone" Value="0,10,0,0" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="LanguageButtonFrameMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,10,0,0" />
+            <On Platform="Android" Value="0,10,0,0" />
+            <On Platform="UWP, WinRT, WinPhone" Value="0,10,0,0" />
+        </OnPlatform>
+        <OnPlatform x:Key="LoginButtonMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="5" />
+            <On Platform="Android" Value="5" />
+            <On Platform="UWP, WinRT, WinPhone" Value="5" />
+        </OnPlatform>
+        <OnPlatform x:Key="LanguageApplyButtonMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="5" />
+            <On Platform="Android" Value="5" />
+            <On Platform="UWP, WinRT, WinPhone" Value="5" />
+        </OnPlatform>
+        <OnPlatform x:Key="ApplicationDetailsStackLayoutMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,0,0,20" />
+            <On Platform="Android" Value="0,0,0,20" />
+            <On Platform="UWP, WinRT, WinPhone" Value="0,0,0,20" />
+        </OnPlatform>
+        <OnPlatform x:Key="ApplicationNameMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="4,2,4,4" />
+            <On Platform="Android" Value="4,2,4,4" />
+            <On Platform="UWP, WinRT, WinPhone" Value="4,2,4,4" />
+        </OnPlatform>
+        <OnPlatform x:Key="ApplicationVersionMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="4,0,4,2" />
+            <On Platform="Android" Value="4,0,4,2" />
+            <On Platform="UWP, WinRT, WinPhone" Value="4,0,4,2" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="DashboardTabPaddings" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,100,0,20"></On>
+            <On Platform="Android" Value="0,100,0,20"></On>
+            <On Platform="WinPhone, UWP" Value="0,20,0,20"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="SearchTextBoxFramePaddings" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="10"></On>
+            <On Platform="Android" Value="2"></On>
+            <On Platform="WinPhone, UWP" Value="2"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="SearchTextBoxMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0"></On>
+            <On Platform="Android" Value="0,0, 0,0"></On>
+            <On Platform="WinPhone, UWP" Value="0"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="SearchBarButtonsMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="5,0,3,0"></On>
+            <On Platform="Android" Value="0,0,-10,0"></On>
+            <On Platform="WinPhone, UWP" Value="5,0,5,0"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="SearchBarIconMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,0,5,0"></On>
+            <On Platform="Android" Value="5,0,0,0"></On>
+            <On Platform="WinPhone, UWP" Value="5,0,5,0"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="NavigationBarBackButtonMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="5,0,5,0"></On>
+            <On Platform="Android" Value="5,0,5,0"></On>
+            <On Platform="WinPhone, UWP" Value="5,0,5,0"></On>
+        </OnPlatform>
+        
+        <OnPlatform x:Key="RecordListViewMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,0,0,5"></On>
+            <On Platform="Android, WinPhone, UWP" Value="0"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="RecordListViewDetailsButtonMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,0,10,0"></On>
+            <On Platform="Android" Value="0,0,0,0"></On>
+            <On Platform="Android, WinPhone, UWP" Value="0"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="RecordListCellDataGridPadding" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,8,0,8"></On>
+            <On Platform="Android, WinPhone, UWP" Value="0,8,0,8"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="HeaderButtonMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="10,0,10,0"/>
+            <On Platform="Android" Value="12,0,12,0"/>
+            <On Platform="WinPhone, UWP" Value="5,0,0,0"/>
+        </OnPlatform>
+
+        <OnPlatform x:Key="InsightBoardMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="5,0,5,0"/>
+            <On Platform="Android" Value="6,0,6,0"/>
+            <On Platform="WinPhone, UWP" Value="5,0,5,0"/>
+        </OnPlatform>
+
+
+        <OnPlatform x:Key="ToolsMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,45,0,20"></On>
+            <On Platform="Android" Value="0,20,0,20"></On>
+            <On Platform="WinPhone, UWP" Value="0,45,0,0"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="AppSearchMenuItemsMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="8,8,8,-4"></On>
+            <On Platform="Android" Value="8,8,8,0"></On>
+            <On Platform="WinPhone, UWP" Value="8,8,8,0"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="ToolsStatusIconMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0"></On>
+            <On Platform="Android" Value="0"></On>
+            <On Platform="WinPhone, UWP" Value="0"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="PanelCellMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,10,0,20"></On>
+            <On Platform="Android" Value="0,20,0,0"></On>
+            <On Platform="WinPhone, UWP" Value="0,20,0,0"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="SearchAndListMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="20,0,20,0"></On>
+            <On Platform="Android" Value="20,0,20,0"></On>
+            <On Platform="WinPhone, UWP" Value="20,0,20,0"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="NoResultsLabelMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="30,0,30,0"></On>
+            <On Platform="Android" Value="30,0,30,0"></On>
+            <On Platform="WinPhone, UWP" Value="30,0,30,0"></On>
+        </OnPlatform>
+        
+        <OnPlatform x:Key="PageMenuTopMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="Thickness" Phone="0,15,0,0" Tablet="0" Desktop="0"/>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="Thickness" Phone="0" Tablet="0" Desktop="0"/>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="Thickness" Phone="0" Tablet="0" Desktop="0"/>
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="PageBottomControlMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="Thickness" Phone="5,0,5,10" Tablet="0,0,0,10" Desktop="0"/>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="Thickness" Phone="0" Tablet="0" Desktop="0"/>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="Thickness" Phone="0" Tablet="0" Desktop="0"/>
+            </On>
+        </OnPlatform>
+
+
+        <OnPlatform x:Key="CalendarControlsMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="Thickness" Phone="10,0,10,0" Tablet="20,0,20,0" Desktop="20,0,20,0"/>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="Thickness" Phone="10,0,10,0" Tablet="20,0,20,0" Desktop="20,0,20,0"/>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="Thickness" Phone="10,0,10,0" Tablet="20,0,20,0" Desktop="20,0,20,0"/>
+            </On>
+        </OnPlatform>
+
+        <!-- Used in the actions menu from the bottom page -->
+        <OnPlatform x:Key="ActionsImageMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS, UWP" Value="0"></On>
+            <On Platform="Android" Value="0,0,0,-6"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="ActionsLabelMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS, UWP" Value="0"></On>
+            <On Platform="Android" Value="0,-2,0,0"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="SearchResultsMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS, Android, UWP" Value="20,0,20,0"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="AppToolsCloseButtonMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS, Android, UWP" Value="0,0,8,0"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="AppPopupContentPadding" x:TypeArguments="Thickness">
+            <On Platform="iOS, Android, UWP" Value="20"></On>
+        </OnPlatform>
+
+        <!-- Paddings -->
+        <OnPlatform x:Key="ToolsOnlineLabelPadding" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,0,15,0"></On>
+            <On Platform="Android" Value="0,0,15,0"></On>
+            <On Platform="WinPhone, UWP" Value="0,0,10,0"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="PagePadding" x:TypeArguments="Thickness">
+            <On Platform="iOS, UWP" Value="0,20,0,0"></On>
+            <On Platform="Android" Value="0"></On>
+        </OnPlatform>
+        
+        <OnPlatform x:Key="SearchBarPadding" x:TypeArguments="Thickness">
+            <On Platform="iOS, UWP, Android" Value="0,5,0,5"></On>
+        </OnPlatform>
+
+
+        <!-- PanelCell Style Settings -->
+        <Color x:Key="PanelCellTitleTextColor">Black</Color>
+        <OnPlatform x:Key="PanelCellTitleTextSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="16"></On>
+            <On Platform="Android, WinPhone, UWP" Value="16"></On>
+        </OnPlatform>
+
+        <Color x:Key="PanelCellLabelTextColor">Gray</Color>
+        <Color x:Key="PanelCellLabelTextEmtpyColor">LightGray</Color>
+        <OnPlatform x:Key="PanelCellLabelFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="14"></On>
+            <On Platform="Android, WinPhone, UWP" Value="12"></On>
+        </OnPlatform>
+
+        <Color x:Key="PanelCellDataTextColor">Black</Color>
+        <OnPlatform x:Key="PanelCellDataFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="16"></On>
+            <On Platform="Android, WinPhone, UWP" Value="14"></On>
+        </OnPlatform>
+
+        <Color x:Key="EditTextdefaultColor">Black</Color>
+        <OnPlatform x:Key="EditTextFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="16" />
+            <On Platform="Android, WinPhone, UWP" Value="15" />
+        </OnPlatform>
+
+
+
+        <!-- View Styles -->
+        <Style x:Key="AppSearchMenuStyle" TargetType="Grid">
+            <Setter Property="HorizontalOptions" Value="End"/>
+            <Setter Property="VerticalOptions" Value="Fill"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
+        </Style>
+
+        <Style x:Key="AppPopupStackViewStyle" TargetType="StackLayout">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
+            <Setter Property="WidthRequest" Value="{StaticResource ToolsViewWidth}"/>
+            <Setter Property="HeightRequest" Value="{StaticResource ToolsViewHeight}"/>
+        </Style>
+        <Style x:Key="AppPopupGridViewStyle" TargetType="Grid">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}"/>
+            <Setter Property="WidthRequest" Value="{StaticResource ToolsViewWidth}"/>
+            <Setter Property="HeightRequest" Value="{StaticResource ToolsViewHeight}"/>
+        </Style>
+         <Style x:Key="FilterUIStyle" TargetType="Grid">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="HeightRequest" Value="100"/>
+            <Setter Property="WidthRequest" Value="400"/>
+        </Style>
+
+        <Color x:Key="RecordSelectorBackgroundColor">White</Color>
+        <Color x:Key="RecordSelectorTitleFontColor">Black</Color>
+        <Color x:Key="RecordSelectorCancelButtonFontColor">Black</Color>
+        <Color x:Key="RecordSelectorApplyButtonFontColor">Black</Color>
+        <Color x:Key="RecordSelectorTitleBackgroundColor">#E4E4E4</Color>
+        
+        <OnPlatform x:Key="RecordSelectorTitleFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="18"></On>
+            <On Platform="Android, WinPhone, UWP" Value="18"></On>
+        </OnPlatform>
+        <OnPlatform x:Key="RecordSelectorButtonsFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="18"></On>
+            <On Platform="Android, WinPhone, UWP" Value="18"></On>
+        </OnPlatform>
+        <Style x:Key="RecordSelectorStyle" TargetType="Grid">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource RecordSelectorBackgroundColor}"/>
+            <Setter Property="HeightRequest" Value="100"/>
+            <Setter Property="WidthRequest" Value="400"/>
+        </Style>
+          <Style x:Key="NameLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />                
+            </Style>
+
+            <Style x:Key="profileImageStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="80" />
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="Aspect" Value="AspectFit" />
+            </Style>
+
+            <Style x:Key="DocImageStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="80" />
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="Aspect" Value="AspectFit" />
+            </Style>
+
+            <Style x:Key="FrameCardViewStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="OutlineColor" Value="LightGray" />
+                <Setter Property="BorderColor" Value="LightGray" />
+                <Setter Property="HasShadow" Value="False" />
+            </Style>
+
+            <Style x:Key="InsightBoardNameLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="MaxLines" Value="2"/>
+                <Setter Property="LineBreakMode" Value="WordWrap" />                
+            </Style>
+
+            <Style x:Key="InsightBoardItemStyle" TargetType="Frame">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="BackgroundColor" Value="#eeeeee" />
+                <!--<Setter Property="WidthRequest" Value="120"/>-->
+            </Style>
+
+
+        <Style x:Key="FrameDocItemViewStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="OutlineColor" Value="LightGray" />
+                <Setter Property="BorderColor" Value="LightGray" />
+                <Setter Property="HasShadow" Value="False" />
+              <Setter Property="HeightRequest" Value="90" />
+            <Setter Property="WidthRequest" Value="280" />
+            </Style>
+
+        <Style x:Key="FrameSerialEntryItemViewStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="1" />
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="OutlineColor" Value="LightGray" />
+                <Setter Property="BorderColor" Value="LightGray" />
+                <Setter Property="HasShadow" Value="False" />
+              <Setter Property="HeightRequest" Value="260" />
+            <Setter Property="WidthRequest" Value="220" />
+            </Style>
+
+        <ResourceDictionary>
+            <FilterControls:FilterControlTemplateSelector  x:Key="FilterTemplateSelector">
+                <FilterControls:FilterControlTemplateSelector.TextControlTemplate>
+                    <DataTemplate>
+                     <filterviews:TextFilterControlView />
+                    </DataTemplate>
+                 </FilterControls:FilterControlTemplateSelector.TextControlTemplate>
+                 <FilterControls:FilterControlTemplateSelector.CatalogControlTemplate>
+                    <DataTemplate>
+                     <filterviews:CatalogFilterControlView/>
+                    </DataTemplate>
+                 </FilterControls:FilterControlTemplateSelector.CatalogControlTemplate>
+                <FilterControls:FilterControlTemplateSelector.BoolControlTemplate>
+                    <DataTemplate>
+                     <filterviews:BoolFilterControlView/>
+                    </DataTemplate>
+                 </FilterControls:FilterControlTemplateSelector.BoolControlTemplate>
+                <FilterControls:FilterControlTemplateSelector.DateControlTemplate>
+                    <DataTemplate>
+                     <filterviews:DateFilterControlView/>
+                    </DataTemplate>
+                 </FilterControls:FilterControlTemplateSelector.DateControlTemplate>
+                <FilterControls:FilterControlTemplateSelector.DateRangeControlTemplate>
+                    <DataTemplate>
+                     <filterviews:DateRangeFilterControlView/>
+                    </DataTemplate>
+                 </FilterControls:FilterControlTemplateSelector.DateRangeControlTemplate>
+                <FilterControls:FilterControlTemplateSelector.TextRangeControlTemplate>
+                    <DataTemplate>
+                     <filterviews:TextRangeFilterControlView/>
+                    </DataTemplate>
+                 </FilterControls:FilterControlTemplateSelector.TextRangeControlTemplate>
+                <FilterControls:FilterControlTemplateSelector.HierarchicalCatalogControlTemplate>
+                    <DataTemplate>
+                     <filterviews:HierarchicalCatalogFilterControlView/>
+                    </DataTemplate>
+                 </FilterControls:FilterControlTemplateSelector.HierarchicalCatalogControlTemplate>
+
+             </FilterControls:FilterControlTemplateSelector>
+            <EditControls:EditControlTemplateSelector x:Key="EditTemplateSelector">
+                <EditControls:EditControlTemplateSelector.TextControlTemplate>
+                    <DataTemplate>
+                     <editviews:TextControlView />
+                    </DataTemplate>
+                 </EditControls:EditControlTemplateSelector.TextControlTemplate>
+                 <EditControls:EditControlTemplateSelector.CatalogControlTemplate>
+                    <DataTemplate>
+                     <editviews:CatalogControlView/>
+                    </DataTemplate>
+                 </EditControls:EditControlTemplateSelector.CatalogControlTemplate>
+                <EditControls:EditControlTemplateSelector.BoolControlTemplate>
+                    <DataTemplate>
+                     <editviews:BoolControlView/>
+                    </DataTemplate>
+                 </EditControls:EditControlTemplateSelector.BoolControlTemplate>
+                 <EditControls:EditControlTemplateSelector.RecordSelectorControlTemplate>
+                    <DataTemplate>
+                     <editviews:RecordSelectorControlView/>
+                    </DataTemplate>
+                 </EditControls:EditControlTemplateSelector.RecordSelectorControlTemplate>
+                 <EditControls:EditControlTemplateSelector.TextEditorControlTemplate>
+                    <DataTemplate>
+                     <editviews:TextEditorControlView/>
+                    </DataTemplate>
+                 </EditControls:EditControlTemplateSelector.TextEditorControlTemplate>
+                <EditControls:EditControlTemplateSelector.MultiSelectInputTemplate>
+                    <DataTemplate>
+                     <editviews:MultiSelectInputView/>
+                    </DataTemplate>
+                 </EditControls:EditControlTemplateSelector.MultiSelectInputTemplate>
+                <EditControls:EditControlTemplateSelector.DateTimeControlTemplate>
+                    <DataTemplate>
+                     <editviews:DateTimeControlView/>
+                    </DataTemplate>
+                 </EditControls:EditControlTemplateSelector.DateTimeControlTemplate>
+                <EditControls:EditControlTemplateSelector.ImageInputTemplate>
+                    <DataTemplate>
+                     <editviews:ImageItemControlView/>
+                    </DataTemplate>
+                 </EditControls:EditControlTemplateSelector.ImageInputTemplate>
+                 <EditControls:EditControlTemplateSelector.NotSupportedControlTemplate>
+                    <DataTemplate>
+                    <Label Text="Field type not yet supported" TextColor="Red" />
+                    </DataTemplate>
+                 </EditControls:EditControlTemplateSelector.NotSupportedControlTemplate>
+             </EditControls:EditControlTemplateSelector>
+            <customControls:DashboardTemplateSelector x:Key="DashboardTemplateSelector">
+                <customControls:DashboardTemplateSelector.DashboardCalender>
+                    <DataTemplate>
+                     <views:DashboardCalender />
+                    </DataTemplate>
+                </customControls:DashboardTemplateSelector.DashboardCalender>
+               <customControls:DashboardTemplateSelector.InsightBoard>
+                    <DataTemplate>
+                      <views:InsightBoard />
+                    </DataTemplate>
+                </customControls:DashboardTemplateSelector.InsightBoard>
+                <customControls:DashboardTemplateSelector.FieldPanel>
+                    <DataTemplate>
+                       <viewsWidgets:DiplayPanelView/>
+                    </DataTemplate>
+                </customControls:DashboardTemplateSelector.FieldPanel>
+                <customControls:DashboardTemplateSelector.MapControl>
+                    <DataTemplate>
+                       <viewsWidgets:MapView/>
+                    </DataTemplate>
+               </customControls:DashboardTemplateSelector.MapControl>
+                <customControls:DashboardTemplateSelector.RecordList>
+                    <DataTemplate>
+                       <viewsWidgets:RecordListView/>
+                    </DataTemplate>
+               </customControls:DashboardTemplateSelector.RecordList>
+               <customControls:DashboardTemplateSelector.UnsupportedType>
+                    <DataTemplate>
+                       <viewsWidgets:UnsupportedTypeView/>
+                    </DataTemplate>
+               </customControls:DashboardTemplateSelector.UnsupportedType>
+               <customControls:DashboardTemplateSelector.ParticipantPanel>
+                    <DataTemplate>
+                       <viewsWidgets:ParticipantPanelControlView/>
+                    </DataTemplate>
+               </customControls:DashboardTemplateSelector.ParticipantPanel>
+               <customControls:DashboardTemplateSelector.ChildRecordsPanel>
+                    <DataTemplate>
+                       <viewsWidgets:ChildRecordsView/>
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.ChildRecordsPanel>
+              <customControls:DashboardTemplateSelector.RecordViewDetailsPanel>
+                    <DataTemplate>
+                       <viewsWidgets:DetailPanelsView/>
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.RecordViewDetailsPanel>
+              <customControls:DashboardTemplateSelector.CalendarControl>
+                    <DataTemplate>
+                       <viewsWidgets:CalendarControlView/>
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.CalendarControl>
+             <customControls:DashboardTemplateSelector.WebViewControl>
+                    <DataTemplate>
+                       <viewsWidgets:WebControlView/>
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.WebViewControl>
+              <customControls:DashboardTemplateSelector.PDFViewerControl>
+                    <DataTemplate>
+                       <viewsWidgets:PdfViewerControlView/>
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.PDFViewerControl>
+              <customControls:DashboardTemplateSelector.EditControlTemplate>
+                    <DataTemplate>
+                       <editviews:EditPanelControlView />
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.EditControlTemplate>
+               <customControls:DashboardTemplateSelector.EditChildPanelTemplate>
+                    <DataTemplate>
+                        <editviews:EditChildPanelControlView />
+                    </DataTemplate>
+                </customControls:DashboardTemplateSelector.EditChildPanelTemplate>
+                <customControls:DashboardTemplateSelector.SerialEntryEditPanelTemplate>
+                    <DataTemplate>
+                       <editviews:SerialEntryEditPanelView />
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.SerialEntryEditPanelTemplate>
+             <customControls:DashboardTemplateSelector.WebViewPanelControl>
+                    <DataTemplate>
+                       <viewsWidgets:WebControlPanelView/>
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.WebViewPanelControl>
+              <customControls:DashboardTemplateSelector.SerialEntryListingControl>
+                    <DataTemplate>
+                       <viewsWidgets:SerialEntryListingView/>
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.SerialEntryListingControl>
+              <customControls:DashboardTemplateSelector.DocPanelControl>
+                    <DataTemplate>
+                       <viewsWidgets:DocumentsPanelView/>
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.DocPanelControl>
+                <customControls:DashboardTemplateSelector.CharacteristicsPanel>
+                    <DataTemplate>
+                        <viewsWidgets:CharacteristicsPanelView/>
+                    </DataTemplate>
+                </customControls:DashboardTemplateSelector.CharacteristicsPanel>
+                <customControls:DashboardTemplateSelector.ContactTimesPanelControl>
+                    <DataTemplate>
+                        <viewsWidgets:ContactTimesPanelView/>
+                    </DataTemplate>
+                </customControls:DashboardTemplateSelector.ContactTimesPanelControl>
+                 <customControls:DashboardTemplateSelector.ContactTimeModelControl>
+                    <DataTemplate>
+                        <viewsWidgets:ContactTimesView/>
+                    </DataTemplate>
+                </customControls:DashboardTemplateSelector.ContactTimeModelControl>
+                <customControls:DashboardTemplateSelector.DocumentViewControl>
+                    <DataTemplate>
+                        <viewsWidgets:DocumentView/>
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.DocumentViewControl>
+                <customControls:DashboardTemplateSelector.QueryViewControl>
+                    <DataTemplate>
+                        <viewsWidgets:QueryView/>
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.QueryViewControl>
+                <customControls:DashboardTemplateSelector.ParticipentEditPanelTemplate>
+                    <DataTemplate>
+                        <editviews:ParticipantEditPanelView/>
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.ParticipentEditPanelTemplate>
+                <customControls:DashboardTemplateSelector.LinkParticipentEditPanelTemplate>
+                    <DataTemplate>
+                        <editviews:LinkParticipantEditPanelView/>
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.LinkParticipentEditPanelTemplate>
+                <customControls:DashboardTemplateSelector.ClientReportControl>
+                    <DataTemplate>
+                        <viewsWidgets:ClientReportView/>
+                    </DataTemplate>
+              </customControls:DashboardTemplateSelector.ClientReportControl>
+                <customControls:DashboardTemplateSelector.QuestionnaireEditControl>
+                    <DataTemplate>
+                        <viewsWidgets:QuestionnaireEditView/>
+                    </DataTemplate>
+            </customControls:DashboardTemplateSelector.QuestionnaireEditControl>
+             <customControls:DashboardTemplateSelector.CoreReportControl>
+                    <DataTemplate>
+                        <viewsWidgets:CoreReportView/>
+                    </DataTemplate>
+            </customControls:DashboardTemplateSelector.CoreReportControl>
+            <customControls:DashboardTemplateSelector.ConfigPanelControl>
+                    <DataTemplate>
+                        <viewsWidgets:ConfigPanelView/>
+                    </DataTemplate>
+            </customControls:DashboardTemplateSelector.ConfigPanelControl>
+            <customControls:DashboardTemplateSelector.ConfigEditPanelControl>
+                    <DataTemplate>
+                        <viewsWidgets:ConfigEditPanelView/>
+                    </DataTemplate>
+            </customControls:DashboardTemplateSelector.ConfigEditPanelControl>
+                <customControls:DashboardTemplateSelector.CalendarScheduleControl>
+                    <DataTemplate>
+                        <viewsWidgets:CalendarScheduleView/>
+                    </DataTemplate>
+                </customControls:DashboardTemplateSelector.CalendarScheduleControl>
+                <customControls:DashboardTemplateSelector.CalendarListControl>
+                    <DataTemplate>
+                        <viewsWidgets:CalendarListView/>
+                    </DataTemplate>
+                </customControls:DashboardTemplateSelector.CalendarListControl>
+            </customControls:DashboardTemplateSelector>
+            <ConfigEditControls:ConfigEditControlTemplateSelector x:Key="ConfigEditTemplateSelector">
+                <ConfigEditControls:ConfigEditControlTemplateSelector.TextTemplate>
+                    <DataTemplate>
+                     <editviews:TextControlView />
+                    </DataTemplate>
+                 </ConfigEditControls:ConfigEditControlTemplateSelector.TextTemplate>
+                 <ConfigEditControls:ConfigEditControlTemplateSelector.CheckBoxTemplate>
+                    <DataTemplate>
+                     <editviews:BoolControlView/>
+                    </DataTemplate>
+                 </ConfigEditControls:ConfigEditControlTemplateSelector.CheckBoxTemplate>
+                <ConfigEditControls:ConfigEditControlTemplateSelector.ComboboxControlTemplate>
+                    <DataTemplate>
+                     <editviews:CatalogControlView/>
+                    </DataTemplate>
+                 </ConfigEditControls:ConfigEditControlTemplateSelector.ComboboxControlTemplate>
+               
+                 <ConfigEditControls:ConfigEditControlTemplateSelector.NotSupportedControlTemplate>
+                    <DataTemplate>
+                    <Label Text="Field type not yet supported" TextColor="Red" />
+                    </DataTemplate>
+                 </ConfigEditControls:ConfigEditControlTemplateSelector.NotSupportedControlTemplate>
+             </ConfigEditControls:ConfigEditControlTemplateSelector>
+            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

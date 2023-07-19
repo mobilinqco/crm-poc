@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    x:Class="ACRM.mobile.Pages.SyncPageView"
+    CloseWhenBackgroundIsClicked="False">
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="#9cdaf1"/>
+                <Setter Property="TextColor" Value="#7dbbe6"/>
+            </Style>
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+    
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Bottom"
+            PositionOut="Center"
+            ScaleIn="1"
+            ScaleOut="0.7"
+            DurationIn="300"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"/>
+    </pages:PopupPage.Animation>
+
+    <ScrollView HorizontalOptions="Center"
+                VerticalOptions="Center">
+        <AbsoluteLayout>
+            <Frame x:Name="FrameContainer"
+                   Margin="15"
+                   HorizontalOptions="Center"
+                   BackgroundColor="{StaticResource BarBackgroundColor}">
+<Grid VerticalOptions="Center">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="120"/>
+        <RowDefinition Height="80"/>
+    </Grid.RowDefinitions>
+  <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+   <StackLayout Grid.Row="0" VerticalOptions="Center"
+                             HorizontalOptions="Center">
+                    <ActivityIndicator Color="White" VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                                       IsRunning="True"
+                                       IsEnabled="True" />
+                   
+                </StackLayout>
+  <StackLayout Grid.Row="1"
+                             HorizontalOptions="Center">
+     <Label Text="{Binding SyncStatus}"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{Binding SyncStatusTextColor}" />
+ </StackLayout>
+</Grid>
+                
+            </Frame>
+            <ContentView AbsoluteLayout.LayoutFlags="PositionProportional"
+                         AbsoluteLayout.LayoutBounds="1, 0, -1, -1">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OnCloseButtonTapped}"/>
+                </ContentView.GestureRecognizers>
+                <Label Text="&#xF0159;"
+                       x:Name="CloseImage"
+                       HeightRequest="30"
+                       WidthRequest="30"
+                       FontFamily="{StaticResource MaterialDesignIcons}"
+                       FontSize="{StaticResource PopupCloseButtonFontSize}"
+                       TextColor="{StaticResource PopupCloseButtonColor}"/>
+            </ContentView>
+        </AbsoluteLayout>
+    </ScrollView>
+</pages:PopupPage>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    x:Class="ACRM.mobile.Views.CalendarListSearchAndListContent">
+
+    <ContentView.Content>
+        <Grid HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand"
+              BackgroundColor="{StaticResource SearchPageBackground}"
+              Margin="0"
+              RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Margin="20,20,20,20"
+                           VerticalOptions="StartAndExpand"
+                           HorizontalOptions="StartAndExpand"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           FontSize="{StaticResource HeaderTableCaptionTextFontSize}"
+                           TextColor="{StaticResource NoResultTextColor}"
+                            FontAttributes="Bold"
+                  
+                           Text="{Binding DateRange}" />
+            <!-- Search Results !-->
+            <StackLayout Grid.Row="1"
+                         Margin="{StaticResource SearchAndListMargins}"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="Fill">
+                <syncfusion:SfListView
+                    x:Name="SearchResultsList"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    SelectionMode="Single"
+                    SelectionGesture="Tap"
+                    AutoFitMode="DynamicHeight"
+                    ItemsSource="{Binding SearchAndListContentData.SearchResults}" 
+                    SelectedItem="{Binding SelectedSearchResult}"
+                    TapCommand="{Binding RecordSelectedCommand}"
+                    SelectionBackgroundColor="{StaticResource ItemSelectedColor}"
+                    BackgroundColor="{StaticResource SearchPageBackground}">
+                    <syncfusion:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <customControls:RecordListViewCell/>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+            </StackLayout>
+
+            <!--No Result Display-->
+            <StackLayout Grid.Row="1"
+                         IsVisible="{Binding SearchAndListContentData.EnableNoResultsText}"
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="CenterAndExpand">
+                <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0"
+                           Text="&#xF120D;"
+                           BackgroundColor="Transparent"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           FontSize="{StaticResource NoResultIconFontSize}"
+                           FontFamily="{StaticResource MaterialDesignIcons}"
+                           TextColor="{StaticResource NoResultTextColor}"
+                           Margin="{StaticResource NoResultsLabelMargins}"/>
+
+                    <Label Grid.Row="1"
+                           Text="{Binding SearchAndListContentData.NoResultsText}"
+                           FontSize="{StaticResource NoResultFontSize}"
+                           TextColor="{StaticResource NoResultTextColor}"
+                           HorizontalOptions="Center"/>
+
+                </Grid>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1"
+                         IsVisible="{Binding IsLoading}"
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="CenterAndExpand">
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                         Color="{StaticResource ProgressColor}"
+                         IsVisible="{Binding IsLoading}" />
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

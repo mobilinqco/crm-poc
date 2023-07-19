@@ -1,0 +1,1395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+
+
+	<data name="basic_0">
+		<value>Übersicht</value>
+	</data>
+	<data name="basic_1">
+		<value>Keine Details</value>
+	</data>
+	<data name="basic_2">
+		<value>Alle</value>
+	</data>
+	<data name="basic_3">
+		<value>Globale Suche</value>
+	</data>
+	<data name="basic_4">
+		<value>wird geladen ...</value>
+	</data>
+	<data name="basic_5">
+		<value>Ja</value>
+	</data>
+	<data name="basic_6">
+		<value>Nein</value>
+	</data>
+	<data name="basic_7">
+		<value>Synchronisation: Datenmodell &amp; Konfiguration</value>
+	</data>
+	<data name="basic_8">
+		<value>Synchronisation: Katalogdaten</value>
+	</data>
+	<data name="basic_9">
+		<value>Synchronisation: {1}</value>
+	</data>
+	<data name="basic_10">
+		<value>Hinzufügen</value>
+	</data>
+	<data name="basic_11">
+		<value>Synchronisation: Ressourcen</value>
+	</data>
+	<data name="basic_12">
+		<value>Bitte warten Sie, Daten werden geladen...</value>
+	</data>
+	<data name="basic_13">
+		<value>Alle anzeigen</value>
+	</data>
+	<data name="basic_14">
+		<value>Filter</value>
+	</data>
+	<data name="basic_15">
+		<value>Online</value>
+	</data>
+	<data name="basic_16">
+		<value>Offline</value>
+	</data>
+	<data name="basic_17">
+		<value>&lt;Leer&gt;</value>
+	</data>
+	<data name="basic_18">
+		<value>Alle\r\n</value>
+	</data>
+	<data name="basic_19">
+		<value>Keine\r\n</value>
+	</data>
+	<data name="basic_20">
+		<value>%i ausgewählt\r\n</value>
+	</data>
+	<data name="basic_21">
+		<value>Alle deaktivieren\r\n</value>
+	</data>
+	<data name="basic_22">
+		<value>Einstellungen</value>
+	</data>
+	<data name="basic_23">
+		<value>Bearbeiten</value>
+	</data>
+	<data name="basic_24">
+		<value>Speichern</value>
+	</data>
+	<data name="basic_25">
+		<value>Abbrechen</value>
+	</data>
+	<data name="basic_26">
+		<value>Löschen</value>
+	</data>
+	<data name="basic_27">
+		<value>E-Mail konnte nicht gesendet werden</value>
+	</data>
+	<data name="basic_28">
+		<value>Sie müssen zuerst ein E-Mail-Konto auf Ihrem iPad einrichten</value>
+	</data>
+	<data name="basic_29">
+		<value>Internetverbindungsfehler</value>
+	</data>
+	<data name="basic_30">
+		<value>Keine Internetverbindung verfügbar</value>
+	</data>
+	<data name="basic_31">
+		<value>Fehler melden</value>
+	</data>
+	<data name="basic_32">
+		<value>Fehler beim Laden des Reports</value>
+	</data>
+	<data name="basic_33">
+		<value>Bitte warten Sie, der Report wird geladen...</value>
+	</data>
+	<data name="basic_34">
+		<value>Problem beim Öffnen der Webseite</value>
+	</data>
+	<data name="basic_35">
+		<value>Die Webseite %@ kann nicht geöffnet werden</value>
+	</data>
+	<data name="basic_36">
+		<value>OK</value>
+	</data>
+	<data name="basic_37">
+		<value>%@ (neu)\r\n</value>
+	</data>
+	<data name="basic_38">
+		<value>Position\r\nzurück\r\n</value>
+	</data>
+	<data name="basic_39">
+		<value>Feld\r\nzurück</value>
+	</data>
+	<data name="basic_40">
+		<value>Position\r\nvor\r\n</value>
+	</data>
+	<data name="basic_41">
+		<value>OK</value>
+	</data>
+	<data name="basic_42">
+		<value>Schließen</value>
+	</data>
+	<data name="basic_43">
+		<value>Hinzufügen</value>
+	</data>
+	<data name="basic_44">
+		<value>Es wurden noch keine Merkmale zugewiesen.\r\n</value>
+	</data>
+	<data name="basic_45">
+		<value>%@ km</value>
+	</data>
+	<data name="basic_46">
+		<value>%@ m</value>
+	</data>
+	<data name="basic_47">
+		<value>Firmen innerhalb %@ um mich</value>
+	</data>
+	<data name="basic_48">
+		<value>Radius: %@</value>
+	</data>
+	<data name="basic_49">
+		<value>Die Funktion ist nicht verfügbar, da Ihr Standort nicht ermittelt werden konnte.</value>
+	</data>
+	<data name="basic_50">
+		<value>%@: Feedback über die Anwendung</value>
+	</data>
+	<data name="basic_51">
+		<value>%@: Absturzbericht</value>
+	</data>
+	<data name="basic_52">
+		<value>Änderungen werden übertragen</value>
+	</data>
+	<data name="basic_53">
+		<value>Es werden gerade Datenänderungen zum Server übertragen. Bitte haben Sie etwas Geduld, bis dieser Vorgang abgeschlossen ist.</value>
+	</data>
+	<data name="basic_54">
+		<value>Nicht übertragene Änderungen</value>
+	</data>
+	<data name="basic_55">
+		<value>Sie haben lokale Änderungen, die noch nicht zum Server übertragen wurden. Wollen Sie diese jetzt senden?</value>
+	</data>
+	<data name="basic_56">
+		<value>Abmelden</value>
+	</data>
+	<data name="basic_57">
+		<value>Änderungen übertragen</value>
+	</data>
+	<data name="basic_58">
+		<value>Nicht übertragene Änderungen</value>
+	</data>
+	<data name="basic_59">
+		<value>Sie haben lokale Änderungen, die noch nicht zum Server übertragen wurden. Wenn Sie die Anwendung das nächste Mal mit Serververbindung verwenden, werden diese übertragen.</value>
+	</data>
+	<data name="basic_60">
+		<value>Synchronisation fehlgeschlagen</value>
+	</data>
+	<data name="basic_61">
+		<value>%d/%d</value>
+	</data>
+	<data name="basic_62">
+		<value>Bearbeiten\r\n</value>
+	</data>
+	<data name="basic_63">
+		<value>Änderungen verwerfen\r\n</value>
+	</data>
+	<data name="basic_64">
+		<value>Fehler melden\r\n</value>
+	</data>
+	<data name="basic_65">
+		<value>Keine Konflikte gefunden.</value>
+	</data>
+	<data name="basic_66">
+		<value>Änderungen werden verworfen</value>
+	</data>
+	<data name="basic_67">
+		<value>Sind Sie sicher, dass Sie alle Änderungen verwerfen wollen? Neu angelegte Datensätze und davon abhängige Datensätze werden gelöscht.</value>
+	</data>
+	<data name="basic_68">
+		<value>Daten werden aktualisiert...\r\n</value>
+	</data>
+	<data name="basic_69">
+		<value>Daten werden aktualisiert...\r\n</value>
+	</data>
+	<data name="basic_70">
+		<value>Änderungen werden an den Server übertragen...\r\n</value>
+	</data>
+	<data name="basic_71">
+		<value>Konfiguration wird aktualisiert...\r\n</value>
+	</data>
+	<data name="basic_72">
+		<value>Sie müssen Ihre Daten bis spätestens %@ re-initialisieren, um weiter mit Serververbindung arbeiten zu können</value>
+	</data>
+	<data name="basic_73">
+		<value>Sie müssen Ihre Daten re-initialisieren, um weiter mit dem Server verbunden zu bleiben. Machen Sie das bis spätestens %@, um sich weiterhin anmelden zu können.</value>
+	</data>
+	<data name="basic_74">
+		<value>Web-Report</value>
+	</data>
+	<data name="basic_75">
+		<value>Fehler</value>
+	</data>
+	<data name="basic_76">
+		<value>%d Synchronisationskonflikte\r\n</value>
+	</data>
+	<data name="basic_77">
+		<value>Fehlerprotokoll</value>
+	</data>
+	<data name="basic_78">
+		<value>Daten aktualisieren\n</value>
+	</data>
+	<data name="basic_79">
+		<value>Alle Daten zurücksetzen und re-initialisieren\r\n</value>
+	</data>
+	<data name="basic_80">
+		<value>Konfiguration aktualisieren</value>
+	</data>
+	<data name="basic_81">
+		<value>Letzte Aktualisierung: %@\r\n\r\n\r\n\r\n</value>
+	</data>
+	<data name="basic_82">
+		<value>Nie</value>
+	</data>
+	<data name="basic_83">
+		<value>In Maps öffnen</value>
+	</data>
+	<data name="basic_84">
+		<value>%@ Fehlerprotokoll</value>
+	</data>
+	<data name="basic_85">
+		<value>Löschen</value>
+	</data>
+	<data name="basic_86">
+		<value>%d Ergebnisse. Suchen Sie Online für weitere Ergebnisse\r\n</value>
+	</data>
+	<data name="basic_87">
+		<value>%d Ergebnis(se)</value>
+	</data>
+	<data name="basic_88">
+		<value>Keine Marketingziele zugewiesen</value>
+	</data>
+	<data name="basic_89">
+		<value>Report</value>
+	</data>
+	<data name="basic_90">
+		<value>Sprache ändern</value>
+	</data>
+	<data name="basic_91">
+		<value>Ändern</value>
+	</data>
+	<data name="basic_92">
+		<value>Sprache</value>
+	</data>
+	<data name="basic_93">
+		<value>Offline nicht verfügbar\n</value>
+	</data>
+	<data name="basic_94">
+		<value>Start</value>
+	</data>
+	<data name="basic_95">
+		<value>Ende</value>
+	</data>
+	<data name="basic_96">
+		<value>Anzeigen</value>
+	</data>
+	<data name="basic_97">
+		<value>%i/%i</value>
+	</data>
+	<data name="basic_98">
+		<value>?</value>
+	</data>
+	<data name="basic_99">
+		<value>Alle wiederholen</value>
+	</data>
+	<data name="basic_100">
+		<value>Mitarbeiter</value>
+	</data>
+	<data name="basic_101">
+		<value>Zuletzt verwendete</value>
+	</data>
+	<data name="basic_102">
+		<value>Kürzlich verwendete</value>
+	</data>
+	<data name="basic_103">
+		<value>iPad-Kalender</value>
+	</data>
+	<data name="basic_104">
+		<value>Ausgewählte\n</value>
+	</data>
+	<data name="basic_105">
+		<value>Protokolldatei senden</value>
+	</data>
+	<data name="basic_106">
+		<value>Protokolldatei zurücksetzen</value>
+	</data>
+	<data name="basic_107">
+		<value>Alle Fehler melden\n</value>
+	</data>
+	<data name="basic_108">
+		<value>Keine nicht synchronisierten Datensätze gefunden.</value>
+	</data>
+	<data name="basic_109">
+		<value>Passwort ändern</value>
+	</data>
+	<data name="basic_110">
+		<value>Passwort wurde nicht geändert.</value>
+	</data>
+	<data name="basic_111">
+		<value>Passwort geändert</value>
+	</data>
+	<data name="basic_112">
+		<value>Von</value>
+	</data>
+	<data name="basic_113">
+		<value>Bis</value>
+	</data>
+	<data name="basic_114">
+		<value>%i von %i ausgewählt\r\n</value>
+	</data>
+	<data name="basic_115">
+		<value>nicht spezifiziert</value>
+	</data>
+	<data name="basic_116">
+		<value>Öffnungszeiten</value>
+	</data>
+	<data name="basic_117">
+		<value>Besuchszeiten</value>
+	</data>
+	<data name="basic_118">
+		<value>Telefonzeiten</value>
+	</data>
+	<data name="basic_119">
+		<value>Debug</value>
+	</data>
+	<data name="basic_120">
+		<value>CRMDataStore</value>
+	</data>
+	<data name="basic_121">
+		<value>ConfigUnitStore</value>
+	</data>
+	<data name="basic_122">
+		<value>OfflineStorage</value>
+	</data>
+	<data name="basic_123">
+		<value>Log</value>
+	</data>
+	<data name="basic_124">
+		<value>Debug</value>
+	</data>
+	<data name="basic_125">
+		<value>In meiner Nähe</value>
+	</data>
+	<data name="basic_126">
+		<value>-</value>
+	</data>
+	<data name="basic_127">
+		<value>Ganztägig</value>
+	</data>
+	<data name="basic_128">
+		<value>Startposition</value>
+	</data>
+	<data name="basic_129">
+		<value>Suche im Umkreis von %@</value>
+	</data>
+	<data name="basic_130">
+		<value>Standort</value>
+	</data>
+	<data name="basic_131">
+		<value>Standard</value>
+	</data>
+	<data name="basic_132">
+		<value>Satellit</value>
+	</data>
+	<data name="basic_133">
+		<value>Hybrid</value>
+	</data>
+	<data name="basic_134">
+		<value>Navigieren zu</value>
+	</data>
+	<data name="basic_135">
+		<value>Zur Bearbeitungsansicht wechseln</value>
+	</data>
+	<data name="basic_136">
+		<value>Alle offenen Seiten werden geschlossen.</value>
+	</data>
+	<data name="basic_137">
+		<value>Nur jeweils eine Bearbeitungsansicht kann geöffnet werden.</value>
+	</data>
+	<data name="basic_138">
+		<value>Datensatz löschen?</value>
+	</data>
+	<data name="basic_139">
+		<value>Wollen Sie diesen Datensatz wirklich löschen?</value>
+	</data>
+	<data name="basic_140">
+		<value>Alle Datensätze anzeigen</value>
+	</data>
+	<data name="basic_141">
+		<value>Suchergebnis</value>
+	</data>
+	<data name="basic_142">
+		<value>Suchergebnis</value>
+	</data>
+	<data name="basic_143">
+		<value>Aktuelle Position</value>
+	</data>
+	<data name="basic_144">
+		<value>CRM.client</value>
+	</data>
+	<data name="basic_145">
+		<value>Sie haben Ihren Hauptstandort erreicht. Volle Synchronisation?</value>
+	</data>
+	<data name="basic_146">
+		<value>Synchronisationskonflikte</value>
+	</data>
+	<data name="basic_147">
+		<value>Zeitachse</value>
+	</data>
+	<data name="basic_148">
+		<value>(%@)</value>
+	</data>
+	<data name="basic_149">
+		<value>Dokumente werden heruntergeladen (%i verbleibend)</value>
+	</data>
+	<data name="basic_150">
+		<value>ABMELDEN</value>
+	</data>
+	<data name="basic_151">
+		<value>GLOBAL</value>
+	</data>
+	<data name="basic_152">
+		<value>SYNC</value>
+	</data>
+	<data name="basic_153">
+		<value>SYSTEM</value>
+	</data>
+	<data name="basic_154">
+		<value>Zurück</value>
+	</data>
+	<data name="basic_155">
+		<value>Aktionen</value>
+	</data>
+	<data name="basic_156">
+		<value>Suchen in</value>
+	</data>
+	<data name="basic_157">
+		<value>Suche</value>
+	</data>
+	<data name="basic_158">
+		<value>Wiederholen</value>
+	</data>
+	<data name="basic_159">
+		<value>Favoriten</value>
+	</data>
+	<data name="basic_160">
+		<value>Vollständige Datensynchronisation</value>
+	</data>
+	<data name="basic_161">
+		<value>Wechseln zu %@</value>
+	</data>
+	<data name="basic_162">
+		<value>Offene Bearbeitungsansicht schließen</value>
+	</data>
+	<data name="basic_163">
+		<value>QR-Code scannen</value>
+	</data>
+	<data name="basic_164">
+		<value>Als Mail versenden</value>
+	</data>
+	<data name="basic_165">
+		<value>Name</value>
+	</data>
+	<data name="basic_166">
+		<value>Neu</value>
+	</data>
+	<data name="basic_167">
+		<value>Hochladen</value>
+	</data>
+	<data name="basic_168">
+		<value>Datei auswählen</value>
+	</data>
+	<data name="basic_169">
+		<value>Dokumentenablage</value>
+	</data>
+	<data name="basic_170">
+		<value>Verwalten Sie Ihre Dokumentenablage.</value>
+	</data>
+	<data name="basic_171">
+		<value>Sie können die Datei in Ihre Dokumentenablage aufnehmen, um sie später hochzuladen.</value>
+	</data>
+	<data name="basic_172">
+		<value>Datei hinzufügen</value>
+	</data>
+	<data name="basic_173">
+		<value>Datei zur Dokumentenablage hinzufügen</value>
+	</data>
+  <data name="basic_174">
+    <value>Foto hinzufügen</value>
+  </data>
+
+
+	<data name="basic_288">
+      <value> Die Unterstützung für die Benutzeraktion {0} vom Typ {1} ist noch nicht implementiert oder etwas stimmt nicht mit der Konfiguration.
+        Bitte überprüfen Sie die Konfiguration und überprüfen Sie die Liste der von CRM.Client unterstützten Funktionen.
+      </value>
+  </data>
+  <data name="basic_289">
+      <value>* Pflichtfeld</value>
+  </data>
+  <data name="basic_291">
+    <value>Vormittag</value>
+  </data>
+  <data name="basic_292">
+    <value>Nachmittag</value>
+  </data>
+  <data name="basic_293">
+    <value>Erstes Intervall</value>
+  </data>
+  <data name="basic_294">
+    <value>Zweites Intervall</value>
+  </data>
+  <data name="basic_295">
+      <value>Video hinzufügen</value>
+  </data>
+  <data name="basic_296">
+    <value>Daten inkrementell aktualisieren</value>
+  </data>
+  <data name="basic_297">
+    <value>Inkrementelle Synchronisierung: {1}</value>
+  </data>
+
+
+  <data name="errors_0">
+		<value>Aktion nicht möglich. Konfigurationsfehler.</value>
+	</data>
+	<data name="errors_1">
+		<value>Expand-Konfiguration '%@' fehlt.\r\n</value>
+	</data>
+	<data name="errors_2">
+		<value>SearchAndList-Konfiguration '%@' fehlt.\r\n</value>
+	</data>
+	<data name="errors_3">
+		<value>Filter '%@' fehlt.</value>
+	</data>
+	<data name="errors_4">
+		<value>Control '%@' fehlt\r\n</value>
+	</data>
+	<data name="errors_5">
+		<value>Aktion nicht erlaubt</value>
+	</data>
+	<data name="errors_6">
+		<value>Datenkonflikte verhindern diese Aktion</value>
+	</data>
+	<data name="errors_7">
+		<value>Parameter '%@' ist leer</value>
+	</data>
+	<data name="errors_8">
+		<value>Aktion nicht möglich</value>
+	</data>
+	<data name="errors_9">
+		<value>Warten auf Beendigung der vorherigen Aktion.</value>
+	</data>
+	<data name="errors_10">
+		<value>Der Datensatz existiert nicht oder ist nicht verfügbar</value>
+	</data>
+	<data name="errors_11">
+		<value>Fehlerprotokoll</value>
+	</data>
+	<data name="errors_12">
+		<value>Senden</value>
+	</data>
+	<data name="errors_13">
+		<value>Ihre Änderungen konnten nicht gespeichert werden.</value>
+	</data>
+	<data name="errors_14">
+		<value>Aktion konnte nicht ausgeführt werden, da sie vom Server zurückgewiesen wurde.\r\n</value>
+	</data>
+	<data name="errors_15">
+		<value>Keine Serverantwort (Time-out)</value>
+	</data>
+	<data name="errors_16">
+		<value>Die CRM.client-Anwendung ist beim letzten Mal abgestürzt. Wollen Sie einen Absturzbericht an update Software AG senden?</value>
+	</data>
+	<data name="errors_17">
+		<value>Ein Pflichtfeld wurde nicht befüllt\r\n\r\n</value>
+	</data>
+	<data name="errors_18">
+		<value>Konfigurationskopf fehlt</value>
+	</data>
+	<data name="errors_19">
+		<value>Unerwarteter Fehler</value>
+	</data>
+	<data name="errors_20">
+		<value>Versuchen Sie es bitte noch einmal.</value>
+	</data>
+	<data name="errors_21">
+		<value>Datensatz konnte nicht gespeichert werden.</value>
+	</data>
+	<data name="errors_22">
+		<value>Information nicht verfügbar</value>
+	</data>
+	<data name="errors_23">
+		<value>Der eingegebene Wert ist ungültig.</value>
+	</data>
+	<data name="errors_24">
+		<value>Keine externen Aktivitätsteilnehmer ausgewählt\n\n</value>
+	</data>
+	<data name="errors_25">
+		<value>Der Datensatz wurde nicht gefunden.</value>
+	</data>
+	<data name="errors_26">
+		<value>Keine Detailinformationen verfügbar.\n</value>
+	</data>
+	<data name="errors_27">
+		<value>Ihre Eingabe konnte nicht gespeichert werden.\n</value>
+	</data>
+	<data name="errors_28">
+		<value>Fehler im SQL-Statement</value>
+	</data>
+	<data name="errors_29">
+		<value>Im SQL-Statement sind nur SELECT-Statements erlaubt.</value>
+	</data>
+	<data name="errors_30">
+		<value>Keine Ergebnisse</value>
+	</data>
+	<data name="errors_31">
+		<value>Warnung</value>
+	</data>
+	<data name="errors_32">
+		<value>Sie müssen Ihr Passwort in den nächsten 24 Stunden ändern.</value>
+	</data>
+	<data name="errors_33">
+		<value>Die Textformatierung geht nach dem Speichern verloren</value>
+	</data>
+	<data name="errors_34">
+		<value>Andere Fehler:</value>
+	</data>
+	<data name="errors_35">
+		<value>Ein Pflichtfeld wurde nicht gesetzt. Möchten Sie die Änderungen verwerfen und fortfahren?</value>
+	</data>
+	<data name="errors_36">
+		<value>Dokumentenablage nicht konfiguriert</value>
+	</data>
+	<data name="errors_37">
+		<value>Dieser Dateityp kann nicht zur Dokumentenablage hinzugefügt werden</value>
+	</data>
+	<data name="errors_38">
+		<value>Die Datei ist zu groß für die Dokumentenablage.</value>
+	</data>
+
+
+	<data name="errors_596">
+		<value>CRM.Client Fensterbreite &lt;320 Pixel wird nicht unterstützt</value>
+	</data>
+	<data name="errors_597">
+		<value>CRM.Client Fenster Höhe &lt;500 Pixel wird nicht unterstützt</value>
+	</data>
+	<data name="errors_598">
+		<value>Die minimal unterstützte Geräteauflösung beträgt iOS 320 × 568 Punkte (1136 x 640 Bildschirmpixel).
+			In beiden Dimensionen werden weniger Auflösungen unterstützt.
+			Sie können zu einer anderen Anwendung wechseln oder die Anwendung manuell schließen.</value>
+	</data>
+
+	<data name="errors_600">
+        <value>CRM.Client has problems accessing the file requested.</value>
+  </data>
+  <data name="errors_601">
+    <value>Ungültige Zeitintervalle</value>
+  </data>
+  <data name="errors_602">
+    <value>Bitte achten Sie darauf, dass die Zeitintervalle gültig sind und sich nicht überschneiden.</value>
+  </data>
+	
+
+	<data name="processes_0">
+		<value>Merkmale bearbeiten\r\n</value>
+	</data>
+	<data name="processes_1">
+		<value>Synchronisiere...</value>
+	</data>
+	<data name="processes_2">
+		<value>Bitte warten Sie. Änderungen werden gespeichert.</value>
+	</data>
+	<data name="processes_3">
+		<value>Es gibt nicht gespeicherte Änderungen.</value>
+	</data>
+	<data name="processes_4">
+		<value>Wollen Sie wirklich abbrechen? Ihre nicht gespeicherten Daten gehen verloren.</value>
+	</data>
+	<data name="processes_5">
+		<value>Absturzbericht\r\n</value>
+	</data>
+	<data name="processes_6">
+		<value>Synchronisationsfehler</value>
+	</data>
+	<data name="processes_7">
+		<value>Der Datensatz wurde geändert.</value>
+	</data>
+	<data name="processes_8">
+		<value>Der von Ihnen gerade bearbeitete Datensatz wurde von jemand anderem geändert. Ihre Änderungen werden verworfen.</value>
+	</data>
+	<data name="processes_9">
+		<value>Bitte warten Sie. Änderungen werden gespeichert.</value>
+	</data>
+	<data name="processes_10">
+		<value>Marketingziele bearbeiten</value>
+	</data>
+	<data name="processes_11">
+		<value>Alle</value>
+	</data>
+	<data name="processes_12">
+		<value>Listungen</value>
+	</data>
+	<data name="processes_13">
+		<value>Dokumente\r\n</value>
+	</data>
+	<data name="processes_14">
+		<value>Der Datensatz wurde synchronisiert.</value>
+	</data>
+	<data name="processes_15">
+		<value>Zu Favoriten hinzufügen\r\n</value>
+	</data>
+	<data name="processes_16">
+		<value>Aus Favoriten entfernen</value>
+	</data>
+	<data name="processes_17">
+		<value>Auftrag wurde bereits bestätigt</value>
+	</data>
+	<data name="processes_18">
+		<value>Dokument anzeigen</value>
+	</data>
+	<data name="processes_19">
+		<value>Dokument senden</value>
+	</data>
+	<data name="processes_20">
+		<value>Foto aufnehmen</value>
+	</data>
+	<data name="processes_21">
+		<value>Galerie\n</value>
+	</data>
+	<data name="processes_22">
+		<value>klein,mittel,groß,unverändert</value>
+	</data>
+	<data name="processes_23">
+		<value>%d Bilder online verfügbar\n</value>
+	</data>
+	<data name="processes_24">
+		<value>Foto hochladen</value>
+	</data>
+	<data name="processes_25">
+		<value>Das ausgewählte Foto wird hochgeladen. Sie können auf das Ende dieser Operation warten, die Operation abbrechen oder die Operation im Hintergrund laufen lassen. </value>
+	</data>
+	<data name="processes_26">
+		<value>Hintergrund</value>
+	</data>
+	<data name="processes_27">
+		<value>Das Bild ist {1} groß. Sie können die Größe reduzieren, indem Sie das Bild auf eines der folgenden Formate verkleinern.\n</value>
+	</data>
+	<data name="processes_28">
+		<value>Positionen:</value>
+	</data>
+	<data name="processes_29">
+		<value>Summe:</value>
+	</data>
+	<data name="processes_30">
+		<value>Name des Fotos\n</value>
+	</data>
+	<data name="processes_31">
+		<value>KW</value>
+	</data>
+	<data name="processes_32">
+		<value>%d weitere ...\n</value>
+	</data>
+	<data name="processes_33">
+		<value>Dokument erneut laden</value>
+	</data>
+	<data name="processes_34">
+		<value>Unterschrift\n</value>
+	</data>
+	<data name="processes_35">
+		<value>Bestätigen</value>
+	</data>
+	<data name="processes_36">
+		<value>Tag\n</value>
+	</data>
+	<data name="processes_37">
+		<value>Woche\n</value>
+	</data>
+	<data name="processes_38">
+		<value>Monat</value>
+	</data>
+	<data name="processes_39">
+		<value>Liste\n</value>
+	</data>
+	<data name="processes_40">
+		<value>Der Server hat Ihren Benutzernamen oder Ihr Passwort zurückgewiesen. Das Passwort am Server könnte geändert worden sein.\n\nWas möchten Sie tun?</value>
+	</data>
+	<data name="processes_41">
+		<value>Offline arbeiten</value>
+	</data>
+	<data name="processes_42">
+		<value>Passwort eingeben</value>
+	</data>
+	<data name="processes_43">
+		<value>Benutzername und Passwort eingeben</value>
+	</data>
+	<data name="processes_44">
+		<value>Wiederholen</value>
+	</data>
+	<data name="processes_45">
+		<value>Gratisware: Σ\n</value>
+	</data>
+	<data name="processes_46">
+		<value>Ihrer Eingaben konnten nicht gespeichert werden. Bitte korrigieren oder verwerfen Sie sie.\r\n\r\n</value>
+	</data>
+	<data name="processes_47">
+		<value>Verwerfen</value>
+	</data>
+	<data name="processes_48">
+		<value>Alle Fragen\n</value>
+	</data>
+	<data name="processes_49">
+		<value>Pflichtfragen</value>
+	</data>
+	<data name="processes_50">
+		<value>Zusammenfassung</value>
+	</data>
+	<data name="processes_51">
+		<value>Umfrage abschließen</value>
+	</data>
+	<data name="processes_52">
+		<value>Umfrage abgeschlossen\n</value>
+	</data>
+	<data name="processes_53">
+		<value>Umfrage</value>
+	</data>
+	<data name="processes_54">
+		<value>Durchführen</value>
+	</data>
+	<data name="processes_55">
+		<value>Aktion</value>
+	</data>
+	<data name="processes_56">
+		<value>Fragebogen nicht verfügbar</value>
+	</data>
+	<data name="processes_57">
+		<value>läuft...</value>
+	</data>
+	<data name="processes_58">
+		<value>Fertig</value>
+	</data>
+	<data name="processes_59">
+		<value>Ergebnis</value>
+	</data>
+	<data name="processes_60">
+		<value>Arbeitsaufträge</value>
+	</data>
+	<data name="processes_61">
+		<value>Sie müssen Ihre vorhergehenden Änderungen speichern, bevor Sie die Seite verlassen. Wollen Sie speichern oder die Aktion abbrechen?</value>
+	</data>
+	<data name="processes_62">
+		<value>Die Änderungen konnten nicht gespeichert werden. Wenn Sie trotzdem fortsetzen, gehen diese Änderungen verloren, außer Sie navigieren zurück und versuchen erneut zu speichern. Wollen Sie fortsetzen und die Seite verlassen?</value>
+	</data>
+	<data name="processes_63">
+		<value>Geben Sie hier eine detaillierte Beschreibung ein:</value>
+	</data>
+	<data name="processes_64">
+		<value>Report senden></value>
+	</data>
+
+	<data name="Login_1">
+		<value>Benutzername</value>
+	</data>
+	<data name="Login_10">
+		<value>Keine Verbindung zum Internet vorhanden. Bitte prüfen Sie Ihre Internetverbindung.</value>
+	</data>
+  <data name="Login_1001">
+    <value>Willkommen!</value>
+  </data>
+  <data name="Login_10011">
+    <value>Willkommen!</value>
+  </data>
+  <data name="Login_1002">
+    <value>Willkommen %@!</value>
+  </data>
+  <data name="Login_10021">
+    <value>Willkommen %@!</value>
+  </data>
+  <data name="Login_1003">
+    <value>Wählen Sie bitte Ihre Sprache</value>
+  </data>
+  <data name="Login_10031">
+    <value>Wählen Sie bitte Ihre Sprache</value>
+  </data>
+  <data name="Login_1004">
+    <value>Sprache übernehmen</value>
+  </data>
+  <data name="Login_10041">
+    <value>Sprache übernehmen</value>
+  </data>
+  <data name="Login_101">
+    <value>Keine Verbindung zum Internet vorhanden. Bitte prüfen Sie Ihre Internetverbindung.</value>
+  </data>
+  <data name="Login_11">
+    <value>Offline Login rejected for this environment. Please Check your internet connection and login in online mode.</value>
+  </data>
+  <data name="Login_110">
+    <value>Benutzername</value>
+  </data>
+  <data name="Login_1100">
+    <value>Weitere Informationen</value>
+  </data>
+  <data name="Login_11001">
+    <value>Weitere Informationen</value>
+  </data>
+  <data name="Login_1101">
+    <value>Mehr über Aurea CRM</value>
+  </data>
+  <data name="Login_11011">
+    <value>Mehr über Aurea CRM</value>
+  </data>
+  <data name="Login_1102">
+    <value>Demozugang anfordern</value>
+  </data>
+  <data name="Login_11021">
+    <value>Demozugang anfordern</value>
+  </data>
+  <data name="Login_1103">
+    <value>Vorschau &amp; Anleitung</value>
+  </data>
+  <data name="Login_11031">
+    <value>Vorschau &amp; Anleitung</value>
+  </data>
+  <data name="Login_1104">
+    <value>update Blog</value>
+  </data>
+  <data name="Login_11041">
+    <value>update Blog</value>
+  </data>
+  <data name="Login_1105">
+    <value>update CRM auf Twitter</value>
+  </data>
+  <data name="Login_11051">
+    <value>update CRM auf Twitter</value>
+  </data>
+  <data name="Login_1106">
+    <value>update CRM auf Facebook</value>
+  </data>
+  <data name="Login_11061">
+    <value>update CRM auf Facebook</value>
+  </data>
+  <data name="Login_1107">
+    <value>Über Aurea</value>
+  </data>
+  <data name="Login_11071">
+    <value>Über Aurea</value>
+  </data>
+  <data name="Login_1108">
+    <value>http://go.aurea.com/contact-us</value>
+  </data>
+  <data name="Login_11081">
+    <value>http://go.aurea.com/contact-us</value>
+  </data>
+  <data name="Login_1109">
+    <value>http://www.aurea.com/about-aurea/vision</value>
+  </data>
+  <data name="Login_11091">
+    <value>http://www.aurea.com/about-aurea/vision</value>
+  </data>
+  <data name="Login_111">
+    <value>Offline Login rejected for this environment. Please Check your internet connection and login in online mode.</value>
+  </data>
+  <data name="Login_1110">
+    <value>http://www.aurea.com/products/crm</value>
+  </data>
+  <data name="Login_11101">
+    <value>http://www.aurea.com/products/crm</value>
+  </data>
+  <data name="Login_1111">
+    <value>http://go.aurea.com/crmpad-demo</value>
+  </data>
+  <data name="Login_11111">
+    <value>http://go.aurea.com/crmpad-demo</value>
+  </data>
+  <data name="Login_1112">
+    <value>http://twitter.com/updateCRM</value>
+  </data>
+  <data name="Login_11121">
+    <value>http://twitter.com/updateCRM</value>
+  </data>
+  <data name="Login_1113">
+    <value>http://www.facebook.com/updateCRM</value>
+  </data>
+  <data name="Login_11131">
+    <value>http://www.facebook.com/updateCRM</value>
+  </data>
+  <data name="Login_12">
+    <value>Benutzername oder Passwort ungültig. Bitte prüfen Sie Ihre Eingaben und versuchen es erneut.</value>
+  </data>
+  <data name="Login_1201">
+    <value>Offline Anmeldung</value>
+  </data>
+  <data name="Login_12011">
+    <value>Offline Anmeldung</value>
+  </data>
+  <data name="Login_1202">
+    <value>Protokoll anzeigen</value>
+  </data>
+  <data name="Login_12021">
+    <value>Protokoll anzeigen</value>
+  </data>
+  <data name="Login_1203">
+    <value>Kennwort ändern</value>
+  </data>
+  <data name="Login_12031">
+    <value>Kennwort ändern</value>
+  </data>
+  <data name="Login_1204">
+    <value>Ausgang</value>
+  </data>
+  <data name="Login_12041">
+    <value>Ausgang</value>
+  </data>
+  <data name="Login_121">
+    <value>Benutzername oder Passwort ungültig. Bitte prüfen Sie Ihre Eingaben und versuchen es erneut.</value>
+  </data>
+  <data name="Login_13">
+    <value />
+  </data>
+  <data name="Login_1301">
+    <value>Industrie</value>
+  </data>
+  <data name="Login_13011">
+    <value>Industrie</value>
+  </data>
+  <data name="Login_1302">
+    <value>Life Sciences</value>
+  </data>
+  <data name="Login_13021">
+    <value>Life Sciences</value>
+  </data>
+  <data name="Login_1303">
+    <value>Finanzdienstleister</value>
+  </data>
+  <data name="Login_13031">
+    <value>Finanzdienstleister</value>
+  </data>
+  <data name="Login_1304">
+    <value>Konsumgüter</value>
+  </data>
+  <data name="Login_13041">
+    <value>Konsumgüter</value>
+  </data>
+  <data name="Login_1305">
+    <value />
+  </data>
+  <data name="Login_13051">
+    <value />
+  </data>
+  <data name="Login_1306">
+    <value />
+  </data>
+  <data name="Login_13061">
+    <value />
+  </data>
+  <data name="Login_1307">
+    <value />
+  </data>
+  <data name="Login_13071">
+    <value />
+  </data>
+  <data name="Login_1308">
+    <value />
+  </data>
+  <data name="Login_13081">
+    <value />
+  </data>
+  <data name="Login_131">
+    <value />
+  </data>
+  <data name="Login_14">
+    <value>Ein allgemeiner Fehler ist aufgetreten. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="Login_141">
+    <value>Ein allgemeiner Fehler ist aufgetreten. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="Login_15">
+    <value>Keine Internetverbindung verfügbar</value>
+  </data>
+  <data name="Login_151">
+    <value>Keine Internetverbindung verfügbar</value>
+  </data>
+  <data name="Login_16">
+    <value>Fehler</value>
+  </data>
+  <data name="Login_161">
+    <value>Fehler</value>
+  </data>
+  <data name="Login_17">
+    <value>Anmeldung fehlgeschlagen</value>
+  </data>
+  <data name="Login_171">
+    <value>Anmeldung fehlgeschlagen</value>
+  </data>
+  <data name="Login_18">
+    <value>Anmeldung nicht möglich</value>
+  </data>
+  <data name="Login_181">
+    <value>Anmeldung nicht möglich</value>
+  </data>
+  <data name="Login_19">
+    <value>Synchronisation fehlgeschlagen</value>
+  </data>
+  <data name="Login_191">
+    <value>Synchronisation fehlgeschlagen</value>
+  </data>
+  <data name="Login_2">
+    <value>Passwort</value>
+  </data>
+  <data name="Login_20">
+    <value>Während der Synchronisation ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="Login_201">
+    <value>Während der Synchronisation ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="Login_21">
+    <value>Sie verfügen über keine gültige Lizenz für update Mobile Services. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+  <data name="Login_210">
+    <value>Passwort</value>
+  </data>
+  <data name="Login_211">
+    <value>Sie verfügen über keine gültige Lizenz für update Mobile Services. Bitte kontaktieren Sie Ihren Administrator.</value>
+  </data>
+  <data name="Login_22">
+    <value>Ungültige Version</value>
+  </data>
+  <data name="Login_221">
+    <value>Ungültige Version</value>
+  </data>
+  <data name="Login_23">
+    <value>Ihre CRMpad Version wird vom Server nicht mehr unterstützt.</value>
+  </data>
+  <data name="Login_231">
+    <value>Ihre CRMpad Version wird vom Server nicht mehr unterstützt.</value>
+  </data>
+  <data name="Login_24">
+    <value>Ihre CRMpad Version wird vom Server nicht mehr unterstützt. Bitte installieren Sie die aktuellste Version.</value>
+  </data>
+  <data name="Login_241">
+    <value>Ihre CRMpad Version wird vom Server nicht mehr unterstützt. Bitte installieren Sie die aktuellste Version.</value>
+  </data>
+  <data name="Login_25">
+    <value>Aktuelle Version</value>
+  </data>
+  <data name="Login_251">
+    <value>Aktuelle Version</value>
+  </data>
+  <data name="Login_26">
+    <value>Log</value>
+  </data>
+  <data name="Login_261">
+    <value>Log</value>
+  </data>
+  <data name="Login_27">
+    <value>Neues Passwort</value>
+  </data>
+  <data name="Login_271">
+    <value>Neues Passwort</value>
+  </data>
+  <data name="Login_28">
+    <value>Passwort bestätigen</value>
+  </data>
+  <data name="Login_281">
+    <value>Passwort bestätigen</value>
+  </data>
+  <data name="Login_29">
+    <value>Neues Passwort und die Bestätigung stimmen nicht überein.</value>
+  </data>
+  <data name="Login_291">
+    <value>Neues Passwort und die Bestätigung stimmen nicht überein.</value>
+  </data>
+  <data name="Login_3">
+    <value>Kein Server ausgewählt</value>
+  </data>
+  <data name="Login_30">
+    <value>Ihr Passwort ist abgelaufen und muss geändert werden.</value>
+  </data>
+  <data name="Login_301">
+    <value>Ihr Passwort ist abgelaufen und muss geändert werden.</value>
+  </data>
+  <data name="Login_31">
+    <value>Server hat keine Sprachen zurück geliefert.</value>
+  </data>
+  <data name="Login_311">
+    <value>Server hat keine Sprachen zurück geliefert.</value>
+  </data>
+  <data name="Login_32">
+    <value>Anmelden</value>
+  </data>
+  <data name="Login_321">
+    <value>Anmelden</value>
+  </data>
+  <data name="Login_33">
+    <value>Die Synchronisierung wurde abgebrochen</value>
+  </data>
+  <data name="Login_331">
+    <value>Die Synchronisierung wurde abgebrochen</value>
+  </data>
+  <data name="Login_34">
+    <value>Aktueller Benutzer ist mit einer anderen Registrierungs-URL angemeldet. Schließen Sie CRM.Client, bevor Sie eine andere Registrierungs-URL registrieren</value>
+  </data>
+  <data name="Login_341">
+    <value>Aktueller Benutzer ist mit einer anderen Registrierungs-URL angemeldet. Schließen Sie CRM.Client, bevor Sie eine andere Registrierungs-URL registrieren</value>
+  </data>
+  <data name="Login_35">
+    <value>Der aktuelle Server ist bereits registriert. Entfernen Sie die Serverregistrierung, bevor Sie sie erneut registrieren</value>
+  </data>
+  <data name="Login_351">
+    <value>Der aktuelle Server ist bereits registriert. Entfernen Sie die Serverregistrierung, bevor Sie sie erneut registrieren</value>
+  </data>
+  <data name="Login_36">
+    <value>Die aktuelle Server-URL ist bereits registriert. Entfernen Sie die Serverregistrierung, bevor Sie die neue Server-URL registrieren</value>
+  </data>
+  <data name="Login_361">
+    <value>Die aktuelle Server-URL ist bereits registriert. Entfernen Sie die Serverregistrierung, bevor Sie die neue Server-URL registrieren</value>
+  </data>
+  <data name="Login_37">
+    <value>Nur der Standardserver ist zulässig</value>
+  </data>
+  <data name="Login_371">
+    <value>Nur der Standardserver ist zulässig</value>
+  </data>
+  <data name="Login_38">
+    <value>Bitte wählen Sie den Standardserver aus der Liste der Server</value>
+  </data>
+  <data name="Login_381">
+    <value>Bitte wählen Sie den Standardserver aus der Liste der Server</value>
+  </data>
+  <data name="Login_39">
+    <value>Kein Server ausgewählt</value>
+  </data>
+  <data name="Login_4">
+    <value>Anmeldung wird durchgeführt...</value>
+  </data>
+  <data name="Login_41">
+    <value>Anmeldung wird durchgeführt...</value>
+  </data>
+  <data name="Login_5">
+    <value>Anmeldung wird durchgeführt...</value>
+  </data>
+  <data name="Login_51">
+    <value>Anmeldung wird durchgeführt...</value>
+  </data>
+  <data name="Login_6">
+    <value>Synchronisation wird durchgeführt...</value>
+  </data>
+  <data name="Login_61">
+    <value>Synchronisation wird durchgeführt...</value>
+  </data>
+  <data name="Login_7">
+    <value>Das eingegebene Passwort ist nicht korrekt.</value>
+  </data>
+  <data name="Login_71">
+    <value>Das eingegebene Passwort ist nicht korrekt.</value>
+  </data>
+  <data name="Login_8">
+    <value>Es wurden noch keine Daten für diesen Benutzer synchronisiert. Bitte prüfen Sie Internetverbindung &amp; Benutzernamen.</value>
+  </data>
+  <data name="Login_81">
+    <value>Es wurden noch keine Daten für diesen Benutzer synchronisiert. Bitte prüfen Sie Internetverbindung &amp; Benutzernamen.</value>
+  </data>
+  <data name="Login_9">
+    <value>Die lokal gespeicherten Daten sind veraltet. Bitte prüfen Sie Ihre Internetverbindung um einen Full Sync durchzuführen.</value>
+  </data>
+  <data name="Login_91">
+    <value>Die lokal gespeicherten Daten sind veraltet. Bitte prüfen Sie Ihre Internetverbindung um einen Full Sync durchzuführen.</value>
+  </data>
+
+  <data name="Login_2000">
+        <value>Unvollständig Full Sync</value>
+    </data>
+	<data name="Login_2001">
+        <value>
+					Ihre vorherige vollständige Synchronisierung wurde nicht erfolgreich abgeschlossen. Möchten Sie die vollständige Synchronisierung fortsetzen oder neu starten?
+				</value>
+    </data>
+	<data name="Login_2002">
+        <value>Fortsetzen</value>
+    </data>
+	<data name="Login_2003">
+        <value>Neubeginn</value>
+    </data>
+
+	<data name="DateTexts_0">
+		<value>Heute</value>
+    </data>
+	<data name="DateTexts_1">
+		<value>Gestern</value>
+    </data>
+	<data name="DateTexts_2">
+		<value>Morgen</value>
+    </data>
+	<data name="DateTexts_3">
+		<value>Jetzt</value>
+    </data>
+	<data name="DateTexts_4">
+		<value>%@ - %@</value>
+    </data>
+	<data name="DateTexts_5">
+		<value></value>
+    </data>
+	<data name="DateTexts_6">
+		<value>Datum</value>
+    </data>
+	<data name="DateTexts_7">
+		<value>Jahr</value>
+    </data>
+	<data name="DateTexts_8">
+		<value>Monat</value>
+    </data>
+	<data name="DateTexts_9">
+		<value>Tag</value>
+    </data>
+	<data name="DateTexts_10">
+		<value>Stunde</value>
+    </data>
+	<data name="DateTexts_11">
+		<value>Minute</value>
+    </data>
+
+	<data name="names_of_weekdays_core_0">
+		<value>Montag</value>
+    </data>
+	<data name="names_of_weekdays_core_1">
+		<value>Dienstag</value>
+    </data>
+	<data name="names_of_weekdays_core_2">
+		<value>Mittwoch</value>
+    </data>
+	<data name="names_of_weekdays_core_3">
+		<value>Donnerstag</value>
+    </data>
+	<data name="names_of_weekdays_core_4">
+		<value>Freitag</value>
+    </data>
+	<data name="names_of_weekdays_core_5">
+		<value>Samstag</value>
+    </data>
+	<data name="names_of_weekdays_core_6">
+		<value>Sonntag</value>
+    </data>
+</root>

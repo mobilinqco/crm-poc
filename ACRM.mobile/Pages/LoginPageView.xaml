@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="ACRM.mobile.Pages.LoginPageView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    NavigationPage.HasNavigationBar="false">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="LoginExtendedEntryTextFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="14" />
+                <On Platform="Android, WinPhone" Value="14" />
+                <On Platform="UWP" Value="14" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Behaviors>
+        <xct:EventToCommandBehavior Command="{Binding PageAppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+
+    <Grid Margin="0" RowSpacing="0">
+        <StackLayout Spacing="0" VerticalOptions="Fill">
+            <Grid
+                Margin="0"
+                RowSpacing="10"
+                VerticalOptions="CenterAndExpand">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource LoginPageInputRowHeight}" />
+                    <RowDefinition Height="{StaticResource LoginPageInputRowHeight}" />
+                    <RowDefinition Height="{StaticResource LoginPageInputRowHeight}" />
+                    <RowDefinition Height="{StaticResource LoginPageButtonRowHeight}" />
+                    <RowDefinition Height="{StaticResource LoginPageInputRowHeight}" />
+                    <RowDefinition Height="{StaticResource LoginPageButtonRowHeight}" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{StaticResource LoginPageMarginColumnWidth}" />
+                    <ColumnDefinition Width="{StaticResource LoginPageContentColumnWidth}" />
+                    <ColumnDefinition Width="{StaticResource LoginPageMarginColumnWidth}" />
+                </Grid.ColumnDefinitions>
+
+                <Frame
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Padding="0"
+                    BackgroundColor="{StaticResource TransparentShadowBackground}"
+                    CornerRadius="3"
+                    HorizontalOptions="Fill"
+                    OutlineColor="White">
+                    <Grid HeightRequest="{StaticResource LoginPageServerGridHeight}" HorizontalOptions="Fill">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{StaticResource LoginPageServerLabelColumnWidth}" />
+                            <ColumnDefinition Width="{StaticResource LoginPageBurgerButtonColumnWidth}" />
+                            <ColumnDefinition Width="{StaticResource LoginPageCogButtonColumnWidth}" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label
+                            Grid.Column="0"
+                            Margin="{StaticResource LoginServerLabelMargins}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="14"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding SelectedServerString, Mode=OneWay}"
+                            TextColor="White"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center" />
+
+                        <Button
+                            x:Name="ServerList"
+                            Grid.Column="1"
+                            Margin="{StaticResource BurgerButtonMargins}"
+                            Padding="0"
+                            BackgroundColor="Transparent"
+                            Command="{Binding ServerListCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            Text="&#xF035C;"
+                            TextColor="White"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="{StaticResource LoginPageBurgerButtonWidth}" />
+
+                        <Button
+                            x:Name="LogList"
+                            Grid.Column="2"
+                            Margin="{StaticResource CogButtonMargins}"
+                            Padding="0"
+                            BackgroundColor="Transparent"
+                            Command="{Binding ShowSettingsCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            Text="&#xF0493;"
+                            TextColor="White"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="{StaticResource LoginPageCogButtonWidth}" />
+                    </Grid>
+                </Frame>
+
+                <Frame
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Padding="0"
+                    BackgroundColor="{StaticResource TransparentShadowBackground}"
+                    CornerRadius="3"
+                    HeightRequest="{StaticResource LoginPageUsernameFrameHeight}"
+                    HorizontalOptions="Fill"
+                    OutlineColor="White">
+                    <customControls:ExtendedEntry
+                        x:Name="UserNameEntry"
+                        Margin="{StaticResource LoginInputEntryMargins}"
+                        BackgroundColor="Transparent"
+                        BorderWidth="0"
+                        FontAttributes="None"
+                        FontSize="{StaticResource LoginExtendedEntryTextFontSize}"
+                        HorizontalOptions="Fill"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Keyboard="Email"
+                        Placeholder="{Binding TextPlaceholderUsername}"
+                        PlaceholderColor="#CFFFFFFF"
+                        Text="{Binding Username, Mode=TwoWay}"
+                        TextColor="#f4f7fc"
+                        VerticalOptions="CenterAndExpand" />
+                </Frame>
+
+                <Frame
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Padding="0"
+                    BackgroundColor="{StaticResource TransparentShadowBackground}"
+                    CornerRadius="3"
+                    HeightRequest="{StaticResource LoginPagePasswordFrameHeight}"
+                    HorizontalOptions="Fill"
+                    OutlineColor="White">
+                    <customControls:ExtendedEntry
+                        x:Name="PasswordEntry"
+                        Margin="{StaticResource LoginInputEntryMargins}"
+                        BackgroundColor="Transparent"
+                        BorderWidth="0"
+                        FontAttributes="None"
+                        FontSize="{StaticResource LoginExtendedEntryTextFontSize}"
+                        HorizontalOptions="Fill"
+                        IsPassword="True"
+                        Placeholder="{Binding TextPlaceholderPassword}"
+                        PlaceholderColor="#CFFFFFFF"
+                        Text="{Binding Password, Mode=TwoWay}"
+                        TextColor="#f4f7fc"
+                        VerticalOptions="Center" />
+                </Frame>
+
+                  <Frame IsVisible="{Binding IsChangePasswordEnabled}"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Padding="0"
+                    BackgroundColor="{StaticResource TransparentShadowBackground}"
+                    CornerRadius="3"
+                    HeightRequest="{StaticResource LoginPagePasswordFrameHeight}"
+                    HorizontalOptions="Fill"
+                    OutlineColor="White">
+                    <customControls:ExtendedEntry
+                        x:Name="NewPasswordEntry"
+                        Margin="{StaticResource LoginInputEntryMargins}"
+                        BackgroundColor="Transparent"
+                        BorderWidth="0"
+                        FontAttributes="None"
+                        FontSize="{StaticResource LoginExtendedEntryTextFontSize}"
+                        HorizontalOptions="Fill"
+                        IsPassword="True"
+                        Placeholder="{Binding TextPlaceholderNewPassword}"
+                        PlaceholderColor="#CFFFFFFF"
+                        Text="{Binding NewPassword, Mode=TwoWay}"
+                        TextColor="#f4f7fc"
+                        VerticalOptions="Center" />
+                </Frame>
+
+                  <Frame IsVisible="{Binding IsChangePasswordEnabled}"
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Padding="0"
+                    BackgroundColor="{StaticResource TransparentShadowBackground}"
+                    CornerRadius="3"
+                    HeightRequest="{StaticResource LoginPagePasswordFrameHeight}"
+                    HorizontalOptions="Fill"
+                    OutlineColor="White">
+                    <customControls:ExtendedEntry
+                        x:Name="ConfirmNewPasswordEntry"
+                        Margin="{StaticResource LoginInputEntryMargins}"
+                        BackgroundColor="Transparent"
+                        BorderWidth="0"
+                        FontAttributes="None"
+                        FontSize="{StaticResource LoginExtendedEntryTextFontSize}"
+                        HorizontalOptions="Fill"
+                        IsPassword="True"
+                        Placeholder="{Binding TextPlaceholderConfirmNewPassword}"
+                        PlaceholderColor="#CFFFFFFF"
+                        Text="{Binding ConfirmNewPassword, Mode=TwoWay}"
+                        TextColor="#f4f7fc"
+                        VerticalOptions="Center" />
+                </Frame>
+                <Frame
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Margin="{StaticResource LoginButtonFrameMargins}"
+                    Padding="0"
+                    BackgroundColor="#1a75cf"
+                    CornerRadius="3"
+                    HeightRequest="{StaticResource LoginPageButtonFrameHeight}"
+                    HorizontalOptions="Fill"
+                    OutlineColor="Transparent">
+
+                    <Button
+                        x:Name="LoginButton"
+                        Margin="{StaticResource LoginButtonMargins}"
+                        BackgroundColor="Transparent"
+                        Command="{Binding LoginCommand}"
+                        HeightRequest="48"
+                        Text="{Binding TextSignIn}"
+                        TextColor="#ffffff" />
+
+                </Frame>
+
+            </Grid>
+            <StackLayout
+                Margin="{StaticResource ApplicationDetailsStackLayoutMargins}"
+                BackgroundColor="Transparent"
+                HorizontalOptions="FillAndExpand"
+                Spacing="0"
+                VerticalOptions="End">
+
+                <Label
+                    Margin="{StaticResource ApplicationNameMargins}"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="{Binding ApplicationName}"
+                    TextColor="White" />
+                <Label
+                    Margin="{StaticResource ApplicationVersionMargins}"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="{Binding ApplicationVersion}"
+                    TextColor="White" />
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>

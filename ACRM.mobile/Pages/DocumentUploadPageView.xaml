@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Pages.DocumentUploadPageView"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    CloseWhenBackgroundIsClicked="False">
+     <pages:PopupPage.Resources>
+         <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter" />
+        <ResourceDictionary>
+            <OnPlatform x:Key="ButtonFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            DurationIn="300"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            PositionIn="Bottom"
+            PositionOut="Center"
+            ScaleIn="1"
+            ScaleOut="0.7" />
+    </pages:PopupPage.Animation>
+     <StackLayout BackgroundColor="{StaticResource BackgroundColor}"
+        Margin="30"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+
+         <Grid Margin="10">
+             <Grid.ColumnDefinitions>
+                 <ColumnDefinition Width="*"></ColumnDefinition>
+                 <ColumnDefinition Width="Auto"></ColumnDefinition>
+             </Grid.ColumnDefinitions>
+              <Label Grid.Column="0"
+                FontSize="20"
+                     VerticalOptions="Center"
+                HorizontalOptions="Start"
+                Text="{Binding Title}"
+                TextColor="White" />
+              <Button Grid.Column="1"
+                      HorizontalOptions="End"
+                       VerticalOptions="Center"
+                        Command="{Binding OnCloseButtonTapped}"
+                        Text="{Binding CloseText}"
+                        TextColor="White" />
+         </Grid>
+         <Grid Padding="20"  BackgroundColor="White">
+             <Grid RowSpacing="0" IsVisible="{Binding MessageShown, Converter={StaticResource BoolNegationConverter}}">
+
+             
+              <Grid Grid.Row="0" IsVisible="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}">
+
+                <Grid Grid.Row="0" IsVisible="{Binding FileSelected, Converter={StaticResource BoolNegationConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <buttons:SfButton
+                                          Grid.Row="0"
+                                          HorizontalOptions="Center"
+                                          Padding="0"
+                                          IsVisible="{Binding IsPhotoUploadOnly, Converter={StaticResource BoolNegationConverter}}"
+                                          BackgroundColor="{StaticResource BarBackgroundColor}"
+                                          Command="{Binding FilePickCommand}"
+                                          FontSize="{StaticResource ButtonFontSize}"
+                                          Text="{Binding PickAFileText}"
+                                          WidthRequest="200"
+                                          TextColor="White"/>
+
+                    <buttons:SfButton
+                                          Grid.Row="1"
+                                          HorizontalOptions="Center"
+                                          Padding="0"
+                                          IsVisible="{Binding IsPhotoUploadOnly, Converter={StaticResource BoolNegationConverter}}"
+                                          BackgroundColor="{StaticResource BarBackgroundColor}"
+                                          Command="{Binding VideoPickCommand}"
+                                          FontSize="{StaticResource ButtonFontSize}"
+                                          Text="{Binding PickAVideoText}"
+                                          WidthRequest="200"
+                                          TextColor="White"/>
+                    <buttons:SfButton Grid.Row="2"
+                                       HorizontalOptions="Center"
+                                          Padding="0"
+                                          BackgroundColor="{StaticResource BarBackgroundColor}"
+                                          Command="{Binding ImagePickCommand}"
+                                          FontSize="{StaticResource ButtonFontSize}"
+                                          Text="{Binding PickAnImageText}"
+                                          WidthRequest="200"
+                                          TextColor="White">
+
+                    </buttons:SfButton>
+                    <buttons:SfButton Grid.Row="3"
+                                       HorizontalOptions="Center"
+                                          Padding="0"
+                                          BackgroundColor="{StaticResource BarBackgroundColor}"
+                                          Command="{Binding CaptureImageCommand}"
+                                          FontSize="{StaticResource ButtonFontSize}"
+                                          Text="{Binding CaptureAnImageText}"
+                                          WidthRequest="200"
+                                          TextColor="White">
+
+                    </buttons:SfButton>
+                 </Grid> 
+
+                  <Grid Grid.Row="0" IsVisible="{Binding FileSelected}">
+                     <Grid.RowDefinitions>
+                         <RowDefinition Height="Auto"></RowDefinition>
+                         <RowDefinition Height="Auto"></RowDefinition>
+                         <RowDefinition Height="Auto"></RowDefinition>
+                         <RowDefinition Height="Auto"></RowDefinition>
+                         <RowDefinition Height="*"></RowDefinition>
+                     </Grid.RowDefinitions>
+
+                 <Label Grid.Row="0" HorizontalOptions="Center" Text="{Binding FileName}"></Label>
+
+                 <Image Grid.Row="1"  HeightRequest="100" Source="{Binding FileSource}" ></Image>
+                  <ScrollView HorizontalScrollBarVisibility="Never" Grid.Row="2">
+                    <StackLayout BindableLayout.ItemsSource="{Binding Widgets}" BindableLayout.ItemTemplateSelector="{StaticResource DashboardTemplateSelector}" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                />
+                   </ScrollView>
+                 <buttons:SfButton Grid.Row="3"
+                                          HorizontalOptions="Center"
+                                          Padding="0"
+                                          
+                                          BackgroundColor="{StaticResource BarBackgroundColor}"
+                                          Command="{Binding FileUploadCommand}"
+                                          FontSize="{StaticResource ButtonFontSize}"
+                                          Text="{Binding UploadText}"
+                                          WidthRequest="200"
+                                          TextColor="White"/>
+ 
+                     </Grid>
+                  </Grid>
+              <ActivityIndicator VerticalOptions="Center" HeightRequest="200" HorizontalOptions="Center" Grid.Row="0" IsRunning="{Binding IsLoading}"
+                         Color="{StaticResource ProgressColor}"
+                         IsVisible="{Binding IsLoading}" />
+               
+             </Grid>
+              <Grid VerticalOptions="Center" HeightRequest="200" HorizontalOptions="Center" IsVisible="{Binding MessageShown}">
+                    <Label Grid.Row="0" HorizontalOptions="Center" Text="{Binding Message}"></Label>
+                </Grid>
+             </Grid>
+
+         
+    </StackLayout>
+
+          
+</pages:PopupPage>

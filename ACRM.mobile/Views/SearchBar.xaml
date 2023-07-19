@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="ACRM.mobile.Views.SearchBar"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <ContentView.Resources>
+        <valueConverters:BoolToColorConverter x:Key="BooleanToColorConverter" />
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <Grid
+            Padding="{StaticResource SearchBarPadding}"
+            ColumnSpacing="0"
+            HeightRequest="{StaticResource SearchBarFrameHeight}"
+            HorizontalOptions="FillAndExpand"
+            RowSpacing="0"
+            VerticalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Search box  -->
+            <Frame
+                Grid.Column="0"
+                Padding="{StaticResource SearchTextBoxFramePaddings}"
+                BackgroundColor="{StaticResource SearchPageBackground}"
+                CornerRadius="5"
+                HasShadow="false"
+                HorizontalOptions="FillAndExpand"
+                OutlineColor="{StaticResource SearchBarIconColor}"
+                VerticalOptions="Center">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--  Search icon  -->
+                    <Label
+                        Grid.Column="0"
+                        Margin="{StaticResource SearchBarIconMargins}"
+                        BackgroundColor="Transparent"
+                        FontFamily="{StaticResource MaterialDesignIcons}"
+                        FontSize="{StaticResource SearchBarIconSize}"
+                        HorizontalOptions="Start"
+                        Text="&#xF0349;"
+                        TextColor="{StaticResource SearchBarIconColor}"
+                        VerticalOptions="Center" />
+
+                    <customControls:ExtendedEntry
+                        x:Name="SearchTextBox"
+                        Grid.Column="1"
+                        Margin="{StaticResource SearchTextBoxMargins}"
+                        BorderWidth="0"
+                        FontSize="{StaticResource ExtendedEntryTextFontSize}"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Start"
+                        Placeholder="{Binding SearchAndListContentData.SearchTextBoxPlaceholderText, Mode=OneWay}"
+                        PlaceholderColor="{StaticResource PlaceholderTextColor}"
+                        Text="{Binding SearchAndListContentData.SearchText, Mode=TwoWay}"
+                        TextColor="{StaticResource EntryTextColor}"
+                        VerticalOptions="Center">
+                        <customControls:ExtendedEntry.Behaviors>
+                            <xct:EventToCommandBehavior Command="{Binding SearchCommand}" EventName="TextChanged" />
+                        </customControls:ExtendedEntry.Behaviors>
+                    </customControls:ExtendedEntry>
+                </Grid>
+            </Frame>
+
+            <Frame Grid.Row="0" IsVisible="{Binding SearchAndListContentData.EnableNoResultsText, Converter={StaticResource BoolNegationConverter}}"
+                   Grid.Column="1" HeightRequest="30" CornerRadius="5" HasShadow="false"
+                   BackgroundColor="Transparent" Padding="5" Margin="5,5,0,5">
+                <Label Text="{Binding SearchAndListContentData.ResultsCount}"
+                       IsVisible="{Binding SearchAndListContentData.IsCounterVisible}"
+                       TextColor="#4080b0" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </Frame>
+
+            <!--  Filter Button  -->
+            <AbsoluteLayout   Grid.Row="0" IsVisible="{Binding SearchAndListContentData.IsFilterVisible}"
+                Grid.Column="2"  VerticalOptions="CenterAndExpand"
+                 WidthRequest="{StaticResource SearchBarButtonWidth}"
+                >
+                <Button
+              
+                Margin="{StaticResource SearchBarButtonsMargin}"
+                BackgroundColor="Transparent"
+                Command="{Binding ShowFilterCommand}"
+                FontFamily="{StaticResource MaterialDesignIcons}"
+                FontSize="{StaticResource SearchBarIconSize}"
+                HorizontalOptions="End"
+                IsEnabled="{Binding SearchAndListContentData.IsFilteringEnabled}"
+                Text="&#xF0232;"
+                TextColor="{Binding SearchAndListContentData.HasActiveFilters, Converter={StaticResource BooleanToColorConverter}}"
+                 AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
+                <AbsoluteLayout AbsoluteLayout.LayoutBounds="10,0,-1,0" Background="Transparent" IsVisible="{Binding SearchAndListContentData.IsUserFilterEnabled}" >
+                    <AbsoluteLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ShowFilterCommand}" />
+                    </AbsoluteLayout.GestureRecognizers>
+                    <Label FontFamily="{StaticResource MaterialDesignIcons}" BackgroundColor="Transparent" Text="&#xf012f;"
+                       FontSize="15" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
+                    <Label TextColor="White" Text="{Binding SearchAndListContentData.UserFilterCount}" FontSize="8" AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds=".5,0,-1,0" />
+                </AbsoluteLayout>
+            </AbsoluteLayout>
+
+
+            <Button
+                Grid.Column="3"
+                Margin="{StaticResource SearchBarButtonsMargin}"
+                BackgroundColor="Transparent"
+                Command="{Binding SwitchRequestModeCommand}"
+                FontFamily="{StaticResource MaterialDesignIcons}"
+                FontSize="{StaticResource SearchBarIconSize}"
+                HorizontalOptions="End"
+                IsEnabled="{Binding SearchAndListContentData.IsOnlinePossible}"
+                IsVisible="{Binding SearchAndListContentData.IsOnlineOfflineVisible}"
+                Text="{Binding SearchAndListContentData.OnlineButtonIconText}"
+                TextColor="{Binding SearchAndListContentData.OnlineMode, Converter={StaticResource BooleanToColorConverter}}"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="{StaticResource SearchBarButtonWidth}" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

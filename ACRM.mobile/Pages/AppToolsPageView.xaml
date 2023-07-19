@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage
+    x:Class="ACRM.mobile.Pages.AppToolsPageView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+    xmlns:behaviors="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    CloseWhenBackgroundIsClicked="False">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            DurationIn="300"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            PositionIn="Bottom"
+            PositionOut="Center"
+            ScaleIn="1"
+            ScaleOut="0.7" />
+    </pages:PopupPage.Animation>
+
+    <StackLayout Style="{StaticResource AppPopupStackViewStyle}"
+                 Orientation="Vertical"
+                 Spacing="0"
+                 >
+
+        <!-- TabView -->
+        <tabView:SfTabView Items="{Binding TabItems}"                     
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="FillAndExpand"
+                           BackgroundColor="{StaticResource BarBackgroundColor}"
+                           DisplayMode="ImageWithText"
+                           VisibleHeaderCount="5"
+                           EnableSwiping="False"
+                           EnableRippleAnimation="False"
+                           SelectedIndex="{Binding CurrentTabViewIndex}"
+                           TabHeight="{StaticResource AppToolsTabHeight}">
+
+            <tabView:SfTabView.SelectionIndicatorSettings>
+                <tabView:SelectionIndicatorSettings Color="Black"/>
+            </tabView:SfTabView.SelectionIndicatorSettings>
+
+            <tabView:SfTabView.Behaviors>
+                <behaviors:EventToCommandBehavior Command="{Binding SelectionChangingCommand}" EventName="SelectionChanging"/>
+            </tabView:SfTabView.Behaviors>
+
+        </tabView:SfTabView>
+
+        <!-- Bottom Layout -->
+        <StackLayout
+            HeightRequest="{StaticResource ToolsBottomBarHeight}"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="End"
+            Orientation="Horizontal"
+            Spacing="0">
+
+            <StackLayout
+                BackgroundColor="{Binding StatusColor}"
+                HorizontalOptions="Start"
+                VerticalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                Spacing="0">
+                <Button
+                    Margin="{StaticResource ToolsStatusIconMargin}"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    FontSize="{StaticResource ToolsStatusIconFontSize}" 
+                    FontFamily="{StaticResource MaterialDesignIcons}"
+                    WidthRequest="{StaticResource AppToolsPageOnlineButtonWidth}"
+                    HeightRequest="{StaticResource ToolsBottomBarHeight}"
+                    VerticalOptions="FillAndExpand"
+                    Text="{Binding StatusIcon}"
+                    TextColor="White"/>
+                <Label
+                    Padding="{StaticResource ToolsOnlineLabelPadding}"
+                    HeightRequest="{StaticResource ToolsBottomBarHeight}"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                    Text="{Binding StatusText}"
+                    TextColor="White"/>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleOfflineModeCommand}"/>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+
+            <buttons:SfButton
+                VerticalOptions="Center"
+                HorizontalOptions="EndAndExpand"
+                Margin="{StaticResource AppToolsCloseButtonMargin}"
+                Padding="0"
+                BackgroundColor="Transparent"
+                Command="{Binding DismissToolsViewCommand}"
+                FontSize="{StaticResource ToolsSyncButtonFontSize}"
+                Text="{Binding CloseText}"
+                TextColor="White"/>
+
+        </StackLayout>
+
+    </StackLayout>
+
+</pages:PopupPage>

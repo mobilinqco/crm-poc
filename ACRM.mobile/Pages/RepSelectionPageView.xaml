@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    x:Class="ACRM.mobile.Pages.RepSelectionPageView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="RepSelectionPageViewButtonFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="RepSelectionPageViewNavigationLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="RepSelectionPageViewHeight" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="450" Tablet="700" Desktop="800"/>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="450" Tablet="700" Desktop="800"/>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="300" Tablet="600" Desktop="600"/>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="RepSelectionPageViewWidth" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="300" Tablet="600" Desktop="400"/>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="350" Tablet="700" Desktop="800"/>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="300" Tablet="600" Desktop="600"/>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="RepSelectionPageViewLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="RepSelectionPageViewContentPadding" x:TypeArguments="Thickness">
+                <On Platform="iOS, Android, UWP" Value="20, 20, 20, 10"></On>
+            </OnPlatform>
+
+             <OnPlatform x:Key="RepSelectionPageViewIconLabelHeight" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="18"></On>
+                <On Platform="Android" Value="20"></On>
+                <On Platform="WinPhone, UWP" Value="20"></On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            DurationIn="300"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            PositionIn="Bottom"
+            PositionOut="Center"
+            ScaleIn="1"
+            ScaleOut="0.7" />
+    </pages:PopupPage.Animation>
+
+    <Grid VerticalOptions="Center"
+          HorizontalOptions="Center"
+          HeightRequest="{StaticResource RepSelectionPageViewHeight}"
+          WidthRequest="{StaticResource RepSelectionPageViewWidth}"
+          BackgroundColor="{StaticResource BarBackgroundColor}"
+          RowSpacing="5">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top Navigation Bar -->
+
+        <StackLayout Grid.Column="0"
+                     Grid.Row="0"
+                     VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     Orientation="Horizontal"
+                     Spacing="5">
+
+            <buttons:SfButton VerticalOptions="FillAndExpand"
+                              HorizontalOptions="Start"
+                              HeightRequest="45"
+                              Margin="0"
+                              Padding="0"
+                              BackgroundColor="Transparent"
+                              Command="{Binding CloseCommand}"
+                              FontSize="{StaticResource RepSelectionPageViewButtonFontSize}"
+                              Text="{Binding CloseText}"
+                              TextColor="White"/>
+
+            <Label VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="StartAndExpand"
+                   FontSize="{StaticResource RepSelectionPageViewNavigationLabelFontSize}"
+                   Text="{Binding TitleText}"
+                   TextColor="White"/>
+
+        </StackLayout>
+
+        <!-- Content -->
+
+        <StackLayout Grid.Column="0"
+                     Grid.Row="1"
+                     VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     Padding="{StaticResource RepSelectionPageViewContentPadding}"
+                     BackgroundColor="White"
+                     Orientation="Vertical"
+                     Spacing="10">
+
+            <!-- Search box -->
+
+            <Frame VerticalOptions="FillAndExpand"
+                   HorizontalOptions="FillAndExpand"
+                   Padding="{StaticResource SearchTextBoxFramePaddings}"
+                   BackgroundColor="{StaticResource SearchPageBackground}"
+                   CornerRadius="5"
+                   HasShadow="false"
+                   OutlineColor="{StaticResource SearchBarIconColor}">
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!--  Search icon  -->
+
+                    <Label Grid.Column="0"
+                           Grid.Row="0"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="Start"
+                           Margin="{StaticResource SearchBarIconMargins}"
+                           BackgroundColor="Transparent"
+                           FontFamily="{StaticResource MaterialDesignIcons}"
+                           FontSize="{StaticResource SearchBarIconSize}"
+                           Text="&#xF0349;"
+                           TextColor="{StaticResource SearchBarIconColor}" />
+
+                    <customControls:ExtendedEntry Grid.Column="1"
+                                                  Grid.Row="0"
+                                                  HorizontalOptions="FillAndExpand"
+                                                  VerticalOptions="CenterAndExpand"
+                                                  Margin="{StaticResource SearchTextBoxMargins}"
+                                                  BorderWidth="0"
+                                                  FontSize="{StaticResource ExtendedEntryTextFontSize}"
+                                                  HorizontalTextAlignment="Start"
+                                                  Placeholder="{Binding SearchTextBoxPlaceholderText}"
+                                                  PlaceholderColor="{StaticResource PlaceholderTextColor}"
+                                                  Text="{Binding SearchText, Mode=TwoWay}"
+                                                  TextColor="{StaticResource EntryTextColor}" >
+
+                        <customControls:ExtendedEntry.Behaviors>
+                            <xct:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}" />
+                        </customControls:ExtendedEntry.Behaviors>
+
+                    </customControls:ExtendedEntry>
+
+                </Grid>
+            </Frame>
+
+            <xforms:SfListView VerticalOptions="FillAndExpand"
+                               HorizontalOptions="FillAndExpand"
+                               ItemsSource="{Binding BindableCrmReps}"
+                               DataSource="{Binding FilterDataSource}"
+                               ItemSpacing="2"
+                               Orientation="Vertical"
+                               AutoFitMode="DynamicHeight"
+                               SelectionBackgroundColor="Transparent">
+
+                <xforms:SfListView.Behaviors>
+                    <xct:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}"/>
+                </xforms:SfListView.Behaviors>
+
+                <xforms:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid VerticalOptions="FillAndExpand"
+                              HorizontalOptions="FillAndExpand"
+                              Padding="4, 8, 4, 8">
+
+                            <Grid.Triggers>
+                                <DataTrigger TargetType="Grid"
+                                             Binding="{Binding IsSelected}"
+                                             Value="True">
+                                    <Setter Property="BackgroundColor"
+                                            Value="LightGray"/>
+                                </DataTrigger>
+                            </Grid.Triggers>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="CenterAndExpand"
+                                   FontSize="{StaticResource RepSelectionPageViewLabelFontSize}"
+                                   Text="{Binding Name}"
+                                   TextColor="Black"/>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   HeightRequest="{StaticResource RepSelectionPageViewIconLabelHeight}"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="End"
+                                   IsVisible="{Binding IsSelected}"
+                                   FontSize="16"
+                                   FontFamily="{StaticResource MaterialDesignIcons}"
+                                   TextColor="White"
+                                   Text="&#xF0E1E;"/>
+                        </Grid>
+
+                    </DataTemplate>
+                </xforms:SfListView.ItemTemplate>
+
+            </xforms:SfListView>
+
+            <StackLayout VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         Orientation="Horizontal"
+                         Spacing="5">
+
+                <buttons:SfButton VerticalOptions="FillAndExpand"
+                                  HorizontalOptions="CenterAndExpand"
+                                  Margin="0"
+                                  Padding="0"
+                                  BackgroundColor="{StaticResource BackgroundColor}"
+                                  Command="{Binding ConfirmCommand}"
+                                  FontSize="{StaticResource RepSelectionPageViewButtonFontSize}"
+                                  Text="{Binding ConfirmText}"
+                                  TextColor="White"/>
+
+            </StackLayout>
+
+        </StackLayout>
+
+    </Grid>
+
+</pages:PopupPage>

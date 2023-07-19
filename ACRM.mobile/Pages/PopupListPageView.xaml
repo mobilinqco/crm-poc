@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage
+   xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:pagemodel="clr-namespace:ACRM.mobile.ViewModels;assembly=ACRM.mobile"
+    xmlns:widgetmodel="clr-namespace:ACRM.mobile.CustomControls.EditControls.Models;assembly=ACRM.mobile"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    CloseWhenBackgroundIsClicked="False"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    x:Class="ACRM.mobile.Pages.PopupListPageView">
+     <pages:PopupPage.Resources>
+         <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter" />
+         <valueConverters:NullToBoolConverter x:Key="NullToBoolConverter"/>
+          <valueConverters:BoolToColorConverter
+            x:Key="BoolToColorConverter"
+            FalseValue="#eeeeee"
+            TrueValue="LightBlue" />
+        <ResourceDictionary>
+            <OnPlatform x:Key="ButtonFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            DurationIn="300"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            PositionIn="Bottom"
+            PositionOut="Center"
+            ScaleIn="1"
+            ScaleOut="0.7" />
+    </pages:PopupPage.Animation>
+     <StackLayout BackgroundColor="{StaticResource BackgroundColor}"
+        Margin="30"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+
+         <Grid Margin="10">
+             <Grid.ColumnDefinitions>
+                 <ColumnDefinition Width="*"></ColumnDefinition>
+                 <ColumnDefinition Width="Auto"></ColumnDefinition>
+             </Grid.ColumnDefinitions>
+              <Label Grid.Column="0"
+                FontSize="20"
+                     VerticalOptions="Center"
+                HorizontalOptions="Start"
+                Text="{Binding Title}"
+                TextColor="White" />
+              <Button Grid.Column="1"
+                      HorizontalOptions="End"
+                       VerticalOptions="Center"
+                        Command="{Binding OnCloseButtonTapped}"
+                        Text="Close"
+                        TextColor="White" />
+         </Grid>
+         <Grid Padding="20"  BackgroundColor="White">
+       <ScrollView>
+          <StackLayout Grid.Row="0" BindableLayout.ItemsSource="{Binding UIItems}" Margin="10" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+
+                >
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="{Binding Selected, Converter={StaticResource BoolToColorConverter}}"  >
+                           <Grid.GestureRecognizers>
+                           <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type pagemodel:PopupListPageViewModel}}, Path= SelectedItemCommand}"
+                                                 CommandParameter="{Binding .}"/>
+                          </Grid.GestureRecognizers>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                        <Grid  Grid.Row="0" Grid.Column="0" HeightRequest= "75" WidthRequest ="40">
+                                    <Label Grid.Column="0"
+                                           HeightRequest="30"
+                                           Text="{Binding ImageSource.glyph}"
+                                           FontSize="{StaticResource HeaderButtonIconSize}"
+                                           FontFamily="{StaticResource HeaderButtonImagesFont}"
+                                           TextColor="{StaticResource HeaderButtonTextColor}"
+                                           IsVisible="{Binding ImageSource.image, Converter={StaticResource NullToBoolConverter}}"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"/>
+
+                                    <Image Grid.Column="0" Style="{StaticResource profileImageStyle}" Source="{Binding ImageSource.image}" IsVisible="{Binding ImageSource.glyph, Converter={StaticResource NullToBoolConverter}}" />
+                                </Grid>
+                                <Label Grid.Column="1"  Grid.Row="0" FontSize="12" Text="{Binding DisplayText}" HorizontalTextAlignment="Start"
+                                           VerticalTextAlignment="Center"></Label>
+                            <Label IsVisible="{Binding Selected}" Grid.Column="2"   Grid.Row="0" Grid.RowSpan="2" VerticalTextAlignment="Center" VerticalOptions="Center"
+                            Margin="0"
+                            BackgroundColor="Transparent"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            Text="&#xF012C;"
+                            WidthRequest="45"
+                            TextColor="#20569e" />
+                            <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+                            </Grid>
+                        
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+
+       </ScrollView>
+     </Grid>
+
+         
+    </StackLayout>
+
+      
+</pages:PopupPage>

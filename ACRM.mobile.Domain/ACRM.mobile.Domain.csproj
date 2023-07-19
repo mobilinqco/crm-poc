@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <ReleaseVersion>1.0</ReleaseVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Remove="FormatUtils\" />
+    <None Remove="Application\SerialEntry\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+    <Folder Include="JsonUtils\" />
+    <Folder Include="Configuration\UserInterface\" />
+    <Folder Include="Configuration\DataModel\" />
+    <Folder Include="Application\" />
+    <Folder Include="Application\Network\" />
+    <Folder Include="Application\ActionTemplates\" />
+    <Folder Include="Application\Language\" />
+    <Folder Include="OfflineSync\" />
+    <Folder Include="Application\DataTree\" />
+    <Folder Include="Application\Calendar\" />
+    <Folder Include="Application\Messages\" />
+    <Folder Include="FormatUtils\" />
+    <Folder Include="Application\SerialEntry\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+</Project>

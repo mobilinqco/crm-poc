@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Pages.DocumentPageView"
+    Padding="{StaticResource PagePadding}"
+     xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:widgetmodel="clr-namespace:ACRM.mobile.ViewModels;assembly=ACRM.mobile"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:widgetViewss="clr-namespace:ACRM.mobile.Views.Widgets;assembly=ACRM.mobile"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    NavigationPage.HasNavigationBar="false">
+     <ContentPage.Resources>
+        <customControls:FileDownloadIconConverter x:Key="FileDownloadIconConverter"/>
+        <customControls:FileTypeIconConverter x:Key="FileTypeIconConverter"/>
+        <valueConverters:BoolToStringConverter x:Key="BoolToStringConverter" />
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter" />
+        <valueConverters:BoolToColorConverter
+            x:Key="BoolToColorConverter"
+            FalseValue="Transparent"
+            TrueValue="White" />
+        <valueConverters:NullToBoolConverter x:Key="NullToBoolConverter" />
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <views:CustomNavigationBar
+                Grid.Row="0"
+                BindingContext="this"
+                HeightRequest="45" />
+            <Grid
+                Grid.Row="1"
+                Margin="0"
+                BackgroundColor="{StaticResource BackgroundColor}"
+                HorizontalOptions="Fill"
+                RowSpacing="0"
+                VerticalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!--  Header View  -->
+                <views:HeaderGroup
+                    Grid.Row="0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+
+                <!--  Content View  -->
+                <widgetViewss:DocumentView
+                Grid.Row="1"/>
+
+
+                <!--  Header Actions  -->
+                <views:HeaderGroupButtons
+                    Grid.Row="2"
+                    Margin="{StaticResource PageBottomControlMargin}"
+                    HeightRequest="60"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding HeaderData.AreActionsViewVisible}"
+                    VerticalOptions="FillAndExpand" />
+
+            </Grid>
+
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

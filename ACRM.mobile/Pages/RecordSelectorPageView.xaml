@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    x:Class="ACRM.mobile.Pages.RecordSelectorPageView"
+    CloseWhenBackgroundIsClicked="True">
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Right"
+            PositionOut="Right"
+            ScaleIn="1"
+            ScaleOut="0.7"
+            DurationIn="300"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"/>
+    </pages:PopupPage.Animation>
+
+    <Grid Style="{StaticResource RecordSelectorStyle}"
+          WidthRequest="{Binding PageWidthRequest}"
+          HeightRequest="{Binding PageHeightRequest}"
+          HorizontalOptions="End"
+          VerticalOptions="Center"
+          RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              BackgroundColor="{StaticResource RecordSelectorTitleBackgroundColor}"
+              HorizontalOptions="Fill">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Command="{Binding CloseCommand}"
+                    VerticalOptions="Start"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource RecordSelectorCancelButtonFontColor}"
+                    FontSize="{StaticResource RecordSelectorButtonsFontSize}"
+                    Text="{Binding CloseButtonTitle}"/>
+
+            <Label Grid.Column="1"
+                   VerticalOptions="Fill"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   FontSize="{StaticResource RecordSelectorTitleFontSize}"
+                   TextColor="{StaticResource RecordSelectorTitleFontColor}"
+                   Text="{Binding RecordSelectorTitle}" />
+
+            <Button Grid.Column="2"
+                    Command="{Binding ApplyCommand}"
+                    VerticalOptions="End"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource RecordSelectorApplyButtonFontColor}"
+                    FontSize="{StaticResource RecordSelectorButtonsFontSize}"
+                    IsVisible="{Binding IsApplyVisible}"
+                    Text="{Binding ApplyButtonTitle}"/>
+        </Grid>
+        
+        <BoxView Grid.Row="1"
+                 HeightRequest="{StaticResource FancyLineHeight}"
+                 BackgroundColor="{Binding RecordSelectorSeparatorLineColor}"
+                 VerticalOptions="Start"
+                 HorizontalOptions="Fill"
+                 Margin="0"/>
+
+        <!-- Content View -->
+        <views:SearchAndListContent
+            Grid.Row="2"
+            BackgroundColor="{StaticResource SearchPageBackground}"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"/>
+    </Grid>
+</pages:PopupPage>

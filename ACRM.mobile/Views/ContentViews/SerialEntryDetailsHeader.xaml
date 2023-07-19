@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.ContentViews.SerialEntryDetailsHeader">
+    <ContentView.Content>
+         <Grid RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
+       <Frame CornerRadius="0"  Margin="0" Padding="0" Grid.Row="0" BackgroundColor="{StaticResource BackgroundColor}" HeightRequest="50">
+        <Grid Margin="0" 
+                    RowSpacing="0" ColumnSpacing="0"
+             HorizontalOptions="FillAndExpand">
+             <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                 <Button Grid.Column="0" Margin="12,0,0,0"
+                         BackgroundColor="Transparent"
+                         HorizontalOptions="Start"
+                         FontSize="20"
+                        Command="{Binding OnDetailsBackCommand}"
+                        Text="&lt; Back"
+                        TextColor="White"></Button>
+            <Label
+                            Grid.Column="1"
+                           
+                            BackgroundColor="Transparent"
+                            FontSize="25"
+                            HorizontalOptions="Center"
+                            Text="OVERVIEW"
+                            TextColor="White"
+                            VerticalOptions="Center" />
+
+         </Grid>
+           </Frame>
+            </Grid>
+    </ContentView.Content>
+</ContentView>

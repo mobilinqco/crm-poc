@@ -1,0 +1,473 @@
+﻿<ContentView x:Name="QuestionnaireEditContentView"
+             x:Class="ACRM.mobile.Views.Widgets.QuestionnaireEditView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion2="clr-namespace:Syncfusion.XForms.Expander;assembly=Syncfusion.Expander.XForms"
+             xmlns:textinputlayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+             xmlns:local="clr-namespace:ACRM.mobile.UIModels"
+             xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+             xmlns:sfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             Padding="{StaticResource PagePadding}"
+             BackgroundColor="White"
+             NavigationPage.HasNavigationBar="false">
+
+    <ContentView.Resources>
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter" />
+
+        <ResourceDictionary>
+            <OnPlatform x:Key="NoContentLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS, Android, WinPhone, UWP" Value="28"></On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="ErrorMessageMargins" x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="0,5,0,5" />
+                <On Platform="Android, WinPhone" Value="0,5,0,5" />
+                <On Platform="UWP" Value="0,5,0,5" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="ViewElementMargins" x:TypeArguments="Thickness">
+                <On Platform="iOS, Android, WinPhone, UWP" Value="10, 10, 0, 0"></On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="LabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS, Android, WinPhone, UWP" Value="18"></On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="DescriptionLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS, Android, WinPhone, UWP" Value="16"></On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="CompletionLayoutFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS, Android, WinPhone, UWP" Value="28"></On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="SeparatorLineHeight" x:TypeArguments="x:Double">
+                <On Platform="iOS, Android, WinPhone, UWP" Value="1"></On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <ContentView.Content>
+        <Grid HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  BackgroundColor="{StaticResource SearchPageBackground}"
+                  IsVisible="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ScrollView Grid.Row="0"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            Orientation="Vertical">
+
+                    <Grid HorizontalOptions="FillAndExpand"
+                          VerticalOptions="FillAndExpand"
+                          Margin="0, 10, 0, 0"
+                          RowSpacing="10">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                              Grid.Column="0"
+                              HorizontalOptions="CenterAndExpand"
+                              VerticalOptions="StartAndExpand"
+                              FontSize="{StaticResource LabelFontSize}"
+                              Text="{Binding QuestionnaireLabel}"/>
+
+                        <sfButtons:SfSegmentedControl Grid.Row="1"
+                                                      Grid.Column="0"
+                                                      HorizontalOptions="FillAndExpand"
+                                                      VerticalOptions="StartAndExpand"
+                                                      Margin="10, 0, 10, 0"
+                                                      CornerRadius="5"
+                                                      SegmentHeight="30"
+                                                      FontColor="Black"
+                                                      BorderColor="Transparent"
+                                                      Color="LightGray"
+                                                      FontSize="{StaticResource LabelFontSize}"
+                                                      SelectedIndex="{Binding SegmentedControlIndex, Mode=TwoWay}"
+                                                      ItemsSource="{Binding EditViewTypeItems}"
+                                                      VisibleSegmentsCount="{Binding ViewModesCounter}"
+                                                      IsVisible="{Binding IsTypeSelectionVisible}">
+
+                            <sfButtons:SfSegmentedControl.Behaviors>
+                                <xct:EventToCommandBehavior EventName="SelectionChanged" Command="{Binding SelectionChangedCommand}" />
+                            </sfButtons:SfSegmentedControl.Behaviors>
+
+                        </sfButtons:SfSegmentedControl>
+
+                        <StackLayout Grid.Row="2"
+                                     Grid.Column="0"
+                                     HorizontalOptions="FillAndExpand"
+                                     VerticalOptions="StartAndExpand"
+                                     Spacing="10"
+                                     BindableLayout.ItemsSource="{Binding BindableQuestionnaireQuestionSections}">
+
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <syncfusion2:SfExpander DynamicSizeMode="Content"
+                                                            IsExpanded="True"
+                                                            HeaderIconPosition="Start"
+                                                            HeaderBackgroundColor="LightGray"
+                                                            IsVisible="{Binding IsVisible}">
+
+                                        <syncfusion2:SfExpander.Header>
+                                            <Label HorizontalOptions="FillAndExpand"
+                                                   VerticalOptions="StartAndExpand"
+                                                   HorizontalTextAlignment="Start"
+                                                   VerticalTextAlignment="Center"
+                                                   Padding="10"
+                                                   FontSize="{StaticResource LabelFontSize}"
+                                                   FontAttributes="Bold"
+                                                   Text="{Binding Label}"
+                                                   BackgroundColor="LightGray"
+                                                   TextColor="Black"/>
+                                        </syncfusion2:SfExpander.Header>
+
+                                        <syncfusion2:SfExpander.Content>
+                                            <StackLayout HorizontalOptions="FillAndExpand"
+                                                         VerticalOptions="StartAndExpand"
+                                                         Spacing="0"
+                                                         BindableLayout.ItemsSource="{Binding BindableQuestionnaireQuestionDataList}">
+
+                                                <BindableLayout.ItemTemplateSelector>
+
+                                                    <customControls:QuestionnaireQuestionDataTemplateSelector>
+
+                                                        <customControls:QuestionnaireQuestionDataTemplateSelector.QuestionnaireSelectableQuestionData>
+                                                            <DataTemplate>
+
+                                                                <Grid HorizontalOptions="FillAndExpand"
+                                                                      VerticalOptions="StartAndExpand"
+                                                                      Margin="20, 10, 0, 0"
+                                                                      RowSpacing="0"
+                                                                      IsVisible="{Binding IsVisible}">
+
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                    </Grid.RowDefinitions>
+
+                                                                    <Label Grid.Row="0"
+                                                                           HorizontalOptions="FillAndExpand"
+                                                                           VerticalOptions="StartAndExpand"
+                                                                           HorizontalTextAlignment="Start"
+                                                                           VerticalTextAlignment="Center"
+                                                                           Padding="10"
+                                                                           FontSize="{StaticResource DescriptionLabelFontSize}"
+                                                                           Text="{Binding Label}"
+                                                                           TextColor="Black"
+                                                                           BackgroundColor="LightGray"/>
+
+                                                                    <StackLayout Grid.Row="1"
+                                                                                 HorizontalOptions="FillAndExpand"
+                                                                                 VerticalOptions="StartAndExpand"
+                                                                                 BindableLayout.ItemsSource="{Binding BindableQuestionnaireSelectableAnswers}"
+                                                                                 Orientation="Vertical">
+
+                                                                        <BindableLayout.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <Grid HorizontalOptions="FillAndExpand"
+                                                                                      VerticalOptions="FillAndExpand"
+                                                                                      IsVisible="{Binding IsVisible}"
+                                                                                      IsEnabled="{Binding IsEnabled}">
+
+                                                                                    <Grid.RowDefinitions>
+                                                                                        <RowDefinition Height="Auto"/>
+                                                                                        <RowDefinition Height="Auto"/>
+                                                                                    </Grid.RowDefinitions>
+
+                                                                                    <Grid.GestureRecognizers>
+                                                                                        <TapGestureRecognizer Command="{Binding
+                                                                                                                        Source={RelativeSource AncestorType={x:Type local:QuestionnaireEditModel}},
+                                                                                                                        Path=QuestionnaireSelectableAnswerTappedCommand}"
+                                                                                                              CommandParameter="{Binding .}"/>
+                                                                                    </Grid.GestureRecognizers>
+
+                                                                                    <Grid Grid.Row="0"
+                                                                                          HorizontalOptions="FillAndExpand"
+                                                                                          VerticalOptions="FillAndExpand">
+
+                                                                                        <Grid.ColumnDefinitions>
+                                                                                            <ColumnDefinition Width="Auto"/>
+                                                                                            <ColumnDefinition Width="Auto"/>
+                                                                                        </Grid.ColumnDefinitions>
+
+                                                                                        <Label Grid.Row="0"
+                                                                                               Grid.Column="0"
+                                                                                               VerticalOptions="CenterAndExpand"
+                                                                                               HorizontalOptions="Start"
+                                                                                               Padding="10"
+                                                                                               FontSize="{StaticResource LabelFontSize}"
+                                                                                               FontFamily="{StaticResource MaterialDesignIcons}"
+                                                                                               TextColor="Black"
+                                                                                               IsVisible="{Binding IsEnabled}">
+
+                                                                                            <Label.Triggers>
+                                                                                                <!-- Single selection triggers-->
+                                                                                                <MultiTrigger TargetType="Label">
+
+                                                                                                    <MultiTrigger.Conditions>
+                                                                                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                                                                            Value="True"/>
+                                                                                                        <BindingCondition Binding="{Binding IsSingleSelection}"
+                                                                                                            Value="True"/>
+                                                                                                    </MultiTrigger.Conditions>
+
+                                                                                                    <Setter Property="Text"
+                                                                                                            Value="&#xF0134;"/>
+
+                                                                                                </MultiTrigger>
+                                                                                                <MultiTrigger TargetType="Label">
+
+                                                                                                    <MultiTrigger.Conditions>
+                                                                                                        <BindingCondition Binding="{Binding IsSelected, Converter={StaticResource BoolNegationConverter}}"
+                                                                                                            Value="True"/>
+                                                                                                        <BindingCondition Binding="{Binding IsSingleSelection}"
+                                                                                                                Value="True"/>
+                                                                                                    </MultiTrigger.Conditions>
+
+                                                                                                    <Setter Property="Text"
+                                                                                                            Value="&#xF0130;"/>
+
+                                                                                                </MultiTrigger>
+
+                                                                                                <!-- Multiple selection triggers-->
+                                                                                                <MultiTrigger TargetType="Label">
+
+                                                                                                    <MultiTrigger.Conditions>
+                                                                                                        <BindingCondition Binding="{Binding IsSelected}"
+                                                                                                            Value="True"/>
+                                                                                                        <BindingCondition Binding="{Binding IsSingleSelection, Converter={StaticResource BoolNegationConverter}}"
+                                                                                                            Value="True"/>
+                                                                                                    </MultiTrigger.Conditions>
+
+                                                                                                    <Setter Property="Text"
+                                                                                                            Value="&#xF0135;"/>
+
+                                                                                                </MultiTrigger>
+                                                                                                <MultiTrigger TargetType="Label">
+
+                                                                                                    <MultiTrigger.Conditions>
+                                                                                                        <BindingCondition Binding="{Binding IsSelected, Converter={StaticResource BoolNegationConverter}}"
+                                                                                                                          Value="True"/>
+                                                                                                        <BindingCondition Binding="{Binding IsSingleSelection, Converter={StaticResource BoolNegationConverter}}"
+                                                                                                                          Value="True"/>
+                                                                                                    </MultiTrigger.Conditions>
+
+                                                                                                    <Setter Property="Text"
+                                                                                                            Value="&#xF0131;"/>
+
+                                                                                                </MultiTrigger>
+                                                                                            </Label.Triggers>
+
+                                                                                        </Label>
+
+                                                                                        <Label Grid.Row="0"
+                                                                                               Grid.Column="1"
+                                                                                               HorizontalOptions="FillAndExpand"
+                                                                                               VerticalOptions="CenterAndExpand"
+                                                                                               HorizontalTextAlignment="Start"
+                                                                                               VerticalTextAlignment="Center"
+                                                                                               Padding="0, 10, 10, 10"
+                                                                                               FontSize="{StaticResource LabelFontSize}"
+                                                                                               Text="{Binding Label}"
+                                                                                               TextColor="Black"/>
+
+                                                                                    </Grid>
+                                                                                        
+                                                                                    <BoxView Grid.Row="1"
+                                                                                             BackgroundColor="DarkGray"
+                                                                                             HeightRequest="{StaticResource SeparatorLineHeight}"
+                                                                                             HorizontalOptions="FillAndExpand" />
+
+                                                                                </Grid>
+
+                                                                            </DataTemplate>
+                                                                        </BindableLayout.ItemTemplate>
+
+                                                                    </StackLayout>
+                                                                        
+                                                                </Grid>
+
+                                                            </DataTemplate>
+                                                        </customControls:QuestionnaireQuestionDataTemplateSelector.QuestionnaireSelectableQuestionData>
+
+                                                        <customControls:QuestionnaireQuestionDataTemplateSelector.QuestionnaireTextQuestionData>
+                                                            <DataTemplate>
+
+                                                                <Grid HorizontalOptions="FillAndExpand"
+                                                                      VerticalOptions="StartAndExpand"
+                                                                      Margin="20, 10, 0, 0"
+                                                                      RowSpacing="0"
+                                                                      IsVisible="{Binding IsVisible}">
+
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                    </Grid.RowDefinitions>
+
+                                                                    <Label Grid.Row="0"
+                                                                           HorizontalOptions="FillAndExpand"
+                                                                           VerticalOptions="FillAndExpand"
+                                                                           HorizontalTextAlignment="Start"
+                                                                           VerticalTextAlignment="Center"
+                                                                           Padding="10"
+                                                                           FontSize="{StaticResource DescriptionLabelFontSize}"
+                                                                           Text="{Binding Label}"
+                                                                           TextColor="Black"
+                                                                           BackgroundColor="LightGray"/>
+
+                                                                    <textinputlayout:SfTextInputLayout Grid.Row="1"
+                                                                                                       InputViewPadding="0"
+                                                                                                       VerticalOptions="Fill"
+                                                                                                       HorizontalOptions="Start"
+                                                                                                       ContainerType="None"
+                                                                                                       OutlineCornerRadius="0"
+                                                                                                       FocusedColor="Transparent"
+                                                                                                       UnfocusedColor="Transparent"
+                                                                                                       ReserveSpaceForAssistiveLabels="False"
+                                                                                                       ShowHint="False"
+                                                                                                       IsEnabled="{Binding BindableQuestionnaireTextAnswer.IsEnabled}">
+
+                                                                        <Editor HeightRequest="40"
+                                                                                FontSize="{StaticResource LabelFontSize}"
+                                                                                AutoSize="TextChanges"
+                                                                                Text="{Binding BindableQuestionnaireTextAnswer.CurrentContentValue, Mode=TwoWay}"
+                                                                                TextColor="Black">
+
+                                                                            <Editor.Behaviors>
+                                                                                <xct:EventToCommandBehavior EventName="TextChanged"
+                                                                                                            Command="{Binding
+                                                                                                                      Source={x:Reference Name=QuestionnaireEditContentView},
+                                                                                                                      Path=BindingContext.QuestionnaireTextAnswerChangedCommand}"
+                                                                                                            CommandParameter="{Binding BindableQuestionnaireTextAnswer}"/>
+                                                                            </Editor.Behaviors>
+
+                                                                        </Editor>
+
+                                                                    </textinputlayout:SfTextInputLayout>
+
+                                                                </Grid>
+
+                                                            </DataTemplate>
+                                                        </customControls:QuestionnaireQuestionDataTemplateSelector.QuestionnaireTextQuestionData>
+
+                                                    </customControls:QuestionnaireQuestionDataTemplateSelector>
+
+                                                </BindableLayout.ItemTemplateSelector>
+
+                                            </StackLayout>
+
+                                        </syncfusion2:SfExpander.Content>
+                                    </syncfusion2:SfExpander>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+
+                        </StackLayout>
+
+                        <Grid Grid.Row="3"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="EndAndExpand"
+                                BackgroundColor="{StaticResource BackgroundColor}">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   HorizontalOptions="StartAndExpand"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   Padding="10"
+                                   FontSize="{StaticResource CompletionLayoutFontSize}"
+                                   Text="{Binding CompletionPercentageString}"
+                                   TextColor="White"
+                                   BackgroundColor="Transparent"/>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   HorizontalOptions="EndAndExpand"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   Padding="10"
+                                   FontSize="{StaticResource CompletionLayoutFontSize}"
+                                   Text="{Binding FinalizeStateString}"
+                                   TextColor="White"
+                                   BackgroundColor="Transparent"
+                                   IsVisible="{Binding AllMandatoryCompleted}">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OnFinalizeCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                        </Grid>
+
+                    </Grid>
+
+                </ScrollView>
+
+            </Grid>
+
+            <StackLayout
+                Grid.Row="0"
+                HorizontalOptions="FillAndExpand"
+                IsVisible="{Binding NoContent}"
+                VerticalOptions="FillAndExpand">
+
+                <Label HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       Padding="10"
+                       FontSize="{StaticResource NoContentLabelFontSize}"
+                       Text="{Binding NoContentString}"
+                       TextColor="Black"
+                       BackgroundColor="White"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="0" Margin="0,0,0,0" 
+                         IsVisible="{Binding IsLoading}"
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="CenterAndExpand">
+                <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                   Color="{StaticResource ProgressColor}"
+                                   IsVisible="{Binding IsLoading}" />
+            </StackLayout>
+
+        </Grid>
+    </ContentView.Content>
+    
+</ContentView>

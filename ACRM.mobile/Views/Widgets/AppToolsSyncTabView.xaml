@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
+    x:Class="ACRM.mobile.Views.Widgets.AppToolsSyncTabView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="SyncTabButtonFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+
+        <ScrollView BackgroundColor="White">
+
+            <StackLayout Padding="{StaticResource AppPopupContentPadding}"
+                             Orientation="Vertical"
+                             Spacing="20">
+
+                <Label Text="Sync options"
+                       TextColor="Gray"/>
+
+                <Label Text="{Binding FullSyncRequiredText}"
+                       TextColor="Orange"
+                       IsVisible="{Binding IsFullSyncRequiredTextVisible}"/>
+
+                <buttons:SfButton HorizontalOptions="FillAndExpand"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource BarBackgroundColor}"
+                                    Command="{Binding DataSyncCommand}"
+                                    FontSize="{StaticResource SyncTabButtonFontSize}"
+                                    Text="{Binding DataSyncText}"
+                                    TextColor="White"
+                                    VerticalOptions="Start"
+                                    IsVisible="{Binding DataSyncOn}"/>
+                    
+                <buttons:SfButton HorizontalOptions="FillAndExpand"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource BarBackgroundColor}"
+                                    Command="{Binding IncrementalSyncCommand}"
+                                    FontSize="{StaticResource SyncTabButtonFontSize}"
+                                    Text="{Binding IncrementalSyncText}"
+                                    TextColor="White"
+                                    VerticalOptions="Start"
+                                    IsVisible="{Binding DataSyncOn}"/>
+                
+                <buttons:SfButton HorizontalOptions="FillAndExpand"
+                                    Padding="0"
+                                    IsVisible="{Binding ConfigOn}"
+                                    BackgroundColor="{StaticResource BarBackgroundColor}"
+                                    Command="{Binding ConfigSyncCommand}"
+                                    FontSize="{StaticResource SyncTabButtonFontSize}"
+                                    Text="{Binding ConfigSyncText}"
+                                    TextColor="White"
+                                    VerticalOptions="Start"/>
+
+                <Grid HorizontalOptions="FillAndExpand"
+                        ColumnSpacing="10">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <buttons:SfButton Grid.Column="0"
+                                        Grid.Row="0"
+                                        HorizontalOptions="FillAndExpand"
+                                        Padding="0"
+                                        BackgroundColor="{StaticResource BarBackgroundColor}"
+                                        Command="{Binding FullSyncCommand}"
+                                        FontSize="{StaticResource SyncTabButtonFontSize}"
+                                        Text="{Binding FullSyncText}"
+                                        TextColor="White"/>
+
+                    <buttons:SfButton Grid.Column="1"
+                                        Grid.Row="0"
+                                        HorizontalOptions="FillAndExpand"
+                                        Padding="0"
+                                        IsVisible="{Binding ChangeLanguageOn}"
+                                        BackgroundColor="{StaticResource BarBackgroundColor}"
+                                        Command="{Binding ChangeLanguageCommand}"
+                                        FontSize="{StaticResource SyncTabButtonFontSize}"
+                                        Text="{Binding ChangeLanguageText}"
+                                        TextColor="White"/>
+
+                </Grid>
+
+            </StackLayout>
+
+        </ScrollView>
+
+    </ContentView.Content>
+
+</ContentView>

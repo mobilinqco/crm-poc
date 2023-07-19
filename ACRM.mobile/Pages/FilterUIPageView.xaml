@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Pages.FilterUIPageView"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:viewmodel="clr-namespace:ACRM.mobile.ViewModels;assembly=ACRM.mobile"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    CloseWhenBackgroundIsClicked="False"
+    >
+    <pages:PopupPage.Resources>
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter" />
+        <ResourceDictionary>
+            <OnPlatform x:Key="ButtonFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Right"
+            PositionOut="Right"
+            ScaleIn="1"
+            ScaleOut="0.7"
+            DurationIn="300"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"/>
+    </pages:PopupPage.Animation>
+    <Grid Style="{StaticResource FilterUIStyle}"
+          WidthRequest="{Binding PageWidthRequest}"
+          HeightRequest="{Binding PageHeightRequest}" HorizontalOptions="End"
+          VerticalOptions="Center"
+          RowSpacing="0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" IsVisible="{Binding IsDetailView,Converter={StaticResource BoolNegationConverter}}"
+              BackgroundColor="{StaticResource RecordSelectorTitleBackgroundColor}"
+              HorizontalOptions="Fill">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Command="{Binding OnCloseButtonTapped}"
+                    VerticalOptions="Center"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource RecordSelectorCancelButtonFontColor}"
+                    FontSize="{StaticResource RecordSelectorButtonsFontSize}"
+                    Text="{Binding CloseButtonTitle}"/>
+
+            <Label Grid.Column="1"
+                   VerticalOptions="Fill"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   FontSize="{StaticResource RecordSelectorTitleFontSize}"
+                   TextColor="{StaticResource RecordSelectorTitleFontColor}"
+                   Text="{Binding FilterTitle}" />
+
+            <Button Grid.Column="2"
+                    Command="{Binding ClearAllButtonTapped}"
+                    VerticalOptions="Center"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource RecordSelectorApplyButtonFontColor}"
+                    FontSize="{StaticResource RecordSelectorButtonsFontSize}"
+                    Text="{Binding ClearAllText}"/>
+        </Grid>
+
+        <Grid Grid.Row="0" IsVisible="{Binding IsDetailView}"
+              BackgroundColor="{StaticResource RecordSelectorTitleBackgroundColor}"
+              HorizontalOptions="Fill">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Margin="10"
+                    Command="{Binding OnBackButtonTapped}"
+                    HorizontalOptions="Start"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource RecordSelectorCancelButtonFontColor}"
+                    FontSize="{StaticResource RecordSelectorButtonsFontSize}"
+                    Text="{Binding BackButtonTitle}"/>
+
+            <Label Grid.Column="1"
+                   VerticalOptions="Fill"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   FontSize="{StaticResource RecordSelectorTitleFontSize}"
+                   TextColor="{StaticResource RecordSelectorTitleFontColor}"
+                   Text="{Binding SelectedItem.DisplayName}" />
+
+
+        </Grid>
+
+        <BoxView Grid.Row="1"
+                 HeightRequest="{StaticResource FancyLineHeight}"
+                 BackgroundColor="{Binding RecordSelectorSeparatorLineColor}"
+                 VerticalOptions="Start"
+                 HorizontalOptions="Fill"
+                 Margin="0"/>
+
+        <Grid Grid.Row="2" IsVisible="{Binding IsDetailView,Converter={StaticResource BoolNegationConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <ScrollView>
+                    <StackLayout  BindableLayout.ItemsSource="{Binding UserFilters}" Margin="10" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid BackgroundColor="Transparent" Margin="5" >
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:FilterUIPageViewModel}}, Path= ItemTappedCommand}"
+                                                 CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <CheckBox Grid.Column="0"  HorizontalOptions="Start" IsChecked="{Binding IsEnabled}" IsEnabled="False" />
+
+
+                                    <Label Grid.Column="1"  Grid.Row="0" FontSize="16" Text="{Binding DisplayName}" HorizontalTextAlignment="Start"
+                                           VerticalTextAlignment="Center"></Label>
+
+                                    <Label Grid.Column="1"  Grid.Row="1" FontSize="16" Text="{Binding SelectedText}" LineBreakMode="WordWrap" HorizontalTextAlignment="Start" TextColor="Gray"
+                                           VerticalTextAlignment="Center"></Label>
+
+                                    <BoxView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+                                </Grid>
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+
+                </ScrollView>
+            </Grid>
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="End" IsVisible="{Binding ShowApplyButton}">
+                <Label 
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="End"
+                   VerticalTextAlignment="Center"
+                   FontSize="{StaticResource RecordSelectorTitleFontSize}"
+                   TextColor="{StaticResource RecordSelectorTitleFontColor}"
+                   Text="{Binding ApplyText}" />
+                <Switch Margin="10" IsToggled="{Binding ApplyFilter}" ></Switch>
+            </StackLayout>
+
+        </Grid>
+        <Grid Grid.Row="2" IsVisible="{Binding IsDetailView}">
+            <ScrollView>
+                <customControls:TemplatedContentControl
+                            HorizontalOptions="FillAndExpand" 
+                            Item="{Binding Content}"
+                            ItemTemplate="{StaticResource FilterTemplateSelector}"
+                            VerticalOptions="Start" />
+            </ScrollView>
+        </Grid>
+    </Grid>
+
+</pages:PopupPage>

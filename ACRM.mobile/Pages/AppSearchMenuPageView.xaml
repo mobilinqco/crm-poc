@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:sfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" 
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile"
+    x:Class="ACRM.mobile.Pages.AppSearchMenuPageView"
+    CloseWhenBackgroundIsClicked="True">
+
+    <pages:PopupPage.Resources>
+        <customControls:StringToColorConverter x:Key="StringToColorConverter"/>
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+        <customControls:HasItemConverter x:Key="HasItemConverter"/>
+    </pages:PopupPage.Resources>
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Right"
+            PositionOut="Right"
+            ScaleIn="1"
+            ScaleOut="0.7"
+            DurationIn="300"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"/>
+    </pages:PopupPage.Animation>
+    
+    <Grid Style="{StaticResource AppSearchMenuStyle}"
+          WidthRequest="{Binding WidthRequest}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0"
+              IsVisible="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <sfButtons:SfSegmentedControl
+            Grid.Row="0"
+            x:Name="SearchTypeSelector"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Center"
+            CornerRadius="5"
+            SegmentHeight="30"
+            FontColor="White"
+            BorderColor="White"
+            BackgroundColor="Transparent"
+            SelectionTextColor="{StaticResource BackgroundColor}"
+            FontSize="{StaticResource AppMenuSearchTypesFontSize}"
+            Margin="{StaticResource AppSearchMenuItemsMargins}"
+            IsVisible="{Binding IsSearchTypeVisible}"
+            SelectedIndex="{Binding SegmentedControlIndex, Mode=TwoWay}"
+            ItemsSource="{Binding SearchTypes}"                        
+            VisibleSegmentsCount="{Binding ViewModesCounter}">
+                <sfButtons:SfSegmentedControl.SelectionIndicatorSettings>
+                    <sfButtons:SelectionIndicatorSettings Color="White"/>
+                </sfButtons:SfSegmentedControl.SelectionIndicatorSettings>
+            </sfButtons:SfSegmentedControl>
+
+            <Frame Grid.Row="1"
+               CornerRadius="5"
+               OutlineColor="{StaticResource SearchBarIconColor}" 
+               BackgroundColor="Transparent" 
+               HorizontalOptions="FillAndExpand" 
+               VerticalOptions="Start"
+               Padding="{StaticResource SearchTextBoxFramePaddings}"
+               Margin="{StaticResource AppSearchMenuItemsMargins}"
+               IsVisible="{Binding GlobalSearchVisible}"
+               HasShadow="false">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Search icon-->
+                    <Label Grid.Column="0"
+                       Text="&#xF0349;"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       BackgroundColor="Transparent"
+                       FontSize="{StaticResource SearchBarIconSize}"
+                       FontFamily="{StaticResource MaterialDesignIcons}"
+                       TextColor="{StaticResource SearchBarIconColor}"
+                       Margin="{StaticResource SearchBarIconMargins}"/>
+
+                    <customControls:ExtendedEntry
+                    Grid.Column="1"
+                    x:Name="GlobalSearchTextBox"
+                    VerticalOptions="Center"
+                    HorizontalOptions="FillAndExpand"
+                    BorderWidth="0"
+                    BackgroundColor="Transparent"
+                    TextColor="White"
+                    HorizontalTextAlignment="Start"
+                    Placeholder="{Binding GlobalSearchPlaceholderText, Mode=OneWay}"
+                    FontSize="{StaticResource ExtendedEntryTextFontSize}"
+                    PlaceholderColor="{StaticResource GlobalSearchPlaceholderTextColor}"
+                    Text="{Binding GlobalSearchText, Mode=TwoWay}" >
+                        <customControls:ExtendedEntry.Behaviors>
+                            <xct:EventToCommandBehavior Command="{Binding SearchCommand}" EventName="TextChanged" />
+                        </customControls:ExtendedEntry.Behaviors>
+                        </customControls:ExtendedEntry>
+                    
+                </Grid>
+            </Frame>
+            <StackLayout Grid.Row="2"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand" Orientation="Vertical">
+
+             <!-- Global Search Results !-->
+                <StackLayout IsVisible="{Binding HasSearchResults}"
+                             Margin="{StaticResource AppSearchMenuItemsMargins}"
+                             VerticalOptions="FillAndExpand"
+                             HorizontalOptions="Fill">
+                    <syncfusion:SfListView x:Name="SearchResultsList"
+
+                                           HorizontalOptions="FillAndExpand"
+                                           VerticalOptions="FillAndExpand"
+                                           SelectionMode="Single"
+                                           SelectionGesture="Tap"
+                                           AutoFitMode="DynamicHeight"
+                                           ItemsSource="{Binding SearchResults}" 
+                                           SelectedItem="{Binding SelectedSearchResult}"
+                                           TapCommand="{Binding RecordSelectedCommand}"
+                                           SelectionBackgroundColor="{StaticResource ItemSelectedColor}"
+                                           BackgroundColor="{StaticResource SearchPageBackground}">
+                        <syncfusion:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <customControls:RecordListViewCell/>
+                            </DataTemplate>
+                        </syncfusion:SfListView.ItemTemplate>
+                    </syncfusion:SfListView>
+                </StackLayout>
+
+  
+            
+               
+            <syncfusion:SfListView
+            
+            VerticalOptions="FillAndExpand"
+            SelectionMode="Single"
+            AutoFitMode="DynamicHeight"
+            SelectionBackgroundColor="{StaticResource ItemSelectedColor}"
+            ItemsSource="{Binding InfoAreaActions}"
+            IsVisible="{Binding InfoAreaVisible}"
+            TapCommand="{Binding InfoAreaSelectedCommand}"
+            Margin="{StaticResource AppSearchMenuItemsMargins}"
+            BackgroundColor="{StaticResource BackgroundColor}">
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid VerticalOptions="Fill"
+                              Margin="0, 1, 0, 1"
+                              HorizontalOptions="Fill"
+                              RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <BoxView Grid.Row="0"
+                                     Grid.Column="0"
+                                     WidthRequest="3"
+                                     BackgroundColor="{Binding ActionColorAccent, Converter={StaticResource StringToColorConverter}}"
+                                     HorizontalOptions="Start"
+                                     VerticalOptions="Fill"
+                                     Margin="0"/>
+                                <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{Binding ActionDisplayName}"
+                                   HorizontalOptions="Fill"
+                                   VerticalOptions="Fill"
+                                   TextColor="White"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   HeightRequest="{StaticResource AppSearchMenuInfoAreaRelatedHeight}"/>
+                                <BoxView Grid.Row="1"
+                                     Grid.ColumnSpan="2"
+                                     HeightRequest="1"
+                                     BackgroundColor="LightGray"
+                                     VerticalOptions="Start"
+                                     HorizontalOptions="Fill"
+                                     Margin="0"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
+              <!--Loading indicator-->
+                <StackLayout Margin="0,40,0,0"
+                             IsVisible="{Binding IsLoading}"
+                             HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="CenterAndExpand">
+                <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                   Color="{StaticResource ProgressColor}"
+                                   IsVisible="{Binding IsLoading}" />
+                </StackLayout>
+                 </StackLayout>
+        </Grid>
+
+        <StackLayout Grid.Column="0"
+                     HorizontalOptions="CenterAndExpand"
+                     IsVisible="{Binding IsLoading}"
+                     VerticalOptions="CenterAndExpand">
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="White" />
+        </StackLayout>
+    
+    </Grid>
+    
+</pages:PopupPage>

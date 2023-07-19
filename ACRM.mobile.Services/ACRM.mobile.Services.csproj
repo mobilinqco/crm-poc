@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <ReleaseVersion>1.0</ReleaseVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Utils\" />
+    <None Remove="Portable.BouncyCastle" />
+    <None Remove="Processors\" />
+    <None Remove="Extensions\" />
+    <None Remove="System.Data.DataSetExtensions" />
+    <None Remove="Jint" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ACRM.mobile.DataAccess\ACRM.mobile.DataAccess.csproj" />
+    <ProjectReference Include="..\ACRM.mobile.Domain\ACRM.mobile.Domain.csproj" />
+    <ProjectReference Include="..\ACRM.mobile.DataAccess.Network\ACRM.mobile.DataAccess.Network.csproj" />
+    <ProjectReference Include="..\ACRM.mobile.DataAccess.Local\ACRM.mobile.DataAccess.Local.csproj" />
+    <ProjectReference Include="..\ACRM.mobile.Logging\ACRM.mobile.Logging.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SubComponents\" />
+    <Folder Include="Utils\" />
+    <Folder Include="Processors\" />
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+    <PackageReference Include="AsyncAwaitBestPractices" Version="6.0.6" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="Jint" Version="2.11.58" />
+  </ItemGroup>
+</Project>

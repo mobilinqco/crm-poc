@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.ContentViews.SerialEntryListingSumLine"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms">
+    <ContentView.Resources>
+          <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Frame Margin="0" Padding="0"  BackgroundColor="{StaticResource BackgroundColor}" HeightRequest="50">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*">
+                                    </ColumnDefinition>
+
+                                  
+                                  <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                   <ColumnDefinition Width="Auto"></ColumnDefinition>
+                      </Grid.ColumnDefinitions>
+                     <Label Grid.Column="0"
+                                   LineBreakMode="TailTruncation"
+                                   Text="Items:" Margin="10,3,0,10"
+                                   HorizontalOptions="Center"
+                                   TextColor="Wheat"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+                    <Label Grid.Column="1"
+                                   LineBreakMode="TailTruncation"
+                                   Text="{Binding TotalQuantity}" Margin="4,3,0,10"
+                                   HorizontalOptions="Start"
+                                   TextColor="Wheat"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+                    <StackLayout Grid.Column="2" Orientation="Horizontal"  HorizontalOptions="Start" IsVisible="{Binding ShowFreeGoodsPrice}">
+                     <Label 
+                                   LineBreakMode="TailTruncation"
+                                   Text="Free Goods:" Margin="4,3,5,10"
+                                   HorizontalOptions="Start"
+                                   TextColor="Wheat"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+                     <Label 
+                                   LineBreakMode="TailTruncation"
+                                   Text="{Binding TotalFreeGoods, StringFormat='{0:F2}'}" Margin="4,3,20,10"
+                                   HorizontalOptions="Start"
+                                   TextColor="Wheat"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+                      </StackLayout>
+                    <StackLayout Grid.Column="4" Orientation="Horizontal"  HorizontalOptions="Start" IsVisible="{Binding SumLineShowEndPrice}">
+                     <Label  
+                                   LineBreakMode="TailTruncation"
+                                   Text="{Binding CurrencyText}" Margin="4,3,5,10"
+                                   HorizontalOptions="Start"
+                                   TextColor="Wheat"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+                     <Label 
+                                   LineBreakMode="TailTruncation"
+                                   Text="{Binding TotalNetPrice, StringFormat='{0:F2}'}" Margin="4,3,20,10"
+                                   HorizontalOptions="Start"
+                                   TextColor="Wheat"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+                      </StackLayout>
+                    
+                    
+                    <Grid Grid.Column="5" IsVisible="{Binding IsAllItemsMode,Converter={StaticResource BoolNegationConverter}}">
+                     <StackLayout Orientation="Horizontal" 
+                                  IsVisible="{Binding ShowCompleteButton}"
+                                  BackgroundColor="#20569e"
+                                  HorizontalOptions="CenterAndExpand"
+                                  >
+                        <Button
+                            Margin="0"
+                            BackgroundColor="Transparent"
+                            Command="{Binding CompleteActionCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            Text="{Binding CompleteIconText}"
+                            WidthRequest="45"
+                            TextColor="White" />
+                        <Button
+                            BackgroundColor="Transparent"
+                            Command="{Binding CompleteActionCommand}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                            Margin="0,0,10,0"
+                            Text="{Binding CompleteActionText}"
+                            TextColor="White" />
+                    </StackLayout>
+                    </Grid>
+                </Grid>
+       </Frame>
+    </ContentView.Content>
+</ContentView>

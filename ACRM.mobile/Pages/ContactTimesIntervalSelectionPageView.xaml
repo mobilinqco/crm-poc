@@ -1,0 +1,632 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+                 xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+                 xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+                 xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms" 
+                 xmlns:range="clr-namespace:Syncfusion.SfRangeSlider.XForms;assembly=Syncfusion.SfRangeSlider.XForms" xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls"
+                 utility:ViewModelLocator.AutoWireViewModel="True"
+                 x:Class="ACRM.mobile.Pages.ContactTimesIntervalSelectionPageView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter" />
+            
+            <OnPlatform x:Key="TimeIntervalSelectionPageViewHeight" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="550" Tablet="450" Desktop="450"/>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="550" Tablet="450" Desktop="450"/>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="550" Tablet="450" Desktop="450"/>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="TimeIntervalSelectionPageViewWidth" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="300" Tablet="600" Desktop="400"/>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="350" Tablet="700" Desktop="800"/>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="300" Tablet="600" Desktop="600"/>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="TimeIntervalSelectionPageViewButtonFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="TimeIntervalSelectionPageViewNavigationLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="TimeIntervalSelectionPageViewContentPadding" x:TypeArguments="Thickness">
+                <On Platform="iOS, Android, UWP" Value="20, 20, 20, 10"></On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="TimeIntervalSelectionPageViewLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+            </OnPlatform>
+            <OnPlatform x:Key="SeparatorLineHeight" x:TypeArguments="x:Double">
+                <On Platform="iOS, Android, WinPhone, UWP" Value="1"></On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            DurationIn="300"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            PositionIn="Bottom"
+            PositionOut="Center"
+            ScaleIn="1"
+            ScaleOut="0.7" />
+    </pages:PopupPage.Animation>
+
+    <ContentPage.Content>
+
+        <Grid VerticalOptions="Center"
+              HorizontalOptions="Center"
+              HeightRequest="{StaticResource TimeIntervalSelectionPageViewHeight}"
+              WidthRequest="{StaticResource TimeIntervalSelectionPageViewWidth}"
+              BackgroundColor="{StaticResource BarBackgroundColor}"
+              RowSpacing="5">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Top Navigation Bar -->
+
+            <StackLayout Grid.Column="0"
+                         Grid.Row="0"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         Orientation="Horizontal"
+                         Spacing="5">
+
+                <buttons:SfButton VerticalOptions="FillAndExpand"
+                                  HorizontalOptions="Start"
+                                  HeightRequest="45"
+                                  Margin="0"
+                                  Padding="0"
+                                  BackgroundColor="Transparent"
+                                  Command="{Binding CloseCommand}"
+                                  FontSize="{StaticResource TimeIntervalSelectionPageViewButtonFontSize}"
+                                  Text="{Binding CloseText}"
+                                  TextColor="White"/>
+
+                <Label VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       FontSize="{StaticResource TimeIntervalSelectionPageViewNavigationLabelFontSize}"
+                       Text="{Binding TitleText}"
+                       TextColor="White"/>
+
+                <buttons:SfButton VerticalOptions="FillAndExpand"
+                                  HorizontalOptions="End"
+                                  HeightRequest="45"
+                                  Margin="0"
+                                  Padding="0"
+                                  BackgroundColor="Transparent"
+                                  Command="{Binding ConfirmCommand}"
+                                  FontSize="{StaticResource TimeIntervalSelectionPageViewButtonFontSize}"
+                                  Text="{Binding ConfirmText}"
+                                  TextColor="White"
+                                  IsEnabled="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}"/>
+
+            </StackLayout>
+
+            <!-- Content -->
+
+            <Grid Grid.Column="0"
+                  Grid.Row="1"
+                  VerticalOptions="FillAndExpand"
+                  HorizontalOptions="FillAndExpand"
+                  BackgroundColor="White"
+                  Padding="{StaticResource TimeIntervalSelectionPageViewContentPadding}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <ScrollView Grid.Row="0"
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            BackgroundColor="White"
+                            IsVisible="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}">
+
+                    <Grid VerticalOptions="FillAndExpand"
+                          HorizontalOptions="FillAndExpand"
+                          RowSpacing="10">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <StackLayout Grid.Row="0"
+                                     VerticalOptions="FillAndExpand"
+                                     HorizontalOptions="FillAndExpand"
+                                     Orientation="Vertical">
+
+                            <xforms:SfListView VerticalOptions="Fill"
+                                               HorizontalOptions="FillAndExpand"
+                                               ItemSpacing="2"
+                                               Orientation="Vertical"
+                                               IsScrollingEnabled="False"
+                                               ItemsSource="{Binding BindableContactTimesSelectableDays}"
+                                               SelectionBackgroundColor="Transparent">
+
+                                <xforms:SfListView.LayoutManager>
+                                    <xforms:GridLayout>
+                                        <xforms:GridLayout.SpanCount>
+                                            <OnPlatform x:TypeArguments="x:Int32">
+                                                <OnPlatform.WinPhone>
+                                                    <OnIdiom x:TypeArguments="x:Int32" Phone="2" Tablet="4" Desktop="4"/>
+                                                </OnPlatform.WinPhone>
+                                                <OnPlatform.Android>
+                                                    <OnIdiom x:TypeArguments="x:Int32" Phone="2" Tablet="4" />
+                                                </OnPlatform.Android>
+                                                <OnPlatform.iOS>
+                                                    <OnIdiom x:TypeArguments="x:Int32" Phone="2" Tablet="4" />
+                                                </OnPlatform.iOS>
+                                            </OnPlatform>
+                                        </xforms:GridLayout.SpanCount>
+                                    </xforms:GridLayout>
+                                </xforms:SfListView.LayoutManager>
+
+                                <xforms:SfListView.Behaviors>
+                                    <xct:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}"/>
+                                </xforms:SfListView.Behaviors>
+
+                                <xforms:SfListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid HorizontalOptions="FillAndExpand"
+                                                  VerticalOptions="FillAndExpand">
+
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Grid.Column="0"
+                                                       VerticalOptions="FillAndExpand"
+                                                       HorizontalOptions="FillAndExpand"
+                                                       FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"
+                                                       FontFamily="{StaticResource MaterialDesignIcons}">
+
+                                                    <Label.Triggers>
+
+                                                        <DataTrigger TargetType="Label"
+                                                                     Binding="{Binding IsSelected, Converter={StaticResource BoolNegationConverter}}"
+                                                                     Value="True">
+                                                            <Setter Property="Text"
+                                                                    Value="&#xF0131;"/>
+                                                        </DataTrigger>
+
+                                                        <DataTrigger TargetType="Label"
+                                                                     Binding="{Binding IsSelected}"
+                                                                     Value="True">
+                                                            <Setter Property="Text"
+                                                                    Value="&#xF0135;"/>
+                                                        </DataTrigger>
+
+                                                    </Label.Triggers>
+
+                                                </Label>
+
+                                                <Label Grid.Column="1"
+                                                       VerticalOptions="FillAndExpand"
+                                                       HorizontalOptions="FillAndExpand"
+                                                       Text="{Binding WeekDayAbbreviation}"
+                                                       FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"/>
+                                            </Grid>
+
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </xforms:SfListView.ItemTemplate>
+
+                            </xforms:SfListView>
+
+                        </StackLayout>
+
+                        <BoxView Grid.Row="1"
+                                 BackgroundColor="DarkGray"
+                                 HeightRequest="{StaticResource SeparatorLineHeight}"
+                                 HorizontalOptions="FillAndExpand" />
+
+                        <Grid Grid.Row="2"
+                              VerticalOptions="FillAndExpand"
+                              HorizontalOptions="CenterAndExpand"
+                              BackgroundColor="White"
+                              ColumnSpacing="0">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0"
+                                   Padding="0, 0, 6, 0"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"
+                                   FontFamily="{StaticResource MaterialDesignIcons}">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IsFirstIntervalSelectedCommand}" />
+                                </Label.GestureRecognizers>
+
+                                <Label.Triggers>
+
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding IsFirstIntervalSelected, Converter={StaticResource BoolNegationConverter}}"
+                                                 Value="True">
+                                        <Setter Property="Text"
+                                                Value="&#xF0131;"/>
+                                    </DataTrigger>
+
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding IsFirstIntervalSelected}"
+                                                 Value="True">
+                                        <Setter Property="Text"
+                                                Value="&#xF0135;"/>
+                                    </DataTrigger>
+
+                                </Label.Triggers>
+
+                            </Label>
+
+                            <Label Grid.Column="1"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"
+                                   Text="{Binding FirstIntervalText}">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IsFirstIntervalSelectedCommand}" />
+                                </Label.GestureRecognizers>
+
+                            </Label>
+
+                        </Grid>
+
+                        <Grid Grid.Row="3"
+                              VerticalOptions="FillAndExpand"
+                              HorizontalOptions="CenterAndExpand"
+                              BackgroundColor="White"
+                              ColumnSpacing="0">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Column="0"
+                                   Grid.Row="0"
+                                   Padding="0, 0, 6, 0"
+                                   VerticalOptions="StartAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"
+                                   Text="{Binding IntervalStartText}"
+                                   TextColor="Black">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IsFirstIntervalStartSelectedCommand}" />
+                                </Label.GestureRecognizers>
+
+                            </Label>
+
+                            <Label Grid.Column="1"
+                                   Grid.Row="0"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="Start"
+                                   Padding="40, 0, 40, 0"
+                                   FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"
+                                   Text="{Binding FirstIntervalStartDateTimeString}"
+                                   TextColor="Black">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IsFirstIntervalStartSelectedCommand}" />
+                                </Label.GestureRecognizers>
+
+                            </Label>
+
+                            <BoxView Grid.Column="1"
+                                     Grid.Row="1"
+                                     BackgroundColor="DarkGray"
+                                     HeightRequest="{StaticResource SeparatorLineHeight}"
+                                     HorizontalOptions="FillAndExpand" />
+
+                            <customControls:CustomDateTimePicker SelectedDataTime="{Binding FirstIntervalStartDateTime}"
+                                                                 SelectedDataTimeString="{Binding FirstIntervalStartDateTimeString, Mode=TwoWay}"
+                                                                 HasDate="False"
+                                                                 HasTime="True"
+                                                                 PickerMode="Dialog"
+                                                                 HeaderText="{Binding FirstIntervalStartDateTimePickerString}"
+                                                                 IsOpen="{Binding IsFirstInervalStartDatePickerOpen, Mode=TwoWay}"/>
+
+                            <Label Grid.Column="0"
+                                   Grid.Row="2"
+                                   VerticalOptions="StartAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"
+                                   Text="{Binding IntervalEndText}"
+                                   TextColor="Black">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IsFirstIntervalEndSelectedCommand}" />
+                                </Label.GestureRecognizers>
+
+                            </Label>
+
+                            <Label Grid.Column="1"
+                                   Grid.Row="2"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="Start"
+                                   Padding="40, 0, 40, 0"
+                                   FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"
+                                   Text="{Binding FirstIntervalEndDateTimeString}"
+                                   TextColor="Black">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IsFirstIntervalEndSelectedCommand}" />
+                                </Label.GestureRecognizers>
+
+                            </Label>
+
+                            <BoxView Grid.Column="1"
+                                     Grid.Row="3"
+                                     BackgroundColor="DarkGray"
+                                     HeightRequest="{StaticResource SeparatorLineHeight}"
+                                     HorizontalOptions="FillAndExpand" />
+
+                            <customControls:CustomDateTimePicker SelectedDataTime="{Binding FirstIntervalEndDateTime}"
+                                                                 SelectedDataTimeString="{Binding FirstIntervalEndDateTimeString, Mode=TwoWay}"
+                                                                 HasDate="False"
+                                                                 HasTime="True"
+                                                                 PickerMode="Dialog"
+                                                                 HeaderText="{Binding FirstIntervalEndDateTimePickerString}"
+                                                                 IsOpen="{Binding IsFirstInervalEndDatePickerOpen, Mode=TwoWay}"/>
+
+                        </Grid>
+
+                        <BoxView Grid.Row="4"
+                                 BackgroundColor="DarkGray"
+                                 HeightRequest="{StaticResource SeparatorLineHeight}"
+                                 HorizontalOptions="FillAndExpand" />
+
+                        <Grid Grid.Row="5"
+                              VerticalOptions="FillAndExpand"
+                              HorizontalOptions="CenterAndExpand"
+                              BackgroundColor="White"
+                              ColumnSpacing="0">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0"
+                                   Padding="0, 0, 6, 0"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"
+                                   FontFamily="{StaticResource MaterialDesignIcons}">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IsSecondIntervalSelectedCommand}" />
+                                </Label.GestureRecognizers>
+
+                                <Label.Triggers>
+
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding IsSecondIntervalSelected, Converter={StaticResource BoolNegationConverter}}"
+                                                 Value="True">
+                                        <Setter Property="Text"
+                                                Value="&#xF0131;"/>
+                                    </DataTrigger>
+
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding IsSecondIntervalSelected}"
+                                                 Value="True">
+                                        <Setter Property="Text"
+                                                Value="&#xF0135;"/>
+                                    </DataTrigger>
+
+                                </Label.Triggers>
+
+                            </Label>
+
+                            <Label Grid.Column="1"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"
+                                   Text="{Binding SecondIntervalText}">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IsSecondIntervalSelectedCommand}" />
+                                </Label.GestureRecognizers>
+
+                            </Label>
+
+                        </Grid>
+
+                        <Grid Grid.Row="6"
+                              VerticalOptions="FillAndExpand"
+                              HorizontalOptions="CenterAndExpand"
+                              BackgroundColor="White"
+                              ColumnSpacing="0">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Column="0"
+                                   Grid.Row="0"
+                                   Padding="0, 0, 6, 0"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"
+                                   Text="{Binding IntervalStartText}"
+                                   TextColor="Black">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IsSecondIntervalStartSelectedCommand}" />
+                                </Label.GestureRecognizers>
+
+                            </Label>
+
+                            <Label Grid.Column="1"
+                                   Grid.Row="0"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="Start"
+                                   Padding="40, 0, 40, 0"
+                                   FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"
+                                   Text="{Binding SecondIntervalStartDateTimeString}"
+                                   TextColor="Black">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IsSecondIntervalStartSelectedCommand}" />
+                                </Label.GestureRecognizers>
+
+                            </Label>
+
+                            <BoxView Grid.Column="1"
+                                     Grid.Row="1"
+                                     BackgroundColor="DarkGray"
+                                     HeightRequest="{StaticResource SeparatorLineHeight}"
+                                     HorizontalOptions="FillAndExpand" />
+
+                            <customControls:CustomDateTimePicker SelectedDataTime="{Binding SecondIntervalStartDateTime}"
+                                                                 SelectedDataTimeString="{Binding SecondIntervalStartDateTimeString, Mode=TwoWay}"
+                                                                 HasDate="False"
+                                                                 HasTime="True"
+                                                                 PickerMode="Dialog"
+                                                                 HeaderText="{Binding SecondIntervalStartDateTimePickerString}"
+                                                                 IsOpen="{Binding IsSecondInervalStartDatePickerOpen, Mode=TwoWay}"/>
+
+                            <Label Grid.Column="0"
+                                   Grid.Row="2"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"
+                                   Text="{Binding IntervalEndText}"
+                                   TextColor="Black">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IsSecondIntervalEndSelectedCommand}" />
+                                </Label.GestureRecognizers>
+
+                            </Label>
+
+                            <Label Grid.Column="1"
+                                   Grid.Row="2"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="Start"
+                                   Padding="40, 0, 40, 0"
+                                   FontSize="{StaticResource TimeIntervalSelectionPageViewLabelFontSize}"
+                                   Text="{Binding SecondIntervalEndDateTimeString}"
+                                   TextColor="Black">
+
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IsSecondIntervalEndSelectedCommand}" />
+                                </Label.GestureRecognizers>
+
+                            </Label>
+
+                            <BoxView Grid.Column="1"
+                                     Grid.Row="3"
+                                     BackgroundColor="DarkGray"
+                                     HeightRequest="{StaticResource SeparatorLineHeight}"
+                                     HorizontalOptions="FillAndExpand" />
+
+                            <customControls:CustomDateTimePicker SelectedDataTime="{Binding SecondIntervalEndDateTime}"
+                                                                 SelectedDataTimeString="{Binding SecondIntervalEndDateTimeString, Mode=TwoWay}"
+                                                                 HasDate="False"
+                                                                 HasTime="True"
+                                                                 PickerMode="Dialog"
+                                                                 HeaderText="{Binding SecondIntervalEndDateTimePickerString}"
+                                                                 IsOpen="{Binding IsSecondInervalEndDatePickerOpen, Mode=TwoWay}"/>
+
+                        </Grid>
+
+                    </Grid>
+
+                </ScrollView>
+
+                <StackLayout Grid.Row="0"
+                             HorizontalOptions="CenterAndExpand"
+                             IsVisible="{Binding IsLoading}"
+                             VerticalOptions="CenterAndExpand">
+
+                    <ActivityIndicator
+                        IsRunning="{Binding IsLoading}"
+                        IsVisible="{Binding IsLoading}"
+                        Color="{StaticResource ProgressColor}" />
+                </StackLayout>
+
+            </Grid>
+
+
+        </Grid>
+        
+    </ContentPage.Content>
+    
+</pages:PopupPage>

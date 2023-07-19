@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.Widgets.DocumentView"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile"
+    xmlns:widgetmodel="clr-namespace:ACRM.mobile.UIModels;assembly=ACRM.mobile"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    BackgroundColor="{StaticResource BackgroundColor}">
+     <ContentView.Resources>
+        <customControls:FileDownloadIconConverter x:Key="FileDownloadIconConverter"/>
+        <customControls:FileTypeIconConverter x:Key="FileTypeIconConverter"/>
+        <valueConverters:BoolToStringConverter x:Key="BoolToStringConverter" />
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter" />
+        <valueConverters:BoolToColorConverter
+            x:Key="BoolToColorConverter"
+            FalseValue="Transparent"
+            TrueValue="White" />
+        <valueConverters:NullToBoolConverter x:Key="NullToBoolConverter" />
+    </ContentView.Resources>
+
+    <ContentView.Content>
+          <!--  Content View  -->
+                <Grid 
+                    BackgroundColor="{StaticResource SearchPageBackground}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                     <Grid
+            Margin="0"
+            BackgroundColor="{StaticResource SearchPageBackground}"
+            HorizontalOptions="FillAndExpand"
+            RowSpacing="0"
+            VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Search Bar  -->
+            <views:SearchBar
+                Grid.Row="0"
+                Margin="{StaticResource SearchAndListMargins}"
+                IsVisible="{Binding SearchAndListContentData.IsSearchBarVisible}" />
+            <!--  Search Results !  -->
+            <StackLayout
+                Grid.Row="1"
+                Margin="{StaticResource SearchAndListMargins}"
+                HorizontalOptions="Fill"
+                VerticalOptions="FillAndExpand">
+                <FlexLayout BindableLayout.ItemsSource="{Binding Documents}"  
+                        Wrap="Wrap"
+                            BackgroundColor="{StaticResource SearchPageBackground}"
+                        JustifyContent="Start" >
+                 <BindableLayout.ItemTemplate>
+    
+                    <DataTemplate>
+                     <StackLayout Spacing="0" HorizontalOptions="EndAndExpand">
+                        <Frame Style="{StaticResource FrameDocItemViewStyle}">
+                            <Grid VerticalOptions="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                               <Label Grid.Column="0"  VerticalOptions="CenterAndExpand" 
+                                           FontSize="{StaticResource DocIconSize}"
+                                           TextColor="{StaticResource DocButtonTextColor}"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"
+                                      Text="{Binding FileName, Converter={StaticResource FileTypeIconConverter}}"
+                               BackgroundColor="Transparent"
+                               FontFamily="{StaticResource MaterialDesignIcons}" >
+                               </Label>
+                                <Grid VerticalOptions="Center" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Text="{Binding FileName}" FontAttributes="Bold" TextColor="Black"></Label>
+                                    <Label Grid.Row="1" Text="{Binding SubHeader}" TextColor="Gray"></Label>
+                                </Grid>
+                                <Button Grid.Column="2"
+                                        Text="{Binding Status, Converter={StaticResource FileDownloadIconConverter}}"
+                               BackgroundColor="Transparent"
+                                        FontSize="{StaticResource DocIconSize}"
+                                           TextColor="{StaticResource DocButtonTextColor}"
+                                         HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                               CommandParameter="{Binding .}"
+                               Command="{Binding Source={RelativeSource AncestorType={x:Type widgetmodel:DocumentViewModel}}, Path= DocumentDownloadCommand}"
+                               FontFamily="{StaticResource MaterialDesignIcons}" ></Button>
+                            </Grid>
+                            
+                        </Frame>
+                    </StackLayout>
+                    </DataTemplate>
+              
+            </BindableLayout.ItemTemplate>
+             </FlexLayout>
+             
+            </StackLayout>
+
+            <!--  No Result Display  -->
+            <StackLayout
+                Grid.Row="1"
+                HorizontalOptions="CenterAndExpand"
+                IsVisible="{Binding SearchAndListContentData.EnableNoResultsText}"
+                VerticalOptions="CenterAndExpand">
+                <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label
+                        Grid.Row="0"
+                        Margin="{StaticResource NoResultsLabelMargins}"
+                        BackgroundColor="Transparent"
+                        FontFamily="{StaticResource MaterialDesignIcons}"
+                        FontSize="{StaticResource NoResultIconFontSize}"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="&#xF120D;"
+                        TextColor="{StaticResource NoResultTextColor}"
+                        VerticalOptions="CenterAndExpand" />
+
+                    <Label
+                        Grid.Row="1"
+                        FontSize="{StaticResource NoResultFontSize}"
+                        HorizontalOptions="Center"
+                        Text="{Binding SearchAndListContentData.NoResultsText}"
+                        TextColor="{StaticResource NoResultTextColor}" />
+
+                </Grid>
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="1"
+                HorizontalOptions="CenterAndExpand"
+                IsVisible="{Binding IsLoading}"
+                VerticalOptions="CenterAndExpand">
+                <ActivityIndicator
+                    IsRunning="{Binding IsLoading}"
+                    IsVisible="{Binding IsLoading}"
+                    Color="{StaticResource ProgressColor}" />
+            </StackLayout>
+        </Grid>
+                </Grid>
+    </ContentView.Content>
+</ContentView>

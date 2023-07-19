@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="ACRM.mobile.Pages.DashboardPageView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    Padding="{StaticResource PagePadding}"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    NavigationPage.HasNavigationBar="false">
+    <ContentPage.Resources>
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter" />
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid BackgroundColor="{StaticResource BackgroundColor}" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <views:CustomNavigationBar
+                Grid.Row="0"
+                BindingContext="this"
+                HeightRequest="45"
+                VerticalOptions="CenterAndExpand" />
+
+            <Grid Grid.Row="1" 
+                  HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand">
+            <xct:TabView TabItemsSource="{Binding Tabs}"
+                         TabContentBackgroundColor="{StaticResource SearchPageBackground}"
+                         TabStripPlacement="Top"
+                         TabIndicatorColor="{StaticResource SearchBarIconColor}"
+                         TabIndicatorPlacement="Top"
+                         TabStripBackgroundColor="{StaticResource BackgroundColor}"
+                         IsSwipeEnabled="False"
+                         IsTabStripVisible="{Binding IsTabStripVisible}"
+                         HorizontalOptions="FillAndExpand"
+                         VerticalOptions="FillAndExpand">
+               
+                <xct:TabView.TabViewItemDataTemplate>
+                    <DataTemplate>
+                            <Frame CornerRadius="5"  IsVisible="{Binding IsOnlyTab, Converter={StaticResource BoolNegationConverter}}"
+                             BorderColor="{StaticResource SearchBarIconColor}" 
+                             BackgroundColor="{StaticResource BackgroundColor}"
+                             HorizontalOptions="FillAndExpand" 
+                             VerticalOptions="Start"
+                             Margin="{StaticResource DashboardTabItemSpace}" 
+                             Padding="{StaticResource DashboardTabItemSpace}" 
+                             HasShadow="false">
+                        <StackLayout BackgroundColor="{StaticResource BackgroundColor}"
+                                     HorizontalOptions="FillAndExpand"
+                                     VerticalOptions="FillAndExpand">
+                            <Label FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"
+                                   BackgroundColor="{StaticResource BackgroundColor}"
+                                   TextColor="{StaticResource TopMenuTitleFontColor}"
+                                   Text="{Binding Title}"
+                                   VerticalTextAlignment="Center"
+                                   HeightRequest="40"/>
+                        </StackLayout>
+                          </Frame>
+                    </DataTemplate>
+                </xct:TabView.TabViewItemDataTemplate>
+                <xct:TabView.TabContentDataTemplate>
+                    <DataTemplate>
+                            <Grid Margin="5" HorizontalOptions="FillAndExpand" 
+                                  IsVisible="{Binding IsOnlyTab, Converter={StaticResource BoolNegationConverter}}"
+                                VerticalOptions="FillAndExpand">
+                        <ScrollView
+                            
+                            HorizontalScrollBarVisibility="Never"
+                            VerticalScrollBarVisibility="Default">
+
+                            <StackLayout
+                                BackgroundColor="{StaticResource SearchPageBackground}"
+                                BindableLayout.ItemTemplateSelector="{StaticResource DashboardTemplateSelector}"
+                                BindableLayout.ItemsSource="{Binding Widgets}"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand" />
+                        </ScrollView>
+                            </Grid>
+                    </DataTemplate>
+                </xct:TabView.TabContentDataTemplate>
+            </xct:TabView>
+                 </Grid>
+            <Grid Grid.Row="1" IsVisible="{Binding IsTabStripVisible, Converter={StaticResource BoolNegationConverter}}"
+                  HorizontalOptions="FillAndExpand" 
+                  BackgroundColor="{StaticResource SearchPageBackground}"
+                         VerticalOptions="FillAndExpand">
+                <Grid Margin="5" HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                    <ScrollView
+                            
+                            HorizontalScrollBarVisibility="Never"
+                            VerticalScrollBarVisibility="Default">
+
+                        <StackLayout
+                                BackgroundColor="{StaticResource SearchPageBackground}"
+                                BindableLayout.ItemTemplateSelector="{StaticResource DashboardTemplateSelector}"
+                                BindableLayout.ItemsSource="{Binding Widgets}"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand" />
+                    </ScrollView>
+                </Grid>
+            </Grid>
+            <StackLayout
+                Grid.Row="2"
+                BackgroundColor="{StaticResource BackgroundColor}"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Vertical"
+                VerticalOptions="FillAndExpand">
+
+                <!--  Header Actions  -->
+                <views:HeaderGroupButtons
+                    Margin="{StaticResource PageBottomControlMargin}"
+                    HeightRequest="60"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding HeaderData.AreActionsViewVisible}"
+                    VerticalOptions="FillAndExpand" />
+            </StackLayout>
+           
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customCtrl="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:hc="clr-namespace:HorizontalList;assembly=HorizontalList"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    x:Class="ACRM.mobile.Views.HeaderGroupButtons">
+
+
+    <ContentView.Resources>
+        <customCtrl:UserActionToImageSourceConverter x:Key="UserActionToImageSourceConvert"/>
+        <valueConverters:NullToBoolConverter x:Key="NullToBoolConverter"/>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <hc:HorizontalList x:Name="HeaderButtionsListView"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="FillAndExpand"
+                           ListOrientation="Horizontal"
+                           ItemsSource="{Binding HeaderData.HeaderActionButtons, Mode=TwoWay}"
+                           SelectedCommand="{Binding OnHeaderAction}"
+                           HeightRequest="0"
+                           BackgroundColor="{StaticResource HeaderButtonsContainerBackgroundColor}">
+            <hc:HorizontalList.ItemTemplate>
+                <DataTemplate>
+                    <Grid VerticalOptions="FillAndExpand"
+                          Margin="{StaticResource HeaderButtonMargins}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="0"
+                               HeightRequest="30"
+                               WidthRequest="30"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Aspect="AspectFit"
+                               Source="{Binding UserActionImagePath}"/>
+                        <Label Grid.Row="1"
+                                HeightRequest="15"
+                                Text="{Binding UserActionDisplayName}"
+                                HorizontalOptions="CenterAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Margin="{StaticResource ActionsLabelMargin}"
+                                TextColor="{StaticResource HeaderButtonTextColor}"
+                                FontSize="{StaticResource HeaderInfoAreaTextFontSize}"/>
+                    </Grid>
+                </DataTemplate>
+            </hc:HorizontalList.ItemTemplate>
+        </hc:HorizontalList>
+    </ContentView.Content>
+</ContentView>

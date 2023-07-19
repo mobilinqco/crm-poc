@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Class="ACRM.mobile.Views.ContentViews.SerialEntryTileItemView"
+    xmlns:widgetmodel="clr-namespace:ACRM.mobile.UIModels;assembly=ACRM.mobile"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms">
+    <ContentView.Resources>
+        <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter" />
+        <customControls:SerialEntryStateToColorConverter x:Key="SerialEntryStateToColorConverter"/>
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        
+         <StackLayout Spacing="0" HorizontalOptions="EndAndExpand">
+                        <Frame Style="{StaticResource FrameSerialEntryItemViewStyle}">
+                            <Grid ColumnSpacing="0" >
+                                  <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <BoxView Margin="0,0,0,0"
+                                     Grid.Column="0"
+                                     WidthRequest="5"
+                                     BackgroundColor="{Binding State, Converter={StaticResource SerialEntryStateToColorConverter}}"
+                                     HorizontalOptions="Start"
+                                     VerticalOptions="Fill"
+                                     />
+                            <Grid VerticalOptions="Start" Grid.Column="1"  >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                     <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                              <Label Grid.Row="0" Margin="4,4,0,2"
+                                   Text="{Binding Title}"
+                                   LineBreakMode="TailTruncation"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="16"
+                                   FontAttributes="None"/>
+                                <StackLayout Grid.Row="1" Margin="0,0,0,0" HeightRequest="100"
+                         IsVisible="{Binding IsBusy}"
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="CenterAndExpand">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" VerticalOptions="CenterAndExpand"
+                         Color="{StaticResource ProgressColor}"
+                         IsVisible="{Binding IsBusy}" />
+                         </StackLayout>
+                                <Image Grid.Row="1" IsVisible="{Binding IsBusy, Converter={StaticResource BoolNegationConverter}}"
+                                       Margin="4"  HeightRequest="100" Source="{Binding FileImageSource}"></Image>
+                                <Grid Grid.Row="2" ColumnSpacing="0" Margin="0" >
+                                  <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"
+                                   LineBreakMode="TailTruncation"
+                                   Text="{Binding SubTitle1}" Margin="4,3,0,1"
+                                   HorizontalOptions="Start"
+                                   TextColor="Gray"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="15"
+                                   FontAttributes="Bold"/>
+                                     <Label Grid.Column="1"
+                 
+                                   Text="{Binding CountText}" Margin="4,3,4,1"
+                                   HorizontalOptions="End"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="End"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="18"
+                                   FontAttributes="None"/>
+                                </Grid>
+                                
+                                 <Label Grid.Row="3" IsVisible="{Binding Source={RelativeSource AncestorType={x:Type widgetmodel:SerialEntryControlModel}}, Path= DisableThirdListRow, Converter={StaticResource BoolNegationConverter}}"
+                                   LineBreakMode="TailTruncation"
+                                   Text="{Binding SubTitle2}" Margin="4,3,0,1"
+                                   HorizontalOptions="Start"
+                                   TextColor="Gray"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="14"
+                                   FontAttributes="Bold"/>
+                                <SwipeView Grid.Row="4" Margin="0">
+    <SwipeView.RightItems>
+        <SwipeItems>
+             <SwipeItem Text="Delete" IsVisible="{Binding DestRecordId, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                       BackgroundColor="Red"
+                       Command="{Binding DeleteButtonCommand}" />
+            <SwipeItem Text="Duplicate" IsVisible="{Binding DestRecordId, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                       BackgroundColor="Gray"
+                       Command="{Binding DuplicateButtonCommand}" />
+        </SwipeItems>
+    </SwipeView.RightItems>
+              
+                               <Grid Margin="0" VerticalOptions="CenterAndExpand"
+                                     HorizontalOptions="FillAndExpand"
+                                     BackgroundColor="{StaticResource RelatedInfoAreasHeaderBackgroundColor}">
+                                    <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                     <Grid Grid.Column="0" RowSpacing="0">
+                              <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+           <RowDefinition Height="*"></RowDefinition>
+             <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                         <Button Margin="0" Grid.Row="1" Padding="0"
+                            
+                            BackgroundColor="Transparent"
+                            Command="{Binding MinusButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="40"
+                            HorizontalOptions="Fill"
+                            Text="&#xf0377;"
+                            TextColor="{StaticResource BackgroundColor}"
+                            VerticalOptions="Center"
+                            WidthRequest="70"  />
+                               <Label Grid.Row="2" Margin="0,0,3,5"
+                                   Text="{Binding PackageCount}"
+                                   HorizontalOptions="Center"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Start"
+                                   FontSize="14"
+                                   FontAttributes="None"/>
+                           </Grid>
+                         <Grid Grid.Column="1" RowSpacing="0">
+                              <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+           <RowDefinition Height="*"></RowDefinition>
+             <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                         <Button Margin="0" Grid.Row="1" Padding="0"
+                            
+                            BackgroundColor="Transparent"
+                            Command="{Binding PlusButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="40"
+                            HorizontalOptions="Fill"
+                            Text="&#xf0419;"
+                            TextColor="{StaticResource BackgroundColor}"
+                            VerticalOptions="Center"
+                            WidthRequest="70"  />
+                               <Label Grid.Row="2" Margin="0,0,3,5"
+                                   Text="{Binding PackageCount}"
+                                   HorizontalOptions="Center"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Start"
+                                   FontSize="14"
+                                   FontAttributes="None"/>
+                           </Grid>
+                               </Grid>
+
+                                    </SwipeView>
+                            </Grid>
+
+                              </Grid>
+                            
+                        </Frame>
+                    </StackLayout>
+        
+    </ContentView.Content>
+</ContentView>

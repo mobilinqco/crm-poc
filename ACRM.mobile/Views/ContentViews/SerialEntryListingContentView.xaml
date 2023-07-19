@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.ContentViews.SerialEntryListingContentView"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:contentviews="clr-namespace:ACRM.mobile.Views.ContentViews;assembly=ACRM.mobile"
+    xmlns:sfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms">
+      <ContentView.Resources>
+          <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+      
+       <Grid RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand"  >
+       <Grid.RowDefinitions>
+           <RowDefinition Height="Auto"></RowDefinition>
+           <RowDefinition Height="Auto"></RowDefinition>
+           <RowDefinition Height="Auto"></RowDefinition>
+           <RowDefinition Height="*"></RowDefinition>
+       </Grid.RowDefinitions>
+
+     
+               <!--  Serial Entry display setup for Tablets and Desktop  -->
+                <Grid Margin="0"
+                    RowSpacing="0" ColumnSpacing="0"
+                    Grid.Row="0" 
+                    BackgroundColor="White"
+                    HorizontalOptions="FillAndExpand">
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button
+                        Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding SearchButtonCommand}"
+                        FontFamily="{StaticResource MaterialDesignIcons}"
+                        FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                        Text="&#xF0349;"
+                        TextColor="{StaticResource BackgroundColor}"
+                        WidthRequest="45"
+                        VerticalOptions="Center" />
+                    <Grid Grid.Column="1" HorizontalOptions="Fill" >
+                    <ScrollView Orientation="Horizontal" HeightRequest="45"  >
+                        
+                    <StackLayout VerticalOptions="End"  Orientation="Horizontal" IsVisible="{Binding IsAllItemsMode}">
+                          <StackLayout Orientation="Horizontal" Grid.Row="0" BindableLayout.ItemsSource="{Binding PositionFilterItems}" IsVisible="{Binding PositionFilterControlVisible}"
+                         >
+             <BindableLayout.ItemTemplate>
+    
+                    <DataTemplate>
+                        <Grid VerticalOptions="End" >
+                            <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                             <Button Grid.Column="0"
+                         BackgroundColor="Transparent"
+                         HorizontalOptions="Start"
+                         WidthRequest="100"
+                                     Padding="0"
+                                     Margin="0"
+                        Command="{Binding FilterTappedCommand}"
+                        Text="{Binding Title}"
+                         TextColor="{StaticResource BackgroundColor}">
+
+                          </Button>
+                             <Label
+                           Grid.Column="1"
+                           Text="&#xF0142;"
+                           BackgroundColor="Transparent"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           FontSize="{StaticResource SerialEntryArrorIconFontSize}"
+                           FontFamily="{StaticResource MaterialDesignIcons}"
+                           TextColor="{StaticResource BackgroundColor}"
+                           />
+                        </Grid>
+
+                       
+                    </DataTemplate>
+              
+            </BindableLayout.ItemTemplate>
+             </StackLayout>
+                    <sfButtons:SfSegmentedControl
+                        IsVisible="{Binding FilterSegControlVisible}"
+                        BorderColor="Transparent"
+                        Margin="2"
+                        CornerRadius="6"
+                        FontColor="Black"
+                        FontSize="{StaticResource CalendarModesFontSize}"
+                        ItemsSource="{Binding FilterSegControlItems}"
+                        SegmentHeight="30"
+                        SelectedIndex="{Binding FilterSegControlIndex}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="CenterAndExpand"
+                        SegmentWidth="120"
+                        Color="LightGray">
+                        <sfButtons:SfSegmentedControl.Behaviors>
+                            <xct:EventToCommandBehavior EventName="SelectionChanged" Command="{Binding SelectionChangedCommand}" />
+                        </sfButtons:SfSegmentedControl.Behaviors>
+
+                    </sfButtons:SfSegmentedControl> 
+
+                    
+                        </StackLayout>
+                            
+                        </ScrollView>
+                        </Grid>
+                    <AbsoluteLayout Grid.Column="2"  VerticalOptions="CenterAndExpand" IsVisible="{Binding IsAllItemsMode}"
+                              WidthRequest="{StaticResource SearchBarButtonWidth}"
+                >
+               
+               <Button
+                   Margin="0"
+                            
+                            BackgroundColor="Transparent"
+                            Command="{Binding FiltersButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            IsEnabled="{Binding IsFiltersButtonCommandEnabled}"
+                            Text="&#xF0232;"
+                            TextColor="{StaticResource BackgroundColor}"
+                 AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
+               <AbsoluteLayout AbsoluteLayout.LayoutBounds="10,0,-1,0" Background="Transparent" IsVisible="{Binding IsUserFilterHasEnabledFilters}" >
+                    <AbsoluteLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding FiltersButtonCommand}" />
+                </AbsoluteLayout.GestureRecognizers>
+                <Label FontFamily="{StaticResource MaterialDesignIcons}" BackgroundColor="Transparent" Text="&#xf012f;"
+                       FontSize="15" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
+                <Label TextColor="White" Text="{Binding UserFilterCount}" FontSize="8" AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds=".5,0,-1,0" />
+                </AbsoluteLayout>
+    </AbsoluteLayout>
+                        <Button
+                            Margin="0"
+                            Grid.Column="3"
+                            BackgroundColor="Transparent"
+                            Command="{Binding ViewModeButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            Text="{Binding ViewModeButtonIconText}"
+                            WidthRequest="45"
+                            TextColor="{StaticResource BackgroundColor}" />
+
+                    
+                </Grid>
+                <!--  Search box  -->
+                <Frame
+                    Grid.Row="1"
+                    Margin="{StaticResource CalendarControlsMargin}"
+                    Padding="{StaticResource SearchTextBoxFramePaddings}"
+                    BackgroundColor="{StaticResource SearchPageBackground}"
+                    CornerRadius="5"
+                    HasShadow="false"
+                    HorizontalOptions="Fill"
+                    IsVisible="{Binding IsSearchBoxVisible}"
+                    OutlineColor="{StaticResource SearchBarIconColor}"
+                    VerticalOptions="Start">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Search icon  -->
+                        <Label
+                            Grid.Column="0"
+                            Margin="{StaticResource SearchBarIconMargins}"
+                            BackgroundColor="Transparent"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource SearchBarIconSize}"
+                            HorizontalOptions="Start"
+                            Text="&#xF0349;"
+                            TextColor="{StaticResource SearchBarIconColor}"
+                            VerticalOptions="Center" />
+
+                        <customControls:ExtendedEntry
+                            x:Name="SearchTextBox"
+                            Grid.Column="1"
+                            Margin="{StaticResource SearchTextBoxMargins}"
+                            BorderWidth="0"
+                            FontSize="{StaticResource ExtendedEntryTextFontSize}"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Placeholder="{Binding SearchTextBoxPlaceholderText}"
+                            PlaceholderColor="{StaticResource PlaceholderTextColor}"
+                            Text="{Binding SearchText, Mode=TwoWay}"
+                            TextColor="{StaticResource EntryTextColor}"
+                            VerticalOptions="Center">
+
+                            <customControls:ExtendedEntry.Behaviors>
+                                <xct:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand}"/>
+                            </customControls:ExtendedEntry.Behaviors>
+
+                        </customControls:ExtendedEntry>
+                    </Grid>
+                </Frame>
+
+           <Grid Grid.Row="2">
+        <ScrollView VerticalOptions="Start" 
+                   
+                    HorizontalScrollBarVisibility="Never"
+                    VerticalScrollBarVisibility="Default">
+            <Grid>
+            <Grid.RowDefinitions>
+           <RowDefinition Height="*"></RowDefinition>
+       </Grid.RowDefinitions>
+            <Grid Margin="0" IsVisible="{Binding EnableNoResultsText, Converter={StaticResource BoolNegationConverter}}">
+            <StackLayout Grid.Row="0" BindableLayout.ItemsSource="{Binding UIItems}" Margin="10" IsVisible="{Binding IsListMode}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+
+                >
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <contentviews:SerialEntryListItemView></contentviews:SerialEntryListItemView>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+
+           
+            <FlexLayout  Grid.Row="0" BindableLayout.ItemsSource="{Binding UIItems}" IsVisible="{Binding IsListMode,Converter={StaticResource BoolNegationConverter}}" 
+                        Wrap="Wrap"
+                        JustifyContent="Start" AlignItems="Start" >
+             <BindableLayout.ItemTemplate>
+    
+                    <DataTemplate>
+                        <contentviews:SerialEntryTileItemView></contentviews:SerialEntryTileItemView>
+                    </DataTemplate>
+              
+            </BindableLayout.ItemTemplate>
+             </FlexLayout>
+                 </Grid>
+            <!--No Result Display-->
+            <StackLayout Margin="0,40,0,0"
+                         IsVisible="{Binding EnableNoResultsText}"
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="CenterAndExpand">
+                <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0"
+                           Text="&#xF120D;"
+                           BackgroundColor="Transparent"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           FontSize="{StaticResource NoResultIconFontSize}"
+                           FontFamily="{StaticResource MaterialDesignIcons}"
+                           TextColor="{StaticResource NoResultTextColor}"
+                           Margin="{StaticResource NoResultsLabelMargins}"/>
+
+                    <Label Grid.Row="1"
+                           Text="{Binding NoResultsText}"
+                           FontSize="{StaticResource NoResultFontSize}"
+                           TextColor="{StaticResource NoResultTextColor}"
+                           HorizontalOptions="Center"/>
+
+                </Grid>
+            </StackLayout>
+
+            <StackLayout Margin="0,40,0,0"
+                         IsVisible="{Binding IsLoading}"
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="CenterAndExpand">
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                         Color="{StaticResource ProgressColor}"
+                         IsVisible="{Binding IsLoading}" />
+            </StackLayout>
+             </Grid>
+
+
+                </ScrollView>
+             </Grid>
+       
+        </Grid>
+        
+    </ContentView.Content>
+</ContentView>

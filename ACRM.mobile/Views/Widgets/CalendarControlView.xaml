@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.Widgets.CalendarControlView"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:sfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:widgets="clr-namespace:ACRM.mobile.Views.Widgets"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    BackgroundColor="{StaticResource SearchPageBackground}"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms">
+      <ContentView.Resources>
+          <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+        <OnPlatform x:Key="ExtendedEntryTextFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS" Value="16" />
+            <On Platform="Android, WinPhone" Value="16" />
+            <On Platform="UWP" Value="16" />
+        </OnPlatform>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid BackgroundColor="{StaticResource SearchPageBackground}" 
+              HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid
+                Grid.Row="0"
+                IsVisible="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}"
+                BackgroundColor="{StaticResource SearchPageBackground}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!--  Some fancy line  -->
+                <BoxView
+                    Grid.Row="0"
+                    Margin="0"
+                    BackgroundColor="{Binding HeaderData.InfoAreaColor}"
+                    HeightRequest="{StaticResource FancyLineHeight}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="Start" />
+
+                <!--  Calendar Segments display setup for Tablets and Desktop  -->
+                <Grid
+                    Grid.Row="1"
+                    Margin="{StaticResource CalendarControlsMargin}"
+                    HeightRequest="55"
+                    HorizontalOptions="FillAndExpand">
+                    <Grid.IsVisible>
+                        <OnIdiom
+                            x:TypeArguments="x:Boolean"
+                            Desktop="True"
+                            Phone="False"
+                            Tablet="True" />
+                    </Grid.IsVisible>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button
+                        Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding SearchButtonCommand}"
+                        FontFamily="{StaticResource MaterialDesignIcons}"
+                        FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                        Text="&#xF0349;"
+                        TextColor="{StaticResource BackgroundColor}"
+                        VerticalOptions="End" />
+
+                    <sfButtons:SfSegmentedControl
+                        Grid.Column="1"
+                        BorderColor="Transparent"
+                        CornerRadius="5"
+                        FontColor="Black"
+                        FontSize="{StaticResource CalendarModesFontSize}"
+                        HorizontalOptions="CenterAndExpand"
+                        ItemsSource="{Binding SegmentedControlItems}"
+                        SegmentHeight="30"
+                        SelectedIndex="{Binding SegmentedControlIndex}"
+                        VerticalOptions="Center"
+                        
+                        Color="LightGray">
+
+                        <sfButtons:SfSegmentedControl.Behaviors>
+                            <xct:EventToCommandBehavior EventName="SelectionChanged" Command="{Binding SelectionChangedCommand}" />
+                        </sfButtons:SfSegmentedControl.Behaviors>
+
+                    </sfButtons:SfSegmentedControl>
+
+                    <Grid Grid.Column="2" VerticalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            Grid.Column="0"
+                            BackgroundColor="Transparent"
+                            Command="{Binding SelectCalendarsButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            Text="&#xF011C;"
+                            TextColor="{StaticResource BackgroundColor}" />
+
+                        <Button
+                            Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            Command="{Binding SelectRepsButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            IsEnabled="{Binding IsRepSelectionButtonEnabled}"
+                            Text="&#xF0849;"
+                            TextColor="{StaticResource BackgroundColor}" />
+
+                        <AbsoluteLayout   Grid.Row="0"
+                Grid.Column="2"  VerticalOptions="CenterAndExpand"
+                              WidthRequest="{StaticResource SearchBarButtonWidth}"
+                >
+               
+               <Button
+                            Grid.Column="2"
+                            BackgroundColor="Transparent"
+                            Command="{Binding FiltersButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            IsEnabled="{Binding IsFiltersButtonCommandEnabled}"
+                            Text="&#xF0232;"
+                            TextColor="{StaticResource BackgroundColor}"
+                 AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
+               <AbsoluteLayout AbsoluteLayout.LayoutBounds="10,0,-1,0" Background="Transparent" IsVisible="{Binding IsUserFilterHasEnabledFilters}" >
+                    <AbsoluteLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding FiltersButtonCommand}" />
+                </AbsoluteLayout.GestureRecognizers>
+                <Label FontFamily="{StaticResource MaterialDesignIcons}" BackgroundColor="Transparent" Text="&#xf012f;"
+                       FontSize="15" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" />
+                <Label TextColor="White" Text="{Binding UserFilterCount}" FontSize="8" AbsoluteLayout.LayoutFlags="PositionProportional" BackgroundColor="Transparent" AbsoluteLayout.LayoutBounds=".5,0,-1,0" />
+                </AbsoluteLayout>
+    </AbsoluteLayout>
+                   
+
+                        <Button
+                            Grid.Column="3"
+                            BackgroundColor="Transparent"
+                            Command="{Binding RequestModeButtonCommand}"
+                            IsEnabled="{Binding IsRequestModeButtonEnabled}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            Text="{Binding RequestModeButtonIconText}"
+                            TextColor="{StaticResource BackgroundColor}"
+                            WidthRequest="{StaticResource NavigationBarButtonWidth}" />
+                    </Grid>
+                </Grid>
+
+                <!--  Calendar Segments display setup for Phones  -->
+                <Grid
+                    Grid.Row="1"
+                    Margin="{StaticResource CalendarControlsMargin}"
+                    HorizontalOptions="Fill">
+                    <Grid.IsVisible>
+                        <OnIdiom
+                            x:TypeArguments="x:Boolean"
+                            Desktop="False"
+                            Phone="True"
+                            Tablet="False" />
+                    </Grid.IsVisible>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <sfButtons:SfSegmentedControl
+                        Grid.Row="0"
+                        BorderColor="Transparent"
+                        CornerRadius="5"
+                        FontColor="Black"
+                        FontSize="{StaticResource CalendarModesFontSize}"
+                        HorizontalOptions="FillAndExpand"
+                        ItemsSource="{Binding SegmentedControlItems}"
+                        SegmentHeight="30"
+                        SelectedIndex="{Binding SegmentedControlIndex}"
+                        VerticalOptions="Center"
+                        VisibleSegmentsCount="{Binding ViewModesCounter}" 
+                        Color="LightGray">
+
+                        <sfButtons:SfSegmentedControl.Behaviors>
+                            <xct:EventToCommandBehavior EventName="SelectionChanged" Command="{Binding SelectionChangedCommand}" />
+                        </sfButtons:SfSegmentedControl.Behaviors>
+
+                    </sfButtons:SfSegmentedControl>
+
+                    <Grid
+                        Grid.Row="1"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button
+                            Grid.Column="0"
+                            BackgroundColor="Transparent"
+                            Command="{Binding SearchButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            HorizontalOptions="Fill"
+                            Text="&#xF0349;"
+                            TextColor="{StaticResource BackgroundColor}"
+                            VerticalOptions="Center" />
+
+                        <Button
+                            Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            Command="{Binding SelectCalendarsButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            HorizontalOptions="Fill"
+                            Text="&#xF011C;"
+                            TextColor="{StaticResource BackgroundColor}"
+                            VerticalOptions="Center" />
+
+                        <Button
+                            Grid.Column="2"
+                            BackgroundColor="Transparent"
+                            Command="{Binding SelectRepsButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            HorizontalOptions="Fill"
+                            Text="&#xF0849;"
+                            TextColor="{StaticResource BackgroundColor}"
+                            VerticalOptions="Center" />
+
+                        <Button
+                            Grid.Column="3"
+                            BackgroundColor="Transparent"
+                            Command="{Binding FiltersButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            HorizontalOptions="Fill"
+                            IsEnabled="{Binding IsFiltersButtonCommandEnabled}"
+                            Text="&#xF0232;"
+                            TextColor="{StaticResource BackgroundColor}"
+                            VerticalOptions="Center" />
+
+                        <Button
+                            Grid.Column="4"
+                            BackgroundColor="Transparent"
+                            Command="{Binding RequestModeButtonCommand}"
+                            IsEnabled="{Binding IsRequestModeButtonEnabled}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            HorizontalOptions="Fill"
+                            Text="{Binding RequestModeButtonIconText}"
+                            TextColor="{StaticResource BackgroundColor}"
+                            VerticalOptions="Center"
+                            WidthRequest="{StaticResource NavigationBarButtonWidth}" />
+                    </Grid>
+                </Grid>
+
+                <!--  Search box  -->
+                <Frame
+                    Grid.Row="2"
+                    Margin="{StaticResource CalendarControlsMargin}"
+                    Padding="{StaticResource SearchTextBoxFramePaddings}"
+                    BackgroundColor="{StaticResource SearchPageBackground}"
+                    CornerRadius="5"
+                    HasShadow="false"
+                    HorizontalOptions="Fill"
+                    IsVisible="{Binding IsSearchBoxVisible}"
+                    BorderColor="{StaticResource SearchBarIconColor}"
+                    VerticalOptions="Start">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Search icon  -->
+                        <Label
+                            Grid.Column="0"
+                            Margin="{StaticResource SearchBarIconMargins}"
+                            BackgroundColor="Transparent"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource SearchBarIconSize}"
+                            HorizontalOptions="Start"
+                            Text="&#xF0349;"
+                            TextColor="{StaticResource SearchBarIconColor}"
+                            VerticalOptions="Center" />
+
+                        <customControls:ExtendedEntry
+                            x:Name="SearchTextBox"
+                            Grid.Column="1"
+                            Margin="{StaticResource SearchTextBoxMargins}"
+                            BorderWidth="0"
+                            FontSize="{StaticResource ExtendedEntryTextFontSize}"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Placeholder="{Binding SearchTextBoxPlaceholderText}"
+                            PlaceholderColor="{StaticResource PlaceholderTextColor}"
+                            Text="{Binding SearchText, Mode=TwoWay}"
+                            TextColor="{StaticResource EntryTextColor}"
+                            VerticalOptions="Center">
+
+                            <customControls:ExtendedEntry.Behaviors>
+                                <xct:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}"/>
+                            </customControls:ExtendedEntry.Behaviors>
+
+                        </customControls:ExtendedEntry>
+                    </Grid>
+                </Frame>
+
+                <customControls:TemplatedContentControl
+                            HorizontalOptions="FillAndExpand"
+                            Grid.Row="3"
+                            Item="{Binding Content}"
+                            ItemTemplate="{StaticResource DashboardTemplateSelector}"
+                            VerticalOptions="FillAndExpand" />
+
+            </Grid>
+            <StackLayout Grid.Row="0" Margin="0,0,0,0" 
+                         IsVisible="{Binding IsLoading}"
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="CenterAndExpand">
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                         Color="{StaticResource ProgressColor}"
+                         IsVisible="{Binding IsLoading}" />
+            </StackLayout>
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

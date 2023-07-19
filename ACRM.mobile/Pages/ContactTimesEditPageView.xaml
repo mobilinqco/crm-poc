@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Name="ContactTimesEditPage"
+             x:Class="ACRM.mobile.Pages.ContactTimesEditPageView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:syncfusion1="clr-namespace:Syncfusion.XForms.Accordion;assembly=Syncfusion.Expander.XForms" 
+             xmlns:views="clr-namespace:ACRM.mobile.Views" 
+             xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms" 
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+             xmlns:local="clr-namespace:ACRM.mobile.ViewModels"
+             Padding="{StaticResource PagePadding}"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             NavigationPage.HasNavigationBar="false">
+
+    <ContentPage.BindingContext>
+        <local:ContactTimesEditPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter" />
+
+        <ResourceDictionary>
+            <OnPlatform x:Key="ErrorMessageMargins" x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="0,5,0,5" />
+                <On Platform="Android, WinPhone" Value="0,5,0,5" />
+                <On Platform="UWP" Value="0,5,0,5" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="HeaderLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS, Android, WinPhone, UWP" Value="18"></On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="DataLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS, Android, WinPhone, UWP" Value="16"></On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="SeparatorLineHeight" x:TypeArguments="x:Double">
+                <On Platform="iOS, Android, WinPhone, UWP" Value="1"></On>
+            </OnPlatform>
+        </ResourceDictionary>
+
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <views:CustomNavigationBar
+                Grid.Row="0"
+                BindingContext="this"
+                HeightRequest="45" />
+            <Grid
+                Grid.Row="1"
+                Margin="0"
+                BackgroundColor="{StaticResource SearchPageBackground}"
+                HorizontalOptions="Fill"
+                RowSpacing="0"
+                VerticalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!--  Some fancy line  -->
+                <BoxView
+                    Grid.Row="0"
+                    Margin="0"
+                    BackgroundColor="{Binding InfoAreaColor}"
+                    HeightRequest="{StaticResource FancyLineHeight}"
+                    HorizontalOptions="FillAndExpand" />
+
+                <!--  Error Details  -->
+                <Grid
+                    Grid.Row="1"
+                    BackgroundColor="{StaticResource SearchPageBackground}"
+                    HeightRequest="124"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding IsErrorMessageVisible}">
+                    <syncfusion1:SfAccordion
+                        x:Name="ErrorInfoAccordion"
+                        Margin="{StaticResource ErrorMessageMargins}"
+                        BindableLayout.ItemsSource="{Binding ErrorsInfo}"
+                        DynamicSizeMode="Content"
+                        ExpandMode="Single"
+                        HeaderIconPosition="End"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <syncfusion1:AccordionItem HeaderBackgroundColor="Red">
+                                    <syncfusion1:AccordionItem.Header>
+                                        <Grid>
+                                            <Label Text="{Binding Name}" />
+                                        </Grid>
+                                    </syncfusion1:AccordionItem.Header>
+                                    <syncfusion1:AccordionItem.Content>
+                                        <Grid>
+                                            <Label Text="{Binding Description}" />
+                                        </Grid>
+                                    </syncfusion1:AccordionItem.Content>
+                                </syncfusion1:AccordionItem>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </syncfusion1:SfAccordion>
+                </Grid>
+
+                <!--  Details Content !  -->
+                <ScrollView Grid.Row="2"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            Orientation="Vertical"
+                            BackgroundColor="{StaticResource SearchPageBackground}"
+                            IsVisible="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}">
+
+                    <StackLayout HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="Start"
+                                 BindableLayout.ItemsSource="{Binding ContactTimesTypes}"
+                                 Orientation="Vertical">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+
+                                <Grid HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand">
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0"
+                                           HorizontalTextAlignment="Start"
+                                           VerticalTextAlignment="Center"
+                                           Padding="10"
+                                           FontSize="{StaticResource HeaderLabelFontSize}"
+                                           Text="{Binding TypeName}"
+                                           BackgroundColor="LightGray"
+                                           TextColor="Black"/>
+
+                                    <syncfusion:SfListView Grid.Row="1"
+                                                           HorizontalOptions="FillAndExpand"
+                                                           VerticalOptions="Start"
+                                                           ItemsSource="{Binding ContactTimesDays}"
+                                                           Orientation="Vertical"
+                                                           AllowSwiping="True"
+                                                           IsScrollingEnabled="False"
+                                                           AutoFitMode="DynamicHeight"
+                                                           SelectionBackgroundColor="Transparent">
+
+                                        <syncfusion:SfListView.Behaviors>
+                                            <xct:EventToCommandBehavior EventName="ItemTapped" Command="{Binding BindingContext.ItemTappedCommand,
+                                                Source={x:Reference ContactTimesEditPage}}"/>
+                                            <xct:EventToCommandBehavior EventName="SwipeStarted" Command="{Binding BindingContext.SwipeStartedCommand,
+                                                Source={x:Reference ContactTimesEditPage}}"/>
+                                            <xct:EventToCommandBehavior EventName="SwipeEnded" Command="{Binding BindingContext.SwipeEndedCommand,
+                                                Source={x:Reference ContactTimesEditPage}}"/>
+                                        </syncfusion:SfListView.Behaviors>
+
+                                        <syncfusion:SfListView.ItemTemplate>
+                                            <DataTemplate>
+
+                                                <Grid HorizontalOptions="FillAndExpand"
+                                                      VerticalOptions="FillAndExpand"
+                                                      Padding="10, 0, 10, 0">
+
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    
+                                                    <Label Grid.Column="0"
+                                                           Grid.Row="0"
+                                                           HorizontalTextAlignment="End"
+                                                           VerticalTextAlignment="Center"
+                                                           Padding="10"
+                                                           FontSize="{StaticResource HeaderLabelFontSize}"
+                                                           Text="{Binding WeekDayName}"
+                                                           TextColor="DarkGray"/>
+
+                                                    <Label Grid.Column="1"
+                                                           Grid.Row="0"
+                                                           HorizontalTextAlignment="Start"
+                                                           VerticalTextAlignment="Center"
+                                                           Padding="10"
+                                                           FontSize="{StaticResource HeaderLabelFontSize}"
+                                                           Text="{Binding MorningIntervalString}"
+                                                           TextColor="Black"/>
+
+                                                    <Label Grid.Column="2"
+                                                           Grid.Row="0"
+                                                           HorizontalTextAlignment="Start"
+                                                           VerticalTextAlignment="Center"
+                                                           Padding="10"
+                                                           FontSize="{StaticResource HeaderLabelFontSize}"
+                                                           Text="{Binding AfternoonIntervalString}"
+                                                           TextColor="Black"/>
+
+                                                    <BoxView Grid.Column="1"
+                                                             Grid.ColumnSpan="2"
+                                                             Grid.Row="1"
+                                                             BackgroundColor="DarkGray"
+                                                             HeightRequest="{StaticResource SeparatorLineHeight}"
+                                                             HorizontalOptions="FillAndExpand" />
+
+                                                </Grid>
+                                                
+                                            </DataTemplate>
+                                        </syncfusion:SfListView.ItemTemplate>
+
+                                        <syncfusion:SfListView.RightSwipeTemplate>
+                                            <DataTemplate>
+                                                <Grid VerticalOptions="FillAndExpand"
+                                                      HorizontalOptions="FillAndExpand"
+                                                      BackgroundColor="Red">
+
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    
+                                                    <Label Grid.Column="0"
+                                                           Text="{Binding DeleteText, Source={RelativeSource AncestorType={x:Type local:ContactTimesEditPageViewModel}}}" 
+                                                           TextColor="White" 
+                                                           FontAttributes="Bold" 
+                                                           VerticalTextAlignment="Center" 
+                                                           HorizontalTextAlignment="Center"
+                                                           LineBreakMode="NoWrap"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </syncfusion:SfListView.RightSwipeTemplate>
+
+                                    </syncfusion:SfListView>
+
+                                </Grid>
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+
+                    </StackLayout>
+
+                </ScrollView>
+
+                <StackLayout
+                    Grid.Row="2"
+                    HorizontalOptions="CenterAndExpand"
+                    IsVisible="{Binding IsLoading}"
+                    VerticalOptions="CenterAndExpand">
+
+                    <ActivityIndicator
+                        IsRunning="{Binding IsLoading}"
+                        IsVisible="{Binding IsLoading}"
+                        Color="{StaticResource ProgressColor}" />
+                </StackLayout>
+
+                <BoxView
+                    Grid.Row="3"
+                    Margin="0"
+                    BackgroundColor="{Binding InfoAreaColor}"
+                    HeightRequest="{StaticResource FancyLineHeight}"
+                    HorizontalOptions="FillAndExpand" />
+                <Grid
+                    Grid.Row="4"
+                    Padding="0,0,0,20"
+                    HeightRequest="45"
+                    HorizontalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Margin="20,5,0,0"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding OnCancelCommand}"
+                        FontSize="{StaticResource NewOrEditViewButtonFontSize}"
+                        HeightRequest="{StaticResource NewOrEditViewButtonHeight}"
+                        HorizontalOptions="Start"
+                        Text="{Binding CancelButtonTitle}"
+                        TextColor="{StaticResource NewOrEditViewButtonFontColor}" />
+                    <Button
+                        Grid.Column="1"
+                        Margin="0,5,20,0"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding OnSaveCommand}"
+                        FontSize="{StaticResource NewOrEditViewButtonFontSize}"
+                        HeightRequest="{StaticResource NewOrEditViewButtonHeight}"
+                        HorizontalOptions="End"
+                        IsEnabled="{Binding IsSaveButtonEnabled}"
+                        Text="{Binding SaveButtonTitle}"
+                        TextColor="{StaticResource NewOrEditViewButtonFontColor}" />
+                </Grid>
+            </Grid>
+        </Grid>
+
+    </ContentPage.Content>
+
+
+</ContentPage>

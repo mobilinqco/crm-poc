@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="ACRM.mobile.Views.SearchAndListContent"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:data="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable"
+    xmlns:CustomControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile">
+    <ContentView.Resources>
+        <CustomControls:HasItemConverter x:Key="HasItemConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid
+            Margin="0"
+            BackgroundColor="{StaticResource SearchPageBackground}"
+            HorizontalOptions="FillAndExpand"
+            RowSpacing="0"
+            VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Search Bar  -->
+            <views:SearchBar
+                Grid.Row="0"
+                Margin="{StaticResource SearchAndListMargins}"
+                IsVisible="{Binding SearchAndListContentData.IsSearchBarVisible}" />
+            <!--  Search Results !  -->
+
+            <syncfusion:SfListView
+                    x:Name="SearchResultsList"
+                    AutoFitMode="Height"
+                    BackgroundColor="{StaticResource SearchPageBackground}"
+                    Grid.Row="1"
+                    AllowGroupExpandCollapse="{Binding SearchAndListContentData.AreSectionsEnabled}"
+                    IsStickyGroupHeader="{Binding SearchAndListContentData.AreSectionsEnabled}"
+                    GroupHeaderSize="28"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="FillAndExpand"
+                    IsVisible="{Binding SearchAndListContentData.SearchResults, Converter={StaticResource HasItemConverter}}"
+                    ItemsSource="{Binding SearchAndListContentData.SearchResults}"
+                    DataSource="{Binding SearchAndListContentData.GroupingDataSource}"
+                    SelectedItem="{Binding SelectedSearchResult}"
+                    SelectionBackgroundColor="{StaticResource ItemSelectedColor}"
+                    SelectionGesture="Tap"
+                    SelectionMode="Single"
+                    TapCommand="{Binding RecordSelectedCommand}"
+                    LoadMoreOption="AutoOnScroll"
+                    LoadMorePosition="Bottom"
+                    LoadMoreCommand="{Binding LoadMoreCommand}"
+                    LoadMoreCommandParameter="{Binding Source={x:Reference Name=SearchResultsList}}">
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <!--<TextCell Text="{Binding .}"/>-->
+                        <CustomControls:RecordListViewCell />
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
+
+
+            <!--  No Result Display  -->
+            <Grid Grid.Row="1"
+                  IsVisible="{Binding SearchAndListContentData.EnableNoResultsText}"
+                  HorizontalOptions="CenterAndExpand"
+                  VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label
+                        Grid.Row="0"
+                        Margin="{StaticResource NoResultsLabelMargins}"
+                        BackgroundColor="Transparent"
+                        FontFamily="{StaticResource MaterialDesignIcons}"
+                        FontSize="{StaticResource NoResultIconFontSize}"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="&#xF120D;"
+                        TextColor="{StaticResource NoResultTextColor}"
+                        VerticalOptions="CenterAndExpand" />
+
+                <Label
+                        Grid.Row="1"
+                        FontSize="{StaticResource NoResultFontSize}"
+                        HorizontalOptions="Center"
+                        Text="{Binding SearchAndListContentData.NoResultsText}"
+                        TextColor="{StaticResource NoResultTextColor}" />
+
+            </Grid>
+
+            <StackLayout
+                Grid.Row="1"
+                HorizontalOptions="CenterAndExpand"
+                IsVisible="{Binding IsLoading}"
+                VerticalOptions="CenterAndExpand">
+                <ActivityIndicator
+                    IsRunning="{Binding IsLoading}"
+                    IsVisible="{Binding IsLoading}"
+                    Color="{StaticResource ProgressColor}" />
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

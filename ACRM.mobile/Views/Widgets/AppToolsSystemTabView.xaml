@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.Widgets.AppToolsSystemTabView">
+    <ContentView.Content>
+
+        <ScrollView Padding="{StaticResource AppPopupContentPadding}"
+                    BackgroundColor="White">
+
+            <StackLayout Orientation="Vertical"
+                         Spacing="14">
+
+                <StackLayout Orientation="Vertical"
+                             Spacing="4">
+                    <Label Text="Device Model"
+                           TextColor="Gray"/>
+                    <Label Text="{Binding DeviceModelText}"
+                           TextColor="Black"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical"
+                             Spacing="4">
+                    <Label Text="Operating System"
+                           TextColor="Gray"/>
+                    <Label Text="{Binding OperatingSystemText}"
+                           TextColor="Black"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical"
+                             Spacing="4">
+                    <Label Text="App Version"
+                           TextColor="Gray"/>
+                    <Label Text="{Binding AppVersionText}"
+                           TextColor="Black"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical"
+                             Spacing="4">
+                    <Label Text="Aurea CRM version"
+                           TextColor="Gray"/>
+                    <Label Text="{Binding AureaCRMVersionText}"
+                           TextColor="Black"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical"
+                             Spacing="4">
+                    <Label Text="Server URL"
+                           TextColor="Gray"/>
+                    <Label Text="{Binding ServerURLText}"
+                           TextColor="Black"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical"
+                             Spacing="4">
+                    <Label Text="User"
+                           TextColor="Gray"/>
+                    <Label Text="{Binding UsernameText}"
+                           TextColor="Black"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical"
+                             Spacing="4">
+                    <Label Text="Roles"
+                           TextColor="Gray"/>
+                    <Label Text="{Binding RolesText}"
+                           TextColor="Black"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical"
+                             Spacing="4">
+                    <Label Text="Rights"
+                           TextColor="Gray"/>
+                    <Label Text="{Binding RightsText}"
+                           TextColor="Black"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical"
+                             Spacing="4">
+                    <Label Text="Configuration"
+                           TextColor="Gray"/>
+                    <Label Text="{Binding ConfigurationText}"
+                           TextColor="Black"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical"
+                             Spacing="4">
+                    <Label Text="Template version"
+                           TextColor="Gray"/>
+                    <Label Text="{Binding TemplateVersionText}"
+                           TextColor="Black"/>
+                </StackLayout>
+
+            </StackLayout>
+
+        </ScrollView>
+
+    </ContentView.Content>
+
+</ContentView>

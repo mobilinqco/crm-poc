@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="ACRM.mobile.Pages.CalendarPageView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    x:Name="CalendarPage"
+    Padding="{StaticResource PagePadding}"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    NavigationPage.HasNavigationBar="false"
+    >
+    <ContentPage.Resources>
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <views:CustomNavigationBar
+                Grid.Row="0"
+                BindingContext="this"
+                HeightRequest="45" />
+            <Grid Grid.Row="1" HorizontalOptions="FillAndExpand"
+                  BackgroundColor="{StaticResource SearchPageBackground}" 
+                  IsVisible="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}"
+                  VerticalOptions="FillAndExpand">
+                 <customControls:TemplatedContentControl
+                            HorizontalOptions="FillAndExpand"
+                            Item="{Binding Content}"
+                            ItemTemplate="{StaticResource DashboardTemplateSelector}"
+                            VerticalOptions="FillAndExpand" />
+              </Grid>
+
+            <Grid IsVisible="{Binding IsLoading}" Grid.Row="1" BackgroundColor="{StaticResource SearchPageBackground}" 
+              HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+             <StackLayout 
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="CenterAndExpand">
+            <ActivityIndicator VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsLoading}"
+                         Color="{StaticResource ProgressColor}"
+                         IsVisible="{Binding IsLoading}" />
+            </StackLayout>
+                </Grid>
+            <views:HeaderGroupButtons
+                    Grid.Row="2"
+                    Margin="{StaticResource PageBottomControlMargin}"
+                    HeightRequest="60"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding HeaderData.AreActionsViewVisible}"
+                    VerticalOptions="FillAndExpand" />
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

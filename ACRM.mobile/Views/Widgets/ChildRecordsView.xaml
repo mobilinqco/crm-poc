@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.Widgets.ChildRecordsView"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms">
+
+    <ContentView.Resources>
+        <customControls:StringToColorConverter x:Key="StrToColorConverter"/>
+        <valueConverters:NullToBoolConverter x:Key="NullToBoolConverter"/>
+        <customControls:HasItemConverter x:Key="HasItemConverter"/>
+         <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout
+            Margin="0,20,0,0"
+            Spacing="0"
+            Orientation="Vertical">
+            <Grid Margin="0,0,0,0"
+                  ColumnSpacing="0"
+                  IsVisible="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" ></RowDefinition>
+                    <RowDefinition Height="Auto" ></RowDefinition>
+                    <RowDefinition Height="Auto" ></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    FontSize="16"
+                    TextColor="Black"
+                    LineBreakMode="TailTruncation"
+                    Margin="10,0,0,0"
+                    HorizontalOptions="StartAndExpand"
+                    Text="{Binding Title}"/>
+
+                <BoxView
+                    Grid.Row="1"
+                    HeightRequest="2"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="Black"/>
+
+                <syncfusion:SfListView
+                    Grid.Row="2"
+                    IsVisible="{Binding EnableNoResultsText, Converter={StaticResource BoolNegationConverter}}"
+                    x:Name="SearchResultsList"
+                    HeightRequest="{Binding ListViewHeightRequest}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    SelectionMode="Single"
+                    SelectionGesture="Tap"
+                    AutoFitMode="Height"
+                    ItemsSource="{Binding Records}" 
+                    SelectedItem="{Binding SelectedSearchResult}"
+                    TapCommand="{Binding RecordSelectedCommand}"
+                    SelectionBackgroundColor="{StaticResource ItemSelectedColor}"
+                    IsScrollBarVisible="True">
+
+                    <!--BackgroundColor="{StaticResource SearchPageBackground}">-->
+                    <syncfusion:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <!--<TextCell Text="{Binding .}"/>-->
+                            <customControls:RecordListViewCell/>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+                </syncfusion:SfListView>
+
+                <Label Grid.Row="2"
+                       Margin="0,40,0,0"
+                       IsVisible="{Binding EnableNoResultsText}"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       Text="{Binding NoResultsText}"
+                       FontSize="{StaticResource NoResultFontSize}"
+                       TextColor="{StaticResource NoResultTextColor}"/>
+            </Grid>
+            <ActivityIndicator
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                IsRunning="{Binding IsLoading}"
+                Color="{StaticResource ProgressColor}"
+                IsVisible="{Binding IsLoading}" />
+       </StackLayout>
+    </ContentView.Content>
+</ContentView>
+
+

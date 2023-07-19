@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="ACRM.mobile.Views.DashboardCalender"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:calendar="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile">
+    <ContentView.Resources>
+        <customControls:SeasonToImageSourceConverter x:Key="SeasonToImageSourceConverter" />
+        
+        <OnPlatform x:Key="DayFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="38" Tablet="65" Desktop="65"></OnIdiom>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="38" Tablet="65" Desktop="65"></OnIdiom>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="38" Tablet="65" Desktop="65"></OnIdiom>
+            </On>
+        </OnPlatform>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid
+            Margin="5,0,5,0"
+            BackgroundColor="{StaticResource SearchPageBackground}"
+            ColumnSpacing="0"
+            HorizontalOptions="FillAndExpand"
+            RowSpacing="0"
+            VerticalOptions="FillAndExpand">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="48" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Image
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                Aspect="AspectFill"
+                Source="{Binding Season, Converter={StaticResource SeasonToImageSourceConverter}}" />
+            <Grid
+                Grid.Column="0"
+                Margin="0,0,0,0"
+                BackgroundColor="LightGray"
+                HorizontalOptions="FillAndExpand"
+                Opacity="0.8"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <BoxView
+                    Grid.Row="0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+                <Label
+                    Grid.Row="0"
+                    Margin="-45,0,-45,-30"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    HorizontalOptions="CenterAndExpand"
+                    LineBreakMode="NoWrap"
+                    Rotation="-90"
+                    Text="{Binding Month}"
+                    TextColor="DarkSlateGray"
+                    VerticalOptions="CenterAndExpand" />
+                <Label
+                    Grid.Row="1"
+                    Margin="5"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="{Binding Year}"
+                    TextColor="DarkSlateGray"
+                    VerticalOptions="EndAndExpand" />
+            </Grid>
+            <Grid
+                Grid.Column="1"
+                Margin="0,0,0,0"
+                BackgroundColor="Black"
+                HorizontalOptions="FillAndExpand"
+                Opacity="0.3"
+                VerticalOptions="FillAndExpand" />
+            <Grid
+                Grid.Column="1"
+                Margin="0,0,0,0"
+                BackgroundColor="Transparent"
+                HorizontalOptions="FillAndExpand"
+                RowSpacing="0"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Margin="15,0,15,0"
+                    FontAttributes="None"
+                    FontSize="{StaticResource DayFontSize}"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Day}"
+                    TextColor="White"
+                    VerticalOptions="End"
+                    VerticalTextAlignment="Center" />
+                <Label
+                    Grid.Row="1"
+                    Margin="15,0,15,0"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    HeightRequest="25"
+                    HorizontalOptions="Start"
+                    Text="{Binding DayOfTheWeek}"
+                    TextColor="White"
+                    VerticalOptions="End" />
+                <Label
+                    Grid.Row="2"
+                    Margin="15,0,15,0"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HeightRequest="25"
+                    HorizontalOptions="Start"
+                    Text="{Binding MonthYear}"
+                    TextColor="White"
+                    VerticalOptions="End" />
+            </Grid>
+            <StackLayout
+                Grid.Column="3"
+                Opacity="0.8"
+                VerticalOptions="FillAndExpand">
+
+                <calendar:SfCalendar
+                    BackgroundColor="White"
+                    HeightRequest="{Binding HeightRequest}"
+                    HorizontalOptions="EndAndExpand"
+                    MonthChangedCommand="{Binding OnMonthChanged}"
+                    SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                    SelectionChangedCommand="{Binding OnSelectionChanged}"
+                    SelectionMode="SingleSelection"
+                    ShowHeader="False"
+                    ShowLeadingAndTrailingDays="False"
+                    ShowNavigationButtons="True"
+                    ShowYearView="False"
+                    VerticalOptions="FillAndExpand"
+                    ViewMode="MonthView"
+                    WidthRequest="{Binding WidthRequest}">
+                    <calendar:SfCalendar.MonthViewSettings>
+                        <calendar:MonthViewSettings
+                            DateSelectionColor="{StaticResource BackgroundColor}"
+                            DayFontSize="9"
+                            DayHeaderBackgroundColor="LightGray"
+                            DayHeaderFontSize="9"
+                            DayHeaderTextColor="Black"
+                            HeaderFontSize="13"
+                            HeaderTextColor="Black"
+                            SelectionRadius="8" />
+                    </calendar:SfCalendar.MonthViewSettings>
+                </calendar:SfCalendar>
+            </StackLayout>
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

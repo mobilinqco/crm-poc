@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile" 
+    xmlns:widgets="clr-namespace:ACRM.mobile.Views.Widgets"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    NavigationPage.HasNavigationBar="false"
+    x:Class="ACRM.mobile.Pages.LogPageView"
+    >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="AppLogsPageViewCloseButtonFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <Grid BackgroundColor="{StaticResource BarBackgroundColor}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Top Navigation Bar -->
+
+            <StackLayout Grid.Column="0"
+                         Grid.Row="0"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="StartAndExpand"
+                         Orientation="Horizontal"
+                         Spacing="5">
+
+                <buttons:SfButton VerticalOptions="FillAndExpand"
+                                  HorizontalOptions="Start"
+                                  Margin="0"
+                                  Padding="0"
+                                  BackgroundColor="Transparent"
+                                  Command="{Binding CloseCommand}"
+                                  FontSize="{StaticResource AppLogsPageViewCloseButtonFontSize}"
+                                  Text="{Binding CloseText}"
+                                  TextColor="White"/>
+
+            </StackLayout>
+
+             <!-- Content -->
+
+            <StackLayout Grid.Column="0"
+                         Grid.Row="1"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         Padding="{StaticResource AppPopupContentPadding}"
+                         BackgroundColor="White"
+                         Orientation="Vertical"
+                         Spacing="2">
+
+                <widgets:LogView BindingContext="{Binding LogViewModel}"/>
+
+            </StackLayout>
+
+        </Grid>
+
+    </ContentPage.Content>
+</pages:PopupPage>

@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:filtermodel="clr-namespace:ACRM.mobile.CustomControls.FilterControls.Models;assembly=ACRM.mobile"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    x:Class="ACRM.mobile.CustomControls.FilterControls.Views.HierarchicalCatalogFilterControlView">
+    <ContentView.Resources>
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" IsVisible="{Binding IsParentView,Converter={StaticResource BoolNegationConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button  Grid.Row="0" 
+                    Command="{Binding OnBackParentTapped}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start"
+                    BackgroundColor="Transparent"
+                    TextColor="Black"
+                    FontSize="15"
+                    Text="{Binding CatalogParentTitle}"/>
+                <!--  Search box  -->
+                <Frame
+                    Grid.Row="1"
+                    Padding="{StaticResource SearchTextBoxFramePaddings}"
+                    BackgroundColor="{StaticResource SearchPageBackground}"
+                    CornerRadius="5"
+                    HasShadow="false"
+                    HorizontalOptions="FillAndExpand"
+                    OutlineColor="{StaticResource SearchBarIconColor}"
+                    VerticalOptions="Center">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--  Search icon  -->
+                        <Label
+                        Grid.Column="0"
+                        Margin="{StaticResource SearchBarIconMargins}"
+                        BackgroundColor="Transparent"
+                        FontFamily="{StaticResource MaterialDesignIcons}"
+                        FontSize="{StaticResource SearchBarIconSize}"
+                        HorizontalOptions="Start"
+                        Text="&#xF0349;"
+                        TextColor="{StaticResource SearchBarIconColor}"
+                        VerticalOptions="Center" />
+
+                        <customControls:ExtendedEntry
+                        x:Name="SearchTextBox"
+                        Grid.Column="1"
+                        Margin="{StaticResource SearchTextBoxMargins}"
+                        BorderWidth="0"
+                        FontSize="{StaticResource ExtendedEntryTextFontSize}"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding StringValue, Mode=TwoWay}"
+                        TextColor="{StaticResource EntryTextColor}"
+                        VerticalOptions="Center">
+                            <customControls:ExtendedEntry.Behaviors>
+                                <xct:EventToCommandBehavior Command="{Binding SearchCommand}" EventName="TextChanged" />
+                            </customControls:ExtendedEntry.Behaviors>
+                        </customControls:ExtendedEntry>
+                    </Grid>
+                </Frame>
+                <StackLayout Grid.Row="2"
+                             HorizontalOptions="CenterAndExpand"
+                             IsVisible="{Binding IsLoading}"
+                             VerticalOptions="CenterAndExpand">
+                    <ActivityIndicator
+                        IsRunning="{Binding IsLoading}"
+                        IsVisible="{Binding IsLoading}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        Color="{StaticResource ProgressColor}" />
+                </StackLayout>
+                <StackLayout Grid.Row="2"
+                             BindableLayout.ItemsSource="{Binding FilteredCatalogItems}"
+                             IsVisible="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+
+                            <Grid Margin="5" VerticalOptions="CenterAndExpand">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                    <Label Text="{Binding CatalogItem.DisplayValue}"  />
+                                </StackLayout>
+                                <CheckBox IsChecked="{Binding Selected}" VerticalOptions="Center" Grid.Column="0" />
+                                <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </Grid>
+
+            <Grid Grid.Row="0" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsParentView}" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="1" BindableLayout.ItemsSource="{Binding ParentCatalogItems}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+
+                            <Grid Margin="5" VerticalOptions="CenterAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type filtermodel:HierarchicalCatalogFilterControlModel}}, Path= ParentCatalogSelectedCommand}"  CommandParameter="{Binding .}" />
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0" VerticalOptions="Center">
+                                    <Label Text="{Binding DisplayValue}"  />
+                                </StackLayout>
+                                <Label BackgroundColor="Transparent" Grid.Column="1" 
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="30"
+                            HorizontalOptions="Fill"
+                            Text="&#xf0ce0;"
+                            TextColor="Gray"
+                            VerticalOptions="Center"
+                            WidthRequest="50"   />
+                                <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

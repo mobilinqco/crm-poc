@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:contentviews="clr-namespace:ACRM.mobile.Views.ContentViews;assembly=ACRM.mobile"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    x:Class="ACRM.mobile.Views.ContentViews.SerialEntryDetailsView"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms">
+      <ContentView.Resources>
+          <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+          <valueConverters:BoolToColorConverter
+            x:Key="BoolToColorConverter"
+            FalseValue="Gray"
+            TrueValue="Red" />
+    </ContentView.Resources>
+    <ContentView.Content>
+      <Grid RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
+           <Grid.RowDefinitions>
+           <RowDefinition Height="Auto"></RowDefinition>
+           <RowDefinition Height="Auto"></RowDefinition>
+           <RowDefinition Height="*"></RowDefinition>
+           <RowDefinition Height="Auto"></RowDefinition>
+       </Grid.RowDefinitions>
+           <Grid RowSpacing="0" ColumnSpacing="0" Grid.Row="0" HorizontalOptions="FillAndExpand">
+               <Grid.RowDefinitions>
+           <RowDefinition Height="Auto"></RowDefinition>
+           <RowDefinition Height="Auto"></RowDefinition>
+       </Grid.RowDefinitions>
+       <Frame CornerRadius="0"  Margin="0" Padding="0" Grid.Row="0" BackgroundColor="#eeeeee" HeightRequest="50">
+        <Grid Margin="0" 
+                    RowSpacing="0" ColumnSpacing="0"
+             HorizontalOptions="FillAndExpand">
+             <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="Auto" />
+
+                    </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Margin="20,4,0,2"
+                                   Text="{Binding SelectedItem.Title}"
+                                        LineBreakMode="TailTruncation"
+                                   HorizontalOptions="Start"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="16"
+                                   FontAttributes="Bold"/>
+            <StackLayout Orientation="Horizontal"  Grid.Column="1" Margin="5,5,15,5" HorizontalOptions="End" VerticalOptions="Center">
+                                   <Label 
+                                   Text="{Binding SelectedItem.Currency}"
+                                   HorizontalOptions="End"
+                                   TextColor="Blue"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="15"
+                                   FontAttributes="None"/>
+                                 <Label 
+                                   Text="{Binding SelectedItem.NetPrice, StringFormat='{0:F2}'}"
+                                   HorizontalOptions="End"
+                                   TextColor="Blue"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="15"
+                                   FontAttributes="None"/>
+                                   </StackLayout>
+            
+           
+
+         </Grid>
+           </Frame>
+
+       <Frame IsVisible="{Binding SelectedItem.ShowMessage}" CornerRadius="0"  Margin="0" Padding="0" Grid.Row="1" HasShadow="False" BackgroundColor="{Binding SelectedItem.HasError, Converter={StaticResource BoolToColorConverter}}" >
+        <Grid Margin="0" 
+                    RowSpacing="0" ColumnSpacing="0"
+             HorizontalOptions="FillAndExpand">
+             <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+
+                    </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Margin="20,4,2,2"
+                                   Text="{Binding SelectedItem.QuantityMessage}"
+                                        LineBreakMode="TailTruncation"
+                                   HorizontalOptions="Start"
+                                   TextColor="White"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="16"
+                                   FontAttributes="Bold"/>
+            
+           
+
+         </Grid>
+           </Frame>
+
+            </Grid>
+          <Grid  Grid.Row="1" RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
+          <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+
+                    </Grid.ColumnDefinitions>
+                <StackLayout  Grid.Column="0" Margin="0,0,0,0" 
+                         IsVisible="{Binding SelectedItem.IsBusy}"
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="CenterAndExpand">
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                         Color="{StaticResource ProgressColor}"
+                         IsVisible="{Binding IsBusy}" />
+                         </StackLayout>
+               <Grid RowSpacing="0" ColumnSpacing="0" Grid.Column="0" HorizontalOptions="FillAndExpand"
+                     IsVisible="{Binding SelectedItem.IsBusy,Converter={StaticResource BoolNegationConverter}}">
+                <ScrollView  VerticalOptions="Start" 
+                    HorizontalScrollBarVisibility="Never"
+                    VerticalScrollBarVisibility="Default">
+
+             <Grid RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
+           <Grid.RowDefinitions>
+           <RowDefinition Height="Auto"></RowDefinition>
+           <RowDefinition Height="Auto"></RowDefinition>
+
+         </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0"  BindableLayout.ItemsSource="{Binding SelectedItem.ChildWidgets}" BindableLayout.ItemTemplateSelector="{StaticResource DashboardTemplateSelector}" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                />
+          <StackLayout Grid.Row="1"  BindableLayout.ItemsSource="{Binding SelectedItem.Widgets}" BindableLayout.ItemTemplateSelector="{StaticResource DashboardTemplateSelector}" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                />
+                  </Grid>
+                  </ScrollView>
+                    </Grid>
+                  <Image Grid.Column="1" 
+                                       Margin="10"  HeightRequest="100" Source="{Binding SelectedItem.FileImageSource}"></Image>
+          </Grid>
+          <Grid HeightRequest="450" Grid.Row="3" RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
+
+         <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+
+                    </Grid.ColumnDefinitions>
+              <ScrollView VerticalOptions="Start" Grid.Column="0"
+                   
+                    HorizontalScrollBarVisibility="Never"
+                    VerticalScrollBarVisibility="Default">
+          <StackLayout  BindableLayout.ItemsSource="{Binding UIItems}" Margin="10"
+                    VerticalOptions="FillAndExpand"
+                >
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                       <contentviews:SerialEntryListItemContentView ></contentviews:SerialEntryListItemContentView>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+                  </ScrollView>
+           </Grid>
+      </Grid>
+    </ContentView.Content>
+</ContentView>

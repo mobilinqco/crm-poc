@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    x:Class="ACRM.mobile.Pages.LanguageSelectionPageView"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile">
+
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="#9cdaf1"/>
+                <Setter Property="TextColor" Value="#7dbbe6" />
+            </Style>
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Bottom"
+            PositionOut="Center"
+            ScaleIn="1"
+            ScaleOut="0.7"
+            DurationIn="300"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"/>
+    </pages:PopupPage.Animation>
+    <AbsoluteLayout Margin="15"
+          HorizontalOptions="CenterAndExpand"
+          VerticalOptions="FillAndExpand">
+             <Frame Margin="15"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="Fill"
+                   BackgroundColor="{StaticResource BackgroundColor}">
+                <Grid RowSpacing="0"
+                      Margin="5"
+                      HorizontalOptions="Fill"
+                      VerticalOptions="Fill">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource LanguagePageSelectionListHeight}" />
+                        <RowDefinition Height="{StaticResource LanguagePageApplyButtonHeight}" />
+                    </Grid.RowDefinitions>
+                    <syncfusion:SfListView
+                        Grid.Row="0"
+                        ItemsSource="{Binding AvailableLanguages}"
+                        VerticalOptions="Fill"
+                        HorizontalOptions="Fill"
+                        AutoFitMode="DynamicHeight"
+                        SelectionMode="Single"
+                        SelectionBackgroundColor="{StaticResource ItemSelectedColor}"
+                        TapCommand="{Binding LanguageSelectedCommand}"
+                        BackgroundColor="{StaticResource BackgroundColor}">
+                        <syncfusion:SfListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid VerticalOptions="Fill"
+                                          Margin="0, 1, 0, 1"
+                                          HorizontalOptions="Fill">
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                            
+                                        <Label Text="{Binding Name}"
+                                               Grid.Row="0"
+                                               Grid.Column="0"
+                                               HorizontalOptions="Fill"
+                                               TextColor="White"
+                                               FontSize="16"
+                                               FontAttributes="Bold"/>
+                                        <Label Text="&#xF0E1E;"
+                                               Grid.Row="0"
+                                               Grid.Column="1"
+                                               IsVisible="{Binding IsSelected}"
+                                               TextColor="White"
+                                               FontSize="16"
+                                               HorizontalOptions="End"
+                                               HeightRequest="{StaticResource ServerListNameLabelHeight}"
+                                               FontFamily="{StaticResource MaterialDesignIcons}"/>
+                            
+                                        <BoxView HeightRequest="1"
+                                                 Grid.Row="1"
+                                                 Grid.ColumnSpan="2"
+                                                 BackgroundColor="DarkGray"
+                                                 VerticalOptions="Start"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 Margin="0"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </syncfusion:SfListView.ItemTemplate>
+                    </syncfusion:SfListView>
+
+                    <Frame Grid.Row="1"
+                       BackgroundColor="#1a75cf" 
+                       OutlineColor="Transparent"
+                       CornerRadius="3"  
+                       HeightRequest="{StaticResource LanguageSelectionPageButtonFrameHeight}"
+                       HorizontalOptions="Fill"
+                       Margin="{StaticResource LanguageButtonFrameMargins}"
+                       Padding="0">
+
+                        <Button Grid.Row="1"
+                            x:Name="ApplyButton"
+                            Text="{Binding ApplyButtonText}"
+                            TextColor="#ffffff"
+                            IsEnabled="{Binding IsApplyEnabled}"
+                            Command="{Binding OnApply}"
+                            Margin="{StaticResource LanguageApplyButtonMargins}"
+                            HeightRequest="48"
+                            BackgroundColor="Transparent"/>
+                    </Frame>
+                </Grid>
+            </Frame>
+            <ContentView AbsoluteLayout.LayoutFlags="PositionProportional"
+                         AbsoluteLayout.LayoutBounds="1, 0, -1, -1">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OnCloseButtonTapped}"/>
+                </ContentView.GestureRecognizers>
+                <Label Text="&#xF0159;"
+                       x:Name="CloseImage"
+                       HeightRequest="30"
+                       WidthRequest="30"
+                       FontFamily="{StaticResource MaterialDesignIcons}"
+                       FontSize="{StaticResource PopupCloseButtonFontSize}"
+                       TextColor="{StaticResource PopupCloseButtonColor}"/>
+            </ContentView>
+        </AbsoluteLayout>
+</pages:PopupPage>

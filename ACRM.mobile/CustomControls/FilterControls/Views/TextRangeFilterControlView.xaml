@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    x:Class="ACRM.mobile.CustomControls.FilterControls.Views.TextRangeFilterControlView">
+    <ContentView.Content>
+         <Grid Margin="20" ColumnSpacing="10">
+             <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" />
+                      <ColumnDefinition Width="*" />
+                     </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                     </Grid.RowDefinitions>
+             <Label Grid.Row="0" Grid.Column="0" Margin="5"
+               FontSize="18"
+               FontAttributes="{Binding LabelFontAttributes}"
+               HorizontalOptions="Fill"
+               TextColor="Gray"
+               BackgroundColor="Transparent"
+               LineBreakMode="TailTruncation"
+               HeightRequest="30"
+               VerticalTextAlignment="Center"
+               Text="{Binding FromText}"></Label>
+
+             <customControls:ExtendedEntry Grid.Row="0" Grid.Column="1"
+                 FontSize="{StaticResource EditTextFontSize}"
+                                      TextColor="{StaticResource EditTextdefaultColor}"
+                                      BorderWidth="0"
+                                      BorderColor="Transparent"
+                                      BackgroundColor="Transparent"
+                                      Keyboard="{Binding KeyboardType}"
+                 Text="{Binding FromDataString, Mode=TwoWay}"
+                 ></customControls:ExtendedEntry>
+           
+            <BoxView Grid.Row="1" Grid.Column="1" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+             <Label Grid.Row="2" Grid.Column="0" Margin="5"
+               FontSize="18"
+               FontAttributes="{Binding LabelFontAttributes}"
+               HorizontalOptions="Fill"
+               TextColor="Gray"
+               BackgroundColor="Transparent"
+               LineBreakMode="TailTruncation"
+               HeightRequest="30"
+               VerticalTextAlignment="Center"
+               Text="{Binding ToText}"></Label>
+
+             <customControls:ExtendedEntry Grid.Row="2" Grid.Column="1"
+                 
+                FontSize="{StaticResource EditTextFontSize}"
+     
+                                      TextColor="{StaticResource EditTextdefaultColor}"
+                                      BorderWidth="0"
+                                      BorderColor="Transparent"
+                                      BackgroundColor="Transparent"
+                                      Keyboard="{Binding KeyboardType}"
+                 Text="{Binding ToDataString, Mode=TwoWay}"
+                 ></customControls:ExtendedEntry>
+           
+    
+           
+            <BoxView Grid.Row="3" Grid.Column="1" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+      
+        </Grid>
+    </ContentView.Content>
+</ContentView>

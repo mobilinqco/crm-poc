@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Name="ConflictListPage"
+    x:Class="ACRM.mobile.Pages.ConflictListPageView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile"
+    xmlns:local="clr-namespace:ACRM.mobile.ViewModels"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" 
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    Padding="{StaticResource PagePadding}"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    NavigationPage.HasNavigationBar="false">
+
+    <ContentPage.BindingContext>
+        <local:ConflictListPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="ConflictListPageViewListPadding" x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="20"></On>
+                <On Platform="Android" Value="20"></On>
+                <On Platform="WinPhone, UWP" Value="20"></On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="ConflictListPageViewLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+            </OnPlatform>
+            
+            <OnPlatform x:Key="ConflictListPageViewIconLabelHeight" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="18"></On>
+                <On Platform="Android" Value="20"></On>
+                <On Platform="WinPhone, UWP" Value="20"></On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="ConflictsButtonFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <Grid HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <views:CustomNavigationBar Grid.Row="0"
+                                       BindingContext="this"
+                                       HeightRequest="45" />
+
+            <Grid Grid.Row="1"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  Margin="0"
+                  RowSpacing="0"
+                  BackgroundColor="White">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <syncfusion:SfListView Grid.Row="1"
+                                       HorizontalOptions="Fill"
+                                       VerticalOptions="FillAndExpand"
+                                       Padding="{StaticResource ConflictListPageViewListPadding}"
+                                       BackgroundColor="White"
+                                       AutoFitMode="DynamicHeight"
+                                       ItemsSource="{Binding OfflineRequestsWithConflicts}"
+                                       SelectionBackgroundColor="{StaticResource ItemSelectedColor}"
+                                       SelectionGesture="Tap"
+                                       SelectionMode="Single"
+                                       TapCommand="{Binding ItemTappedCommand}"
+                                       ItemSpacing="2"
+                                       Orientation="Vertical">
+
+                    <syncfusion:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid VerticalOptions="FillAndExpand"
+                                  HorizontalOptions="FillAndExpand"
+                                  Padding="4, 8, 4, 8"
+                                  BackgroundColor="LightGray">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="StartAndExpand"
+                                       FontSize="{StaticResource ConflictListPageViewLabelFontSize}"
+                                       Text="{Binding ErrorMessage}"
+                                       TextColor="Black"/>
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="1"
+                                       HeightRequest="{StaticResource ConflictListPageViewIconLabelHeight}"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="End"
+                                       FontSize="20"
+                                       FontFamily="{StaticResource MaterialDesignIcons}"
+                                       TextColor="Black"
+                                       Text="&#xF01d9;"/>
+
+                                <buttons:SfButton Grid.Row="0"
+                                                  Grid.Column="2"
+                                                  VerticalOptions="CenterAndExpand"
+                                                  HorizontalOptions="End"
+                                                  Margin="0"
+                                                  Padding="0"
+                                                  Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference ConflictListPage}}"
+                                                  CommandParameter="{Binding .}"
+                                                  BackgroundColor="Transparent"
+                                                  FontSize="20"
+                                                  FontFamily="{StaticResource MaterialDesignIcons}"
+                                                  TextColor="Black"
+                                                  Text="&#xF0a79;"/>
+                            </Grid>
+                        </DataTemplate>
+                    </syncfusion:SfListView.ItemTemplate>
+
+                </syncfusion:SfListView>
+
+                <buttons:SfButton Grid.Row="0"
+                                  VerticalOptions="Start"
+                                  HorizontalOptions="End"
+                                  Padding="0"
+                                  BackgroundColor="Transparent"
+                                  Command="{Binding SendConflictsFileCommand}"
+                                  FontSize="{StaticResource ConflictsButtonFontSize}"
+                                  Text="{Binding SendConflictsFileText}"
+                                  TextColor="Black"/>
+
+            </Grid>
+
+            <StackLayout Grid.Row="1"
+                         VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="CenterAndExpand"
+                         IsVisible="{Binding IsLoading}">
+                <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                   IsVisible="{Binding IsLoading}"
+                                   Color="{StaticResource ProgressColor}"/>
+            </StackLayout>
+
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

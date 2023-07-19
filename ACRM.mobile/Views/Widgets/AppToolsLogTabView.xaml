@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
+    xmlns:widgets="clr-namespace:ACRM.mobile.Views.Widgets"
+    x:Class="ACRM.mobile.Views.Widgets.AppToolsLogTabView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="AppLogsTabLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="AppLogsTabButtonFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="14" Desktop="18"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="14" Desktop="18"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="14" Desktop="18"></OnIdiom>
+                </On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     Padding="{StaticResource AppPopupContentPadding}"
+                     BackgroundColor="White"
+                     Orientation="Vertical"
+                     Spacing="2">
+
+            <widgets:LogView BindingContext="{Binding LogViewModel}"/>
+
+            <Label VerticalOptions="FillAndExpand"
+                   HorizontalOptions="Start"
+                   FontSize="{StaticResource AppLogsTabLabelFontSize}"
+                   Text="{Binding OfflineStorageText}"
+                   TextColor="Black"/>
+
+            <StackLayout VerticalOptions="FillAndExpand"
+                         HorizontalOptions="StartAndExpand"
+                         Orientation="Horizontal"
+                         Spacing="5">
+
+                <buttons:SfButton VerticalOptions="FillAndExpand"
+                                  HorizontalOptions="End"
+                                  Padding="0"
+                                  BackgroundColor="{StaticResource BackgroundColor}"
+                                  Command="{Binding ShowCrmDBCommand}"
+                                  FontSize="{StaticResource AppLogsTabButtonFontSize}"
+                                  Text="Crm DB"
+                                  TextColor="White"/>
+
+                <buttons:SfButton VerticalOptions="FillAndExpand"
+                                  HorizontalOptions="End"
+                                  Padding="0"
+                                  BackgroundColor="{StaticResource BackgroundColor}"
+                                  Command="{Binding ShowConfigDBCommand}"
+                                  FontSize="{StaticResource AppLogsTabButtonFontSize}"
+                                  Text="Config DB"
+                                  TextColor="White"/>
+
+                <buttons:SfButton VerticalOptions="FillAndExpand"
+                                  HorizontalOptions="End"
+                                  Padding="0"
+                                  BackgroundColor="{StaticResource BackgroundColor}"
+                                  Command="{Binding ShowOfflineDBCommand}"
+                                  FontSize="{StaticResource AppLogsTabButtonFontSize}"
+                                  Text="Offline DB"
+                                  TextColor="White"/>
+
+            </StackLayout>
+
+        </StackLayout>
+
+    </ContentView.Content>
+</ContentView>

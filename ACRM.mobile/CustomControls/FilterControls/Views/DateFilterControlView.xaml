@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    x:Class="ACRM.mobile.CustomControls.FilterControls.Views.DateFilterControlView">
+    <ContentView.Content>
+         <Grid Margin="20">
+             <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" />
+                      <ColumnDefinition Width="*" />
+                     </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                     </Grid.RowDefinitions>
+             <Label Grid.Row="0" Grid.Column="0" Margin="5"
+               FontSize="18"
+               FontAttributes="{Binding LabelFontAttributes}"
+               HorizontalOptions="Fill"
+               TextColor="Gray"
+               BackgroundColor="Transparent"
+               LineBreakMode="TailTruncation"
+               HeightRequest="30"
+               VerticalTextAlignment="Center"
+               Text="{Binding Filter.FieldInfo.Name}"></Label>
+             <StackLayout
+            Grid.Row="0" Grid.Column="1"
+            BackgroundColor="Transparent"
+            Orientation="Vertical"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"
+            HeightRequest="40"
+            >
+             <customControls:ExtendedEntry 
+                 FontSize="{StaticResource EditTextFontSize}"
+                 TextColor="{StaticResource EditTextdefaultColor}"
+                 IsReadOnly="True"
+                 InputTransparent="True"
+                 VerticalOptions="FillAndExpand"
+                 BorderWidth="0"
+                 BorderColor="Transparent"
+                 Text="{Binding DateTimeString, Mode=TwoWay}"
+                 ></customControls:ExtendedEntry>
+            <customControls:CustomDateTimePicker
+                  SelectedDataTimeString="{Binding DateTimeString, Mode=TwoWay}"
+                  SelectedDataTime="{Binding SelectedDataTime}"
+                  HasDate="{Binding HasDate}"
+                  HasTime="{Binding HasTime}"
+                  PickerMode="Dialog"
+                  HeaderText="{Binding FieldLabel}"
+                  IsOpen="{Binding OpenDatePicker, Mode=TwoWay}"/>
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer
+                Command="{Binding DateSelectorEntryCommand}"
+                />
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+           
+            <BoxView Grid.Row="1" Grid.Column="1" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+      
+        </Grid>
+    </ContentView.Content>
+</ContentView>

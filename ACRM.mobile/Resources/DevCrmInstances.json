@@ -1,0 +1,233 @@
+[
+  //-------------------------------------------------------------------------------------
+  // Aurea-hosted servers from http://10.187.182.12/dashboard/
+  //-------------------------------------------------------------------------------------
+  {
+    "Identification": "Aurea-LS-AureaCRM",
+    "Name": "Aurea - LSI Demo Server",
+    "Url": "http://10.187.182.12/demo.lsi/",
+    "Username": "alex",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Aurea-B2B-AureaCRM",
+    "Name": "Aurea - B2B Demo Server",
+    "Url": "http://10.187.182.12/demo.isi/",
+    "Username": "kiran",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Aurea-BB-SR",
+    "Name": "Aurea - BB Base Web Server",
+    "Url": "http://10.187.182.12/bb/",
+    "Username": "su",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Aurea-BB-STD",
+    "Name": "Aurea - BB Standard Web Server",
+    "Url": "http://10.187.182.12/bb.std/",
+    "Username": "su",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Aurea-ISI-SR",
+    "Name": "Aurea - ISI Base Web Server",
+    "Url": "http://10.187.182.12/isi/",
+    "Username": "su",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Aurea-OTC-PadServer",
+    "Name": "Aurea - OTC CRM.pad Test Server",
+    "Url": "http://10.187.182.12/pad.otc/",
+    "Username": "KIFPAD",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Aurea-LSI-PadServer",
+    "Name": "Aurea - LSI CRM.pad Test Server",
+    "Url": "http://10.187.182.12/pad.lsi/",
+    "Username": "admin_cg",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Aurea-CC-Env",
+    "Name": "Aurea - CC CRM.pad Test Server",
+    "Url": "http://10.187.182.12/cc/",
+    "Username": "su",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Aurea-Talis-Env",
+    "Name": "Aurea - Talis CRM.pad Test Server",
+    "Url": "http://10.187.182.12/talis/",
+    "Username": "su",
+    "AuthenticationType": "username"
+  },
+  //-------------------------------------------------------------------------------------
+  {
+    "Identification": "OzPublic942BB",
+    "Name": "Oz Public 942 BB",
+    "Url": "http://888fm.duckdns.org/9.4.20_BB_WEB/",
+    "Username": "su",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "OzPublic9310OTC",
+    "Name": "Oz Public 9.3.10 OTC",
+    "Url": "http://888fm.duckdns.org/9.3.10.522_OTC_WEB/",
+    "Username": "su",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Aurea_Demo",
+    "Name": "Aurea_Demo",
+    "Url": "https://crm-demo.aurea.com/crmclient_aurea_crm/",
+    "Username": "simon",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "ACRM_SaaS_Pipelife",
+    "Name": "ACRM_SaaS_Pipelife",
+    "Url": "https://sky.update.com/login",
+    "Username": "TEST\\testfi2@pipelife.com",
+    "AuthenticationType": "revolution"
+  },
+  {
+    "Identification": "ACRM_SaaS_Talis",
+    "Name": "ACRM_SaaS_Talis",
+    "Url": "https://sky.update.com/login",
+    "Username": "TEST\\alinoz@fun-monkeys.com",
+    "AuthenticationType": "revolution"
+  },
+  {
+    "Identification": "SG_Dev",
+    "Name": "SG Dev",
+    "Url": "https://crm-stage.saint-gobain-services.de/updatePAD_dev/",
+    "Username": "rigips",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "C_C_TEST",
+    "Name": "CC Test",
+    "Url": "https://crmtest.chefsculinar.de/",
+    "Username": "Dusch",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "LS-AureaCRM",
+    "Name": "LSI Aurea CRM",
+    "Url": "http://66.94.99.130/demo.lsi/",
+    "Username": "adam",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "B2B-AureaCRM",
+    "Name": "B2B Aurea CRM",
+    "Url": "http://66.94.99.130/demo.isi/",
+    "Username": "viktor",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "BB-SR",
+    "Name": "BB Base",
+    "Url": "http://66.94.99.130/bb/",
+    "Username": "kiran",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "ISI-SR",
+    "Name": "ISI Base",
+    "Url": "http://66.94.99.130/isi/",
+    "Username": "su",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "OTC-PadServer",
+    "Name": "OTC Pad",
+    "Url": "http://66.94.99.130/pad.otc/",
+    "Username": "KIFPAD",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "LSI-PadServer",
+    "Name": "LSI Pad",
+    "Url": "http://66.94.99.130/pad.lsi/",
+    "Username": "admin_cg",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "CC-Env",
+    "Name": "CC Kiran",
+    "Url": "http://66.94.99.130/cc/",
+    "Username": "hornung",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "CC-Env-New",
+    "Name": "CC Kiran New",
+    "Url": "http://66.94.99.130/cc.new/",
+    "Username": "hornung",
+    "Password": "Update1",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Talis-Env",
+    "Name": "Talis Kiran",
+    "Url": "http://66.94.99.130/talis/",
+    "Username": "su",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "BB-STD-UserName-Cred",
+    "Name": "UserName-Cred",
+    "Url": "http://66.94.99.130/bb.std/",
+    "Username": "Test",
+    "networkUsername": "acrm1",
+    "networkPassword": "Aurea@12345",
+    "AuthenticationType": "usernamecredentials"
+  },
+  {
+    "Identification": "BB-STD-SSO",
+    "Name": "BB-STD-SSO",
+    "Url": "http://66.94.99.130/bb.std/",
+    "Username": "acrm",
+    "AuthenticationType": "ssocredentials"
+  },
+  {
+    "Identification": "CC-NewEnv",
+    "Name": "CC New PS",
+    "Url": "http://10.248.136.68/crm.web/",
+    "Username": "su",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Kuhn-DevEnv",
+    "Name": "Kuhn Dev",
+    "Url": "https://clink-dev.kuhngroup.net/updatecrm_web/",
+    "Username": "KDEADMIN",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Kuhn-TestEnv",
+    "Name": "Kuhn Test",
+    "Url": "https://clink-test.kuhngroup.net/updatecrm_web/",
+    "Username": "KDEADMIN",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Talis-CloudTest",
+    "Name": "Talis-CloudTest",
+    "Url": "https://sky.update.com/TEST_ISI_1000_5839/",
+    "Username": "alinoz@fun-monkeys.com",
+    "AuthenticationType": "username"
+  },
+  {
+    "Identification": "Hochland_TEST_Simple_NEU",
+    "Name": "Hochland_TEST_Simple_NEU",
+    "Url": "https://hl-crm-at.hochland.com/crm/",
+    "Username": "lesch",
+    "AuthenticationType": "username"
+  }
+]

@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" 
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    x:Class="ACRM.mobile.CustomControls.FilterControls.Views.CatalogFilterControlView">
+    <ContentView.Resources>
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!--  Search box  -->
+            <Frame
+                Grid.Row="0"
+                Padding="{StaticResource SearchTextBoxFramePaddings}"
+                BackgroundColor="{StaticResource SearchPageBackground}"
+                CornerRadius="5"
+                HasShadow="false"
+                HorizontalOptions="FillAndExpand"
+                OutlineColor="{StaticResource SearchBarIconColor}"
+                VerticalOptions="Center">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--  Search icon  -->
+                    <Label
+                        Grid.Column="0"
+                        Margin="{StaticResource SearchBarIconMargins}"
+                        BackgroundColor="Transparent"
+                        FontFamily="{StaticResource MaterialDesignIcons}"
+                        FontSize="{StaticResource SearchBarIconSize}"
+                        HorizontalOptions="Start"
+                        Text="&#xF0349;"
+                        TextColor="{StaticResource SearchBarIconColor}"
+                        VerticalOptions="Center" />
+
+                    <customControls:ExtendedEntry
+                        x:Name="SearchTextBox"
+                        Grid.Column="1"
+                        Margin="{StaticResource SearchTextBoxMargins}"
+                        BorderWidth="0"
+                        FontSize="{StaticResource ExtendedEntryTextFontSize}"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="Start"
+                        Text="{Binding StringValue, Mode=TwoWay}"
+                        TextColor="{StaticResource EntryTextColor}"
+                        VerticalOptions="Center">
+                        <customControls:ExtendedEntry.Behaviors>
+                            <xct:EventToCommandBehavior Command="{Binding SearchCommand}" EventName="TextChanged" />
+                        </customControls:ExtendedEntry.Behaviors>
+                    </customControls:ExtendedEntry>
+                </Grid>
+            </Frame>
+            <StackLayout Grid.Row="1"
+                HorizontalOptions="CenterAndExpand"
+                IsVisible="{Binding IsLoading}"
+                VerticalOptions="CenterAndExpand">
+                <ActivityIndicator
+                    IsRunning="{Binding IsLoading}"
+                    IsVisible="{Binding IsLoading}"
+                    Color="{StaticResource ProgressColor}" />
+            </StackLayout>
+
+            <syncfusion:SfListView x:Name="SearchResultsList"
+                                    Grid.Row="1"
+                                    IsVisible="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"
+                                    SelectionMode="Single"
+                                    SelectionGesture="Tap"
+                                    AutoFitMode="DynamicHeight"
+                                    ItemsSource="{Binding FilteredCatalogItems}" 
+                                    TapCommand="{Binding SelectedCommand}"
+                                    SelectionBackgroundColor="{StaticResource ItemSelectedColor}"
+                                    BackgroundColor="{StaticResource SearchPageBackground}">
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5" VerticalOptions="CenterAndExpand">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Column="1"  VerticalOptions="Center">
+                                <Label Text="{Binding CatalogItem.DisplayValue}"  />
+                            </StackLayout>
+                            <CheckBox IsChecked="{Binding Selected}" VerticalOptions="Center" Grid.Column="0" />
+                            <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+                        </Grid>
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+            </syncfusion:SfListView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:EditControls="clr-namespace:ACRM.mobile.CustomControls.EditControls;assembly=ACRM.mobile"
+    xmlns:EditControlsView="clr-namespace:ACRM.mobile.CustomControls.EditControls.Views;assembly=ACRM.mobile"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    x:Class="ACRM.mobile.CustomControls.EditControls.Views.EditPanelControlView">
+     <ContentView.Content>
+        <Grid x:Name="panelGrid" HorizontalOptions="Fill" RowSpacing="0" VerticalOptions="Fill" Margin="0, 0, 0, 0">
+            <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid HorizontalOptions="Fill" Grid.Row="0" 
+                      VerticalOptions="FillAndExpand" Margin="0" Padding="0" BackgroundColor="LightGray">
+                    <Label Margin="20, 5, 20, 5" FontSize="16" Text="{Binding Title}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Fill"
+                           TextColor="Black"
+                           BackgroundColor="Transparent"
+                           LineBreakMode="TailTruncation"></Label>
+                </Grid>
+             <Grid Grid.Row="1" Margin="20">
+                <StackLayout BindableLayout.ItemsSource="{Binding Widgets}" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                >
+                <BindableLayout.ItemTemplateSelector>
+                <EditControls:EditControlDeviceViewSelector >
+                      <EditControls:EditControlDeviceViewSelector.HiddenTemplate>
+                          <DataTemplate>
+                              <Grid IsVisible="False"></Grid>
+                          </DataTemplate>
+                      </EditControls:EditControlDeviceViewSelector.HiddenTemplate>
+                <EditControls:EditControlDeviceViewSelector.PhoneTemplate>
+                    <DataTemplate>
+                          <Grid HorizontalOptions="FillAndExpand" Margin="0, 0, 0, 0" >
+                       <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                     </Grid.RowDefinitions>
+                        <EditControlsView:InputLabelView Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="FillAndExpand" MinimumHeightRequest="40"/>
+                         <customControls:TemplatedContentControl Grid.Row="1" Grid.Column="0" Item="{Binding .}" ItemTemplate="{StaticResource EditTemplateSelector}"
+                                                                 MinimumHeightRequest="40"
+                                                                 HorizontalOptions="FillAndExpand"
+                                                                 VerticalOptions="FillAndExpand"
+                       />
+                          <BoxView Grid.Row="2" Grid.Column="0" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+            
+                     </Grid>
+                    
+                    </DataTemplate>
+                 </EditControls:EditControlDeviceViewSelector.PhoneTemplate>
+                    <EditControls:EditControlDeviceViewSelector.DefaultTemplate>
+                    <DataTemplate>
+                     <Grid HorizontalOptions="FillAndExpand" Margin="0, 0, 0, 0" >
+                      <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="3*" />
+                      <ColumnDefinition Width="7*" />
+                     </Grid.ColumnDefinitions>
+                       <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                     </Grid.RowDefinitions>
+                        <EditControlsView:InputLabelView Grid.Row="0" Grid.Column="0" HorizontalOptions="End" VerticalOptions="FillAndExpand" MinimumHeightRequest="40"/>
+                         <customControls:TemplatedContentControl Grid.Row="0" Grid.Column="1" Item="{Binding .}" ItemTemplate="{StaticResource EditTemplateSelector}"
+                                                                 MinimumHeightRequest="40"
+                                                                 HorizontalOptions="FillAndExpand"
+                                                                 VerticalOptions="FillAndExpand"
+                       />
+                          <BoxView Grid.Row="1" Grid.Column="1" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+            
+                     </Grid>
+                    </DataTemplate>
+                 </EditControls:EditControlDeviceViewSelector.DefaultTemplate>
+             </EditControls:EditControlDeviceViewSelector>
+                </BindableLayout.ItemTemplateSelector>
+                </StackLayout>
+                </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

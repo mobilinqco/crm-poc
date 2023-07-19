@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.ContentViews.SerialEntryListingHeader"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms">
+      <ContentView.Resources>
+          <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
+         <Grid Margin="0" Padding="0" IsVisible="{Binding IsAllItemsMode}" 
+                    RowSpacing="0" ColumnSpacing="0"
+                    Grid.Row="0" 
+             HorizontalOptions="FillAndExpand">
+             <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                 <Button Grid.Column="0" Margin="12,0,0,0" IsVisible="{Binding HasDestiRecords, Converter={StaticResource BoolNegationConverter}}"
+                         BackgroundColor="White"
+                         HorizontalOptions="Start"
+                        Command="{Binding OnCancleButtonTappedCommand}"
+                        Text="Cancel"
+                        TextColor="{StaticResource BackgroundColor}"></Button>
+
+                  <Button  Margin="0"
+                            Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            Command="{Binding RequestModeButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            HorizontalOptions="Fill"
+                            Text="{Binding RequestModeButtonIconText}"
+                            TextColor="{StaticResource BackgroundColor}"
+                            VerticalOptions="Center"
+                            WidthRequest="50" />
+                <Button Margin="0"
+                            IsVisible="false"
+                            Grid.Column="2"
+                            BackgroundColor="Transparent"
+                            Command="{Binding RequestModeButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource NavigationBarButtonTextFontSize}"
+                            HorizontalOptions="Fill"
+                            Text="&#xf0072;"
+                            TextColor="{StaticResource BackgroundColor}"
+                            VerticalOptions="Center"
+                            WidthRequest="50" />
+
+            <Button Grid.Column="4" Margin="0,0,12,0"
+                         BackgroundColor="White"
+                        Command="{Binding OverviewCommand}"
+                        Text="Overview"
+                        TextColor="{StaticResource BackgroundColor}"></Button>
+               </Grid>
+       <Frame CornerRadius="0" IsVisible="{Binding IsAllItemsMode, Converter={StaticResource BoolNegationConverter}}" Margin="0" Padding="0" Grid.Row="0" BackgroundColor="{StaticResource BackgroundColor}" HeightRequest="50">
+        <Grid Margin="0" 
+                    RowSpacing="0" ColumnSpacing="0"
+             HorizontalOptions="FillAndExpand">
+             <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                 <Button Grid.Column="0" Margin="12,0,0,0"
+                         BackgroundColor="Transparent"
+                         HorizontalOptions="Start"
+                        Command="{Binding OnCancleButtonTappedCommand}"
+                        Text="Close"
+                        TextColor="White"></Button>
+            <Label
+                            Grid.Column="1"
+                           
+                            BackgroundColor="Transparent"
+                            FontSize="25"
+                            HorizontalOptions="Center"
+                            Text="OVERVIEW"
+                            TextColor="White"
+                            VerticalOptions="Center" />
+
+            <Button Grid.Column="2" Margin="0,0,12,0"
+                         BackgroundColor="Transparent"
+                        Command="{Binding AllItemsCommand}"
+                        Text="All Items"
+                        TextColor="White"></Button>
+
+         </Grid>
+           </Frame>
+            </Grid>
+    </ContentView.Content>
+</ContentView>

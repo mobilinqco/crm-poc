@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.Widgets.UnsupportedTypeView">
+    <ContentView.Content>
+        <StackLayout
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            Margin="30,60,30,30">
+
+            <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0"
+                       Text="&#xF015C;"
+                       BackgroundColor="Transparent"
+                       HorizontalOptions="Center"
+                       FontSize="{StaticResource UserActionErrorIconFontSize}"
+                       FontFamily="{StaticResource MaterialDesignIcons}"
+                       TextColor="{StaticResource ErrorIconTextColor}"/>
+
+                <Label Grid.Row="1"
+                       Text="{Binding ErrorMessageText}"
+                       FontSize="{StaticResource UserActionErrorFontSize}"
+                       TextColor="{StaticResource UserActionErrorTextColor}"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="Center"/>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

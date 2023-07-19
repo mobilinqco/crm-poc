@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.Widgets.DocumentsPanelView"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:widgetmodel="clr-namespace:ACRM.mobile.UIModels;assembly=ACRM.mobile"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms">
+
+    <ContentView.Resources>
+        <customControls:FileDownloadIconConverter x:Key="FileDownloadIconConverter"/>
+        <customControls:FileTypeIconConverter x:Key="FileTypeIconConverter"/>
+         <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+    </ContentView.Resources>
+  <ContentView.Content>
+        <Grid Margin="0,20,0,0" IsVisible="{Binding HasResults}">
+            <StackLayout Margin="0,0,0,0" Spacing="0"  Orientation="Vertical" IsVisible="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}">
+                <Grid Margin="0,0,0,0" ColumnSpacing="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="Auto" ></ColumnDefinition>
+                        <ColumnDefinition Width="Auto" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" FontSize="16"  TextColor="Black" LineBreakMode="TailTruncation" Margin="10,10,0,10" HorizontalOptions="StartAndExpand" Text="{Binding Title}"></Label>
+              
+                </Grid>
+                <BoxView HeightRequest="2" HorizontalOptions="FillAndExpand" BackgroundColor="Black"></BoxView>
+            <ScrollView>
+            <FlexLayout BindableLayout.ItemsSource="{Binding Documents}"  
+                        Wrap="Wrap" 
+                        JustifyContent="Start" >
+             <BindableLayout.ItemTemplate>
+    
+                    <DataTemplate>
+                     <StackLayout Spacing="0" HorizontalOptions="EndAndExpand">
+                        <Frame Style="{StaticResource FrameDocItemViewStyle}">
+                            <Grid VerticalOptions="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                               <Label Grid.Column="0"  VerticalOptions="CenterAndExpand" 
+                                           FontSize="{StaticResource DocIconSize}"
+                                           TextColor="{StaticResource DocButtonTextColor}"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"
+                                      Text="{Binding FileName, Converter={StaticResource FileTypeIconConverter}}"
+                               BackgroundColor="Transparent"
+                               FontFamily="{StaticResource MaterialDesignIcons}" >
+                               </Label>
+                                <Grid VerticalOptions="Center" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Text="{Binding FileName}" FontAttributes="Bold" TextColor="Black"></Label>
+                                    <Label Grid.Row="1" Text="{Binding SubHeader}" TextColor="Gray"></Label>
+                                </Grid>
+                                <Button Grid.Column="2"
+                                        Text="{Binding Status, Converter={StaticResource FileDownloadIconConverter}}"
+                               BackgroundColor="Transparent"
+                                        FontSize="{StaticResource DocIconSize}"
+                                           TextColor="{StaticResource DocButtonTextColor}"
+                                         HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                               CommandParameter="{Binding .}"
+                               Command="{Binding Source={RelativeSource AncestorType={x:Type widgetmodel:DocumentsPanelModel}}, Path= DocumentDownloadCommand}"
+                               FontFamily="{StaticResource MaterialDesignIcons}" ></Button>
+                            </Grid>
+                            
+                        </Frame>
+                    </StackLayout>
+                    </DataTemplate>
+              
+            </BindableLayout.ItemTemplate>
+             </FlexLayout>
+
+            </ScrollView>
+               
+            </StackLayout>
+             <StackLayout Margin="50"
+                         IsVisible="{Binding IsLoading}"
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="CenterAndExpand">
+            <ActivityIndicator VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsLoading}"
+                         Color="{StaticResource ProgressColor}"
+                         IsVisible="{Binding IsLoading}" />
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:widgets="clr-namespace:ACRM.mobile.Views.Widgets" 
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    x:Class="ACRM.mobile.Pages.LogListPageView"
+    CloseWhenBackgroundIsClicked="False">
+
+    <ContentPage.Resources>
+        <OnPlatform x:Key="LogListPageViewCloseButtonFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+            </On>
+            <On Platform="Android">
+                <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+            </On>
+            <On Platform="WinPhone, UWP">
+                <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+            </On>
+        </OnPlatform>
+    </ContentPage.Resources>
+
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            DurationIn="300"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            PositionIn="Bottom"
+            PositionOut="Center"
+            ScaleIn="1"
+            ScaleOut="0.7" />
+    </pages:PopupPage.Animation>
+
+    <Grid Style="{StaticResource AppPopupGridViewStyle}"
+          BackgroundColor="{StaticResource BarBackgroundColor}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top Navigation Bar -->
+
+        <StackLayout Grid.Column="0"
+                     Grid.Row="0"
+                     VerticalOptions="FillAndExpand"
+                     HorizontalOptions="StartAndExpand"
+                     Orientation="Horizontal"
+                     Spacing="5">
+
+            <buttons:SfButton VerticalOptions="FillAndExpand"
+                              HorizontalOptions="Start"
+                              Margin="0"
+                              Padding="0"
+                              BackgroundColor="Transparent"
+                              Command="{Binding CloseCommand}"
+                              FontSize="{StaticResource LogListPageViewCloseButtonFontSize}"
+                              Text="{Binding CloseText}"
+                              TextColor="White"/>
+
+        </StackLayout>
+
+        <!-- Content -->
+
+        <StackLayout Grid.Column="0"
+                     Grid.Row="1"
+                     VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     Padding="{StaticResource AppPopupContentPadding}"
+                     BackgroundColor="White"
+                     Orientation="Vertical"
+                     Spacing="0">
+
+            <widgets:LogView BindingContext="{Binding LogViewModel}"/>
+
+        </StackLayout>
+
+    </Grid>
+
+</pages:PopupPage>

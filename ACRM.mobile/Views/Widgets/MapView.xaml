@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="ACRM.mobile.Views.Widgets.MapView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:googlemaps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps">
+    <ContentView.Content>
+        <Grid Margin="0,20,0,0">
+            <StackLayout
+                Margin="0,0,0,0"
+                HeightRequest="224"
+                Orientation="Vertical"
+                Spacing="0">
+                <Grid Margin="0,0,0,0" ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Margin="10,10,0,10"
+                        FontSize="16"
+                        HorizontalOptions="StartAndExpand"
+                        LineBreakMode="TailTruncation"
+                        Text="{Binding Label}"
+                        TextColor="Black" />
+                    <Button
+                        x:Name="btnMaximize"
+                        Grid.Column="1"
+                        Margin="0,0,0,0"
+                        BackgroundColor="Transparent"
+                        FontFamily="{StaticResource MaterialDesignIcons}"
+                        IsVisible="{Binding IsMaximizable}"
+                        FontSize="30"
+                        Text="&#xf05af;"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="50" />
+                    <Button
+                        x:Name="btnOpenNativeMaps"
+                        Grid.Column="2"
+                        Margin="0,0,0,0"
+                        BackgroundColor="Transparent"
+                        FontFamily="{StaticResource MaterialDesignIcons}"
+                        IsVisible="{Binding CanOpenInNativeMaps}"
+                        FontSize="30"
+                        Text="&#xF034D;"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="50" />
+                    <Button
+                        x:Name="btnFocus"
+                        Grid.Column="3"
+                        Margin="0,0,0,0"
+                        BackgroundColor="Transparent"
+                        FontFamily="{StaticResource MaterialDesignIcons}"
+                        FontSize="30"
+                        Text="&#xf034f;"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="50" />
+                </Grid>
+                <BoxView
+                    BackgroundColor="Black"
+                    HeightRequest="2"
+                    HorizontalOptions="FillAndExpand" />
+                <googlemaps:Map
+                    x:Name="mapControl"
+                    ItemsSource="{Binding Locations}"
+                    MapType="Street"
+                    SelectedPin="{Binding SelectedPin, Mode=OneWay}" />
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

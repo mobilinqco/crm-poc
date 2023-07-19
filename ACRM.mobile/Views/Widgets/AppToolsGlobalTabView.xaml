@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.Widgets.AppToolsGlobalTabView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="GlobalTabLabelIconFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="26"></On>
+                <On Platform="Android, WinPhone, UWP" Value="24"></On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="GlobalTabLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+
+        <StackLayout
+            Padding="{StaticResource AppPopupContentPadding}"
+            BackgroundColor="White"
+            Orientation="Vertical"
+            Spacing="15">
+
+            <Grid
+                BackgroundColor="Transparent"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Start"
+                RowSpacing="15">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout
+                    Grid.Row="0"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Orientation="Horizontal"
+                    Padding="15,5,15,5"
+                    BackgroundColor="{StaticResource BackgroundColor}"
+                    Spacing="5">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SettingsCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                    <Label
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        VerticalOptions="FillAndExpand"
+                        FontFamily="{StaticResource MaterialDesignIcons}"
+                        FontSize="{StaticResource GlobalTabLabelIconFontSize}"
+                        Text="{Binding SettingsIconText}"
+                        TextColor="White"/> 
+                    <Label
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        VerticalOptions="FillAndExpand"
+                        FontSize="{StaticResource GlobalTabLabelFontSize}"
+                        Text="{Binding SettingsText}"
+                        TextColor="White"/>                         
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Orientation="Vertical"
+                    Padding="15,5,15,5"
+                    BackgroundColor="{StaticResource BackgroundColor}"
+                    Spacing="5">
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding InboxCommand}"/>
+                    </StackLayout.GestureRecognizers>
+
+                    <StackLayout
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Start"
+                        Orientation="Horizontal"
+                        Spacing="5">
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center"
+                            VerticalOptions="FillAndExpand"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="{StaticResource GlobalTabLabelIconFontSize}"
+                            Text="{Binding InboxIconText}"
+                            TextColor="White"/> 
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center"
+                            VerticalOptions="FillAndExpand"
+                            FontSize="{StaticResource GlobalTabLabelFontSize}"
+                            Text="{Binding InboxText}"
+                            TextColor="White"/>                         
+                    </StackLayout>
+
+                    <Label
+                        HorizontalTextAlignment="Start"
+                        VerticalTextAlignment="Start"
+                        VerticalOptions="End"
+                        FontSize="{StaticResource GlobalTabLabelFontSize}"
+                        Text="{Binding InboxAdditionalTitleText}"
+                        TextColor="White"/> 
+
+                </StackLayout>
+
+            </Grid>
+
+        </StackLayout>
+
+    </ContentView.Content>
+</ContentView>

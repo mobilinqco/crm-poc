@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+    x:Class="ACRM.mobile.CustomControls.EditControls.Views.TextControlView">
+    <ContentView.Content>
+        <customControls:ExtendedEntry FontSize="{StaticResource EditTextFontSize}" 
+                                      TextColor="{StaticResource EditTextdefaultColor}"
+                                      BorderWidth="0"
+                                      BorderColor="Transparent"
+                                      BackgroundColor="Transparent"
+                                      Text="{Binding StringValue, Mode=TwoWay}"
+                                      IsEnabled="{Binding ControlEnabled}"
+                                      Keyboard="{Binding KeyboardType}" >
+
+            <customControls:ExtendedEntry.Behaviors>
+                <xct:EventToCommandBehavior EventName="TextChanged" Command="{Binding DataChangedEvent}" />
+            </customControls:ExtendedEntry.Behaviors>
+        </customControls:ExtendedEntry>
+    </ContentView.Content>
+</ContentView>

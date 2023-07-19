@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Class="ACRM.mobile.Views.ContentViews.SerialEntryListItemView"
+    xmlns:contentviews="clr-namespace:ACRM.mobile.Views.ContentViews;assembly=ACRM.mobile"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms">
+    <ContentView.Resources>
+        <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter" />
+        <customControls:SerialEntryStateToColorConverter x:Key="SerialEntryStateToColorConverter"/>
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+          <SwipeView>
+    <SwipeView.RightItems>
+        <SwipeItems>
+             <SwipeItem Text="Delete" IsVisible="{Binding DestRecordId, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                       BackgroundColor="Red"
+                       Command="{Binding DeleteButtonCommand}" />
+            <SwipeItem Text="Duplicate" IsVisible="{Binding DestRecordId, Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                       BackgroundColor="Gray"
+                       Command="{Binding DuplicateButtonCommand}" />
+        </SwipeItems>
+    </SwipeView.RightItems>
+    <!-- Content -->
+
+                     <Grid BackgroundColor="#eeeeee">
+                        <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                       
+                    </Grid.ColumnDefinitions>
+                         <contentviews:SerialEntryListItemContentView Grid.Row="0" Grid.Column="0" ></contentviews:SerialEntryListItemContentView>
+                         <Grid Grid.Row="0" Grid.Column="1" RowSpacing="0" ColumnSpacing="0" >
+                             <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                             <ColumnDefinition Width="Auto" />
+                       
+                             </Grid.ColumnDefinitions>
+                        
+                         <Grid Grid.Column="0" RowSpacing="0">
+                              <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+           <RowDefinition Height="*"></RowDefinition>
+             <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                         <Button Margin="0" Grid.Row="1" Padding="0"
+                            
+                            BackgroundColor="Transparent"
+                            Command="{Binding MinusButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="40"
+                            HorizontalOptions="Fill"
+                            Text="&#xf0377;"
+                            TextColor="{StaticResource BackgroundColor}"
+                            VerticalOptions="Center"
+                            WidthRequest="70"  />
+                               <Label Grid.Row="2" Margin="0,0,3,5"
+                                   Text="{Binding PackageCount}"
+                                   HorizontalOptions="Center"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Start"
+                                   FontSize="14"
+                                   FontAttributes="None"/>
+                           </Grid>
+                         <Grid Grid.Column="1" RowSpacing="0">
+                              <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+           <RowDefinition Height="*"></RowDefinition>
+             <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                         <Button Margin="0" Grid.Row="1" Padding="0"
+                            
+                            BackgroundColor="Transparent"
+                            Command="{Binding PlusButtonCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="40"
+                            HorizontalOptions="Fill"
+                            Text="&#xf0419;"
+                            TextColor="{StaticResource BackgroundColor}"
+                            VerticalOptions="Center"
+                            WidthRequest="70"  />
+                               <Label Grid.Row="2" Margin="0,0,3,5"
+                                   Text="{Binding PackageCount}"
+                                   HorizontalOptions="Center"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Start"
+                                   FontSize="14"
+                                   FontAttributes="None"/>
+                           </Grid>
+                              </Grid>
+                       </Grid>
+          </SwipeView>   
+    </ContentView.Content>
+</ContentView>

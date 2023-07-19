@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.Widgets.WebControlPanelView">
+    <ContentView.Content>
+        <Grid Margin="0,20,0,0">
+            <StackLayout Margin="0,0,0,0" Spacing="0"  Orientation="Vertical">
+                <Grid Margin="0,0,0,0" ColumnSpacing="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="Auto" ></ColumnDefinition>
+                        <ColumnDefinition Width="Auto" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" FontSize="16"  TextColor="Black" LineBreakMode="TailTruncation" Margin="10,10,0,10" HorizontalOptions="StartAndExpand" Text="{Binding Title}"></Label>
+              
+                </Grid>
+                <BoxView HeightRequest="2" HorizontalOptions="FillAndExpand" BackgroundColor="Black"></BoxView>
+              <ScrollView HorizontalOptions="FillAndExpand"
+             VerticalOptions="FillAndExpand">
+          <WebView x:Name="Webview" Source="{Binding WebViewSource}"
+             HeightRequest="400"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="FillAndExpand">
+            </WebView>
+           </ScrollView>
+               
+            </StackLayout>
+  
+        </Grid>
+    </ContentView.Content>
+</ContentView>

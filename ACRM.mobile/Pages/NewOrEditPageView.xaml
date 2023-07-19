@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="ACRM.mobile.Pages.NewOrEditPageView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:syncfusion1="clr-namespace:Syncfusion.XForms.Accordion;assembly=Syncfusion.Expander.XForms"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile"
+    Padding="{StaticResource PagePadding}"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    NavigationPage.HasNavigationBar="false">
+
+    <ContentPage.Resources>
+        <valueConverters:BoolToStringConverter x:Key="BoolToStringConverter" />
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter" />
+
+        <ResourceDictionary>
+            <OnPlatform x:Key="ErrorMessageMargins" x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="0,5,0,5" />
+                <On Platform="Android, WinPhone" Value="0,5,0,5" />
+                <On Platform="UWP" Value="0,5,0,5" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <views:CustomNavigationBar
+                Grid.Row="0"
+                BindingContext="this"
+                HeightRequest="45" />
+            <Grid
+                Grid.Row="1"
+                IsVisible="{Binding HasEditRights}"
+                Margin="0"
+                BackgroundColor="{StaticResource SearchPageBackground}"
+                HorizontalOptions="Fill"
+                RowSpacing="0"
+                VerticalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!--  Some fancy line  -->
+                <BoxView
+                    Grid.Row="0"
+                    Margin="0"
+                    BackgroundColor="{Binding InfoAreaColor}"
+                    HeightRequest="{StaticResource FancyLineHeight}"
+                    HorizontalOptions="FillAndExpand" />
+
+                <!--  Error Details  -->
+                <syncfusion1:SfAccordion
+                    x:Name="ErrorInfoAccordion"
+                    Grid.Row="1"
+                    IsVisible="{Binding IsErrorMessageVisible}"
+                    HeightRequest="124"
+                    BackgroundColor="{StaticResource SearchPageBackground}"
+                    Margin="{StaticResource ErrorMessageMargins}"
+                    BindableLayout.ItemsSource="{Binding PageEditErrors}"
+                    DynamicSizeMode="Content"
+                    ExpandMode="Single"
+                    HeaderIconPosition="End"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <syncfusion1:AccordionItem HeaderBackgroundColor="Red">
+                                <syncfusion1:AccordionItem.Header>
+                                    <Grid>
+                                        <Label Text="{Binding ErrorLabel}" />
+                                    </Grid>
+                                </syncfusion1:AccordionItem.Header>
+                                <syncfusion1:AccordionItem.Content>
+                                    <Grid Padding="5,0,5,5">
+                                        <Label Grid.Row="1" TextColor="Black" Text="{Binding LocalizedDescription}" />
+                                    </Grid>
+                                </syncfusion1:AccordionItem.Content>
+                            </syncfusion1:AccordionItem>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </syncfusion1:SfAccordion>
+                
+                <!--  Details Content !  -->
+                  <Grid Grid.Row="2"
+                 
+                    BackgroundColor="{StaticResource SearchPageBackground}"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding IsLoading, Converter={StaticResource BoolNegationConverter}}"
+                    VerticalOptions="FillAndExpand">
+                    <ScrollView HorizontalScrollBarVisibility="Never">
+                    <StackLayout BindableLayout.ItemsSource="{Binding Widgets}" BindableLayout.ItemTemplateSelector="{StaticResource DashboardTemplateSelector}" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                />
+                        </ScrollView>
+                </Grid>
+                <StackLayout Grid.Row="2"
+                  
+                    HorizontalOptions="CenterAndExpand"
+                    IsVisible="{Binding IsLoading}"
+                    VerticalOptions="CenterAndExpand">
+
+                    <ActivityIndicator
+                        IsRunning="{Binding IsLoading}"
+                        IsVisible="{Binding IsLoading}"
+                        Color="{StaticResource ProgressColor}" />
+                </StackLayout>
+             
+                <BoxView
+                    Grid.Row="3"
+                    Margin="0"
+                    BackgroundColor="{Binding InfoAreaColor}"
+                    HeightRequest="{StaticResource FancyLineHeight}"
+                    HorizontalOptions="FillAndExpand" />
+                <Grid
+                    Grid.Row="4"
+                    Padding="0,0,0,20"
+                    HeightRequest="45"
+                    HorizontalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Margin="20,5,0,0"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding OnCancelCommand}"
+                        FontSize="{StaticResource NewOrEditViewButtonFontSize}"
+                        HeightRequest="{StaticResource NewOrEditViewButtonHeight}"
+                        HorizontalOptions="Start"
+                        Text="{Binding CancelButtonTitle}"
+                        TextColor="{StaticResource NewOrEditViewButtonFontColor}" />
+                    <Button
+                        Grid.Column="1"
+                        Margin="0,5,20,0"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding OnSaveCommand}"
+                        FontSize="{StaticResource NewOrEditViewButtonFontSize}"
+                        HeightRequest="{StaticResource NewOrEditViewButtonHeight}"
+                        HorizontalOptions="End"
+                        IsEnabled="{Binding IsSaveButtonEnabled}"
+                        Text="{Binding SaveButtonTitle}"
+                        TextColor="{StaticResource NewOrEditViewButtonFontColor}" />
+                </Grid>
+            </Grid>
+
+                <Grid Grid.Row="1" IsVisible="{Binding HasEditRights, Converter={StaticResource BoolNegationConverter}}"
+                        BackgroundColor="{StaticResource SearchPageBackground}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+        
+                        </Grid.RowDefinitions>
+                        <Button Grid.Row="0" Margin="20"  VerticalOptions="Start"
+                         BackgroundColor="White"
+                         HorizontalOptions="Start"
+                        Command="{Binding OnCancelCommand}"
+                        Text="{Binding CancelButtonTitle}"
+                        TextColor="{StaticResource NewOrEditViewButtonFontColor}"></Button>
+                       
+                       <Label Grid.Row="1" LineBreakMode="WordWrap" 
+                                       Text="{Binding RightsMessage}"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="CenterAndExpand"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="{StaticResource NewOrEditViewButtonFontColor}"
+                                       FontSize="21">
+
+                       </Label>
+                   </Grid>
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

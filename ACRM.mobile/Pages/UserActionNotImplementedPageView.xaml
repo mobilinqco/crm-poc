@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ACRM.mobile.Pages.UserActionNotImplementedPageView"
+             xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+             xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile"
+             x:Name="UserActionNotImplemented"
+             NavigationPage.HasNavigationBar="false"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             Padding="{StaticResource PagePadding}">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     BackgroundColor="{StaticResource BackgroundColor}">
+            <views:CustomNavigationBar BindingContext="this"
+                                       HeightRequest="45"/>
+
+                <!--User Not Defined Display-->
+                <views:UserActionNotImplementedContent
+                    BackgroundColor="{StaticResource SearchPageBackground}"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

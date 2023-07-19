@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+     xmlns:widgetmodel="clr-namespace:ACRM.mobile.CustomControls.EditControls.Models;assembly=ACRM.mobile"
+    xmlns:sfCB="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    x:Class="ACRM.mobile.CustomControls.EditControls.Views.LinkParticipantEditPanelView">
+    <ContentView.Content>
+        <Grid x:Name="panelGrid" HorizontalOptions="Fill" RowSpacing="0" VerticalOptions="Fill" Margin="0, 0, 0, 0">
+            <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid HorizontalOptions="Fill" Grid.Row="0" 
+                      VerticalOptions="FillAndExpand" Margin="0" Padding="0" BackgroundColor="LightGray">
+                    <Label Margin="20, 5, 20, 5" FontSize="16" Text="{Binding Title}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Fill"
+                           TextColor="Black"
+                           BackgroundColor="Transparent"
+                           LineBreakMode="TailTruncation"></Label>
+                </Grid>
+             <Grid Grid.Row="1" Margin="20">
+                 <Grid.RowDefinitions>
+                     <RowDefinition Height="Auto"></RowDefinition>
+                      <RowDefinition Height="Auto"></RowDefinition>
+                 </Grid.RowDefinitions>
+                  <StackLayout Grid.Row="0" BindableLayout.ItemsSource="{Binding Participants}" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+               <BindableLayout.ItemTemplate>
+                   <DataTemplate>
+                     <Grid HorizontalOptions="FillAndExpand" Margin="0, 0, 0, 0" >
+                      <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="50" />
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="Auto" />
+                      <ColumnDefinition Width="Auto" />
+                     </Grid.ColumnDefinitions>
+                       <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                     </Grid.RowDefinitions>
+                         <Button Margin="0"  Padding="0" Grid.Row="0" Grid.Column="0"
+                            IsVisible="{Binding AllowDelete}"
+                            BackgroundColor="Transparent"
+                            CommandParameter="{Binding .}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type widgetmodel:LinkParticipantEditPanelModel}}, Path= RemoveParticipantCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="30"
+                            HorizontalOptions="Fill"
+                            Text="&#xf0376;"
+                            TextColor="Red"
+                            VerticalOptions="Center"
+                            WidthRequest="50"  />
+                             
+                        <Label Grid.Row="0" Grid.Column="1"
+               FontSize="18"
+               FontAttributes="{Binding LabelFontAttributes}"
+               HorizontalOptions="Fill"
+               TextColor="Black"
+               BackgroundColor="Transparent"
+               LineBreakMode="TailTruncation"
+               HeightRequest="30"
+               VerticalTextAlignment="Center"
+               Text="{Binding Name}"></Label>
+
+                          <Button Margin="0"  Padding="0" Grid.Row="0" Grid.Column="2"
+                            IsVisible="{Binding AllowAcceptance}"
+                            BackgroundColor="Transparent"
+                            CommandParameter="{Binding .}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type widgetmodel:LinkParticipantEditPanelModel}}, Path= AcceptanceTappedCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="30"
+                            HorizontalOptions="Fill"
+                            Text="{Binding AcceptanceIcon}"
+                            TextColor="Silver"
+                            VerticalOptions="Center"
+                            WidthRequest="50"  />
+                         <Button Margin="0"  Padding="0" Grid.Row="0" Grid.Column="3"
+                            IsVisible="{Binding AllowRequirement}"
+                            BackgroundColor="Transparent"
+                            CommandParameter="{Binding .}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type widgetmodel:LinkParticipantEditPanelModel}}, Path= RequirementTappedCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="30"
+                            HorizontalOptions="Fill"
+                            Text="{Binding RequirementIcon}"
+                            TextColor="Silver"
+                            VerticalOptions="Center"
+                            WidthRequest="50"  />
+
+                         
+
+                          <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+            
+                     </Grid>
+                    </DataTemplate>
+               </BindableLayout.ItemTemplate>
+                </StackLayout>
+                   <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" Margin="0, 0, 0, 0" >
+                       <Grid.GestureRecognizers>
+                           <TapGestureRecognizer Command="{Binding AddParticipantCommand}" />
+                          </Grid.GestureRecognizers>
+                      <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" />
+                      <ColumnDefinition Width="*" />
+                     </Grid.ColumnDefinitions>
+                 <Button Margin="0"  Grid.Column="0" Padding="0"
+                            
+                            BackgroundColor="Transparent"
+                            Command="{Binding AddParticipantCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="30"
+                            HorizontalOptions="Fill"
+                            Text="&#xf0417;"
+                            TextColor="LimeGreen"
+                            VerticalOptions="Center"
+                            WidthRequest="50"  />
+                         <Label Grid.Row="0" Grid.Column="1"
+               FontSize="18"
+               FontAttributes="{Binding LabelFontAttributes}"
+               HorizontalOptions="Fill"
+               TextColor="LightGray"
+               BackgroundColor="Transparent"
+               LineBreakMode="TailTruncation"
+               HeightRequest="30"
+               VerticalTextAlignment="Center"
+               Text="Add"></Label>
+
+                       </Grid>
+                </Grid>
+        </Grid>
+
+    </ContentView.Content>
+</ContentView>

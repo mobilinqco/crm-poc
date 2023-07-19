@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:ACRM.mobile.Views"
+    x:Class="ACRM.mobile.Views.Widgets.CalendarListView">
+    <ContentView.Content>
+
+    <views:CalendarListSearchAndListContent VerticalOptions="FillAndExpand"
+                                            HorizontalOptions="FillAndExpand"
+                                            BackgroundColor="{StaticResource SearchPageBackground}" />
+
+    </ContentView.Content>
+</ContentView>

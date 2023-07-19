@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+    x:Class="ACRM.mobile.Views.Widgets.CalendarScheduleView">
+    <ContentView.Content>
+
+        <Grid VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <customControls:CustomDateTimePicker SelectedDataTime="{Binding CurrentSelectedDate, Mode=TwoWay}"
+                                                 HasDate="True"
+                                                 HasTime="False"
+                                                 HeaderHeight="0"
+                                                 HeaderText=""
+                                                 PickerMode="Dialog"
+                                                 IsOpen="{Binding IsDateTimePickerOpen, Mode=TwoWay}"/>
+
+            <customControls:CustomSchedule Grid.Row="1"
+                                           VerticalOptions="FillAndExpand"
+                                           HorizontalOptions="FillAndExpand"
+                                           Margin="{StaticResource CalendarControlsMargin}"
+                                           CellTappedCommand="{Binding CellTappedCommand}"
+                                           CellLongPressedCommand="{Binding CellLongPressedCommand}"
+                                           DataSource="{Binding ScheduleData}"
+                                           DayViewSettings="{Binding DayViewSettings}"
+                                           WeekViewSettings="{Binding WeekViewSettings}"
+                                           ScheduleView="{Binding ScheduleViewMode, Mode=OneWay}"
+                                           SelectedDate="{Binding CurrentSelectedDate, Mode=TwoWay}"
+                                           MoveToDate="{Binding CurrentSelectedDate}"
+                                           VisibleDatesChangedCommand="{Binding ScheduleDatesChangedCommand}">
+
+                <customControls:CustomSchedule.Behaviors>
+                    <xct:EventToCommandBehavior EventName="HeaderTapped" Command="{Binding HeaderTappedCommand}"/>
+                </customControls:CustomSchedule.Behaviors>
+
+            </customControls:CustomSchedule>
+
+        </Grid>
+
+    </ContentView.Content>
+</ContentView>

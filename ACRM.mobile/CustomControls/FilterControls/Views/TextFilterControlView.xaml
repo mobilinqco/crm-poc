@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    x:Class="ACRM.mobile.CustomControls.FilterControls.Views.TextFilterControlView">
+    <ContentView.Content>
+        <Grid Margin="5">
+             <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" />
+                      <ColumnDefinition Width="*" />
+                     </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                     </Grid.RowDefinitions>
+             <Label Grid.Row="0" Grid.Column="0" Margin="5"
+               FontSize="18"
+               FontAttributes="{Binding LabelFontAttributes}"
+               HorizontalOptions="Fill"
+               TextColor="Gray"
+               BackgroundColor="Transparent"
+               LineBreakMode="TailTruncation"
+               HeightRequest="30"
+               VerticalTextAlignment="Center"
+               Text="{Binding Filter.FieldInfo.Name}"></Label>
+
+           <customControls:ExtendedEntry Grid.Row="0" Grid.Column="1" FontSize="{StaticResource EditTextFontSize}" 
+                                      TextColor="{StaticResource EditTextdefaultColor}"
+                                      BorderWidth="0"
+                                      BorderColor="Transparent"
+                                      BackgroundColor="Transparent"
+                                      Text="{Binding StringValue, Mode=TwoWay}"
+                                      Keyboard="{Binding KeyboardType}" ></customControls:ExtendedEntry>
+            <BoxView Grid.Row="1" Grid.Column="1" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+           
+        </Grid>
+        
+    </ContentView.Content>
+</ContentView>

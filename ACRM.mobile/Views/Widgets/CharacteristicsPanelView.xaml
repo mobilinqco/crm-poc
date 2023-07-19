@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:xforms="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             x:Class="ACRM.mobile.Views.Widgets.CharacteristicsPanelView">
+
+    <ContentView.Resources>
+        <OnPlatform x:Key="ViewElementMargins" x:TypeArguments="Thickness">
+            <On Platform="iOS, Android, WinPhone, UWP" Value="10, 10, 0, 0"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="TitleLabelFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS, Android, WinPhone, UWP" Value="16"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="FancyLineHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS, Android, WinPhone, UWP" Value="2"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="DescriptionLabelFontSize" x:TypeArguments="x:Double">
+            <On Platform="iOS, Android, WinPhone, UWP" Value="16"></On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="SeparatorLineHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS, Android, WinPhone, UWP" Value="1"></On>
+        </OnPlatform>
+    </ContentView.Resources>
+    
+    <ContentView.Content>
+        <Grid VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand"
+              Padding="0, 10, 0, 0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Column="0"
+                  VerticalOptions="FillAndExpand"
+                  HorizontalOptions="FillAndExpand">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       Margin="{StaticResource ViewElementMargins}"
+                       FontSize="{StaticResource TitleLabelFontSize}" 
+                       BackgroundColor="Transparent"
+                       Text="{Binding TitleLabelText}"
+                       TextColor="Black"/>
+
+                <BoxView Grid.Row="1"
+                         Margin="0"
+                         BackgroundColor="Black"
+                         HeightRequest="{StaticResource FancyLineHeight}"
+                         HorizontalOptions="FillAndExpand" />
+
+                <xforms:SfListView Grid.Row="2"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   ItemsSource="{Binding CharacteristicGroups}"
+                                   Orientation="Vertical"
+                                   IsScrollingEnabled="False"
+                                   AutoFitMode="DynamicHeight"
+                                   SelectionBackgroundColor="Transparent">
+
+                    <xforms:SfListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid VerticalOptions="FillAndExpand"
+                                  HorizontalOptions="FillAndExpand">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Row="0"
+                                       VerticalOptions="FillAndExpand"
+                                       HorizontalOptions="FillAndExpand"
+                                       HorizontalTextAlignment="Start"
+                                       VerticalTextAlignment="Center"
+                                       Padding="10"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       Text="{Binding DisplayValue}"
+                                       BackgroundColor="LightGray"
+                                       TextColor="DimGray"/>
+
+                                <xforms:SfListView Grid.Row="1"
+                                                   VerticalOptions="FillAndExpand"
+                                                   HorizontalOptions="FillAndExpand"
+                                                   ItemsSource="{Binding CharacteristicItems}"
+                                                   Orientation="Vertical"
+                                                   IsScrollingEnabled="False"
+                                                   AutoFitMode="DynamicHeight"
+                                                   SelectionBackgroundColor="Transparent">
+
+                                    <xforms:SfListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid VerticalOptions="FillAndExpand"
+                                                  HorizontalOptions="FillAndExpand">
+
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+
+                                                <Label Grid.Row="0"
+                                                       VerticalOptions="FillAndExpand"
+                                                       HorizontalOptions="FillAndExpand"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Center"
+                                                       Margin="10, 0, 0, 0"
+                                                       Padding="10"
+                                                       FontSize="18"
+                                                       Text="{Binding DisplayValue}"
+                                                       TextColor="Black"/>
+
+                                                <xforms:SfListView Grid.Row="1"
+                                                                   VerticalOptions="FillAndExpand"
+                                                                   HorizontalOptions="FillAndExpand"
+                                                                   ItemsSource="{Binding AdditionalValues}"
+                                                                   Orientation="Vertical"
+                                                                   IsScrollingEnabled="False"
+                                                                   AutoFitMode="DynamicHeight"
+                                                                   SelectionBackgroundColor="Transparent">
+
+                                                    <xforms:SfListView.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Grid VerticalOptions="FillAndExpand"
+                                                                  HorizontalOptions="FillAndExpand">
+
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                </Grid.RowDefinitions>
+
+                                                                <Label Grid.Row="0"
+                                                                       HorizontalOptions="FillAndExpand"
+                                                                       VerticalOptions="FillAndExpand"
+                                                                       HorizontalTextAlignment="Start"
+                                                                       VerticalTextAlignment="Center"
+                                                                       Margin="20, 0, 0, 0"
+                                                                       Padding="10"
+                                                                       FontSize="{StaticResource DescriptionLabelFontSize}"
+                                                                       FontAttributes="Italic"
+                                                                       Text="{Binding ValueDescription}"
+                                                                       TextColor="Black"
+                                                                       BackgroundColor="LightGray"/>
+
+                                                                <Label Grid.Row="1"
+                                                                       VerticalOptions="FillAndExpand"
+                                                                       HorizontalOptions="FillAndExpand"
+                                                                       HorizontalTextAlignment="Start"
+                                                                       VerticalTextAlignment="Center"
+                                                                       Margin="20, 0, 0, 0"
+                                                                       Padding="10"
+                                                                       FontSize="18"
+                                                                       Text="{Binding InitialContentValue}"
+                                                                       TextColor="Black"/>
+
+                                                            </Grid>
+
+                                                        </DataTemplate>
+                                                    </xforms:SfListView.ItemTemplate>
+
+                                                </xforms:SfListView>
+
+                                                <BoxView Grid.Row="2"
+                                                         Margin="0, 0, 0, 4"
+                                                         BackgroundColor="DarkGray"
+                                                         HeightRequest="{StaticResource SeparatorLineHeight}"
+                                                         HorizontalOptions="FillAndExpand" />
+
+                                            </Grid>
+
+                                        </DataTemplate>
+                                    </xforms:SfListView.ItemTemplate>
+
+                                </xforms:SfListView>
+
+                            </Grid>
+
+                        </DataTemplate>
+                    </xforms:SfListView.ItemTemplate>
+
+                </xforms:SfListView>
+
+            </Grid>
+
+            <ActivityIndicator Grid.Row="0"
+                               BackgroundColor="White"
+                               IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="{StaticResource ProgressColor}" />
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

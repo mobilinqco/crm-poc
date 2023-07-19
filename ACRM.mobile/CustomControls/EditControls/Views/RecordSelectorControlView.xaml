@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+    x:Class="ACRM.mobile.CustomControls.EditControls.Views.RecordSelectorControlView">
+    <ContentView.Content>
+        <StackLayout
+            BackgroundColor="Transparent"
+            Orientation="Vertical"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            >
+             <customControls:ExtendedEntry
+                 FontSize="{StaticResource EditTextFontSize}"
+                 TextColor="{StaticResource EditTextdefaultColor}"
+                 IsReadOnly="True"
+                 InputTransparent="True"
+                 VerticalTextAlignment="Center"
+                 VerticalOptions="FillAndExpand"
+                 BorderWidth="0"
+                 BorderColor="Transparent"
+                 Text="{Binding StringValue, Mode=TwoWay}"
+                 >
+                <customControls:ExtendedEntry.Behaviors>
+                    <xct:EventToCommandBehavior EventName="TextChanged" Command="{Binding DataChangedEvent}" />
+                </customControls:ExtendedEntry.Behaviors>
+            </customControls:ExtendedEntry>
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer 
+                Command="{Binding RecordSelectorEntryCommand}"
+                CommandParameter="{Binding Field}" />
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:hc="clr-namespace:HorizontalList;assembly=HorizontalList"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    x:Class="ACRM.mobile.Views.HeaderGroup">
+
+    <ContentView.Resources>
+        <valueConverters:BoolToColorConverter x:Key="BoolToColorConverter" TrueValue="White" FalseValue="Transparent"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand"
+              BackgroundColor="{StaticResource SearchPageBackground}"
+              Margin="0"
+              RowSpacing="0"
+              ColumnSpacing="0"
+              Padding="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <!--Infoarea Details Header-->
+            <Grid Grid.Row="0" Margin="0" IsVisible="{Binding HeaderData.IsHeaderVisible}"
+                  BackgroundColor="{StaticResource InfoAreasHeaderBackgroundColor}"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand">
+             <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0"
+                  Margin="0"
+                  BackgroundColor="{StaticResource InfoAreasHeaderBackgroundColor}"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                       IsVisible="{Binding HeaderData.IsInfoAreaHeaderImageVisible}"
+                       Margin="0,0,0,15"
+                       WidthRequest="{StaticResource InfoAreaHeaderHeight}"
+                       HeightRequest="{StaticResource InfoAreaHeaderHeight}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       Aspect="AspectFit"
+                       Source="{Binding HeaderData.InfoAreaHeaderImageSource}"/>
+
+                <Grid Grid.Column="1"
+                      Margin="0"
+                      RowSpacing="0"
+                      Padding="0"
+                      VerticalOptions="StartAndExpand"
+                      HorizontalOptions="StartAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" 
+                           VerticalOptions="StartAndExpand"
+                           HorizontalOptions="StartAndExpand"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Center"
+                           IsVisible="{Binding HeaderData.IsHeaderTableCaptionVisible}"
+                           FontSize="{StaticResource HeaderTableCaptionTextFontSize}"
+                           TextColor="{StaticResource HeaderButtonTextColor}"
+                           Text="{Binding HeaderData.HeaderTableCaptionText}" />
+                   
+                    <Label Grid.Row="1"
+                           VerticalOptions="StartAndExpand"
+                           HorizontalOptions="StartAndExpand"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Center"
+                           IsVisible="{Binding HeaderData.IsOrganizerHeaderVisible}"
+                           FontSize="{StaticResource OrganizerHeaderSubTextFontSize}"
+                           TextColor="{StaticResource HeaderButtonTextColor}"
+                           Text="{Binding HeaderData.OrganizerHeaderSubText}" />
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1"
+                  Margin="0"
+                  BackgroundColor="{StaticResource InfoAreasHeaderBackgroundColor}"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  IsVisible="{Binding HeaderData.IsOnlineRecord}">
+            <Button
+                Margin="0"
+                BackgroundColor="Transparent"
+                FontFamily="{StaticResource MaterialDesignIcons}"
+                FontSize="{StaticResource SearchBarIconSize}"
+                HorizontalOptions="End"
+                Text="&#xF0163;"
+                TextColor="White"
+                VerticalOptions="Start"
+                WidthRequest="{StaticResource SearchBarButtonWidth}" />
+                </Grid>
+             </Grid>
+            <!-- Some fancy line -->
+            <BoxView Grid.Row="1" 
+                     HeightRequest="{StaticResource FancyLineHeight}"
+                     BackgroundColor="{Binding HeaderData.InfoAreaColor}"
+                     VerticalOptions="Start"
+                     HorizontalOptions="FillAndExpand"
+                     Margin="0"/>
+
+            <!--Infoarea RelatedInfoAreas-->
+            <StackLayout Grid.Row="2" Margin="0" >
+                <hc:HorizontalList
+                    x:Name="HeaderInfoAreasListView"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    ListOrientation="Horizontal"
+                    ItemsSource="{Binding HeaderData.RelatedInfoAreas}"
+                    SelectedCommand="{Binding OnRelatedInfoAreaSelected}"
+                    HeightRequest="41.5"
+                    BackgroundColor="{StaticResource RelatedInfoAreasHeaderBackgroundColor}">
+                    <hc:HorizontalList.ItemTemplate>
+                        <DataTemplate>
+                            <Grid MinimumWidthRequest="120"
+                                  VerticalOptions="FillAndExpand"
+                                  BackgroundColor="{Binding IsSelected, Converter={StaticResource BoolToColorConverter}}">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       Margin="10,0,5,0"
+                                       MaxLines="1"
+                                       LineBreakMode="TailTruncation"
+                                       Text="{Binding ActionDisplayName}"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="FillAndExpand"
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="{StaticResource HeaderInfoAreaTextColor}"
+                                       FontSize="{StaticResource HeaderInfoAreaTextFontSize}"/>
+                                <BoxView Grid.Column="1"
+                                         Margin="9,0,0,0"
+                                         WidthRequest="1"
+                                         BackgroundColor="{StaticResource HeaderButtonsSeparatorColor}"
+                                         VerticalOptions="FillAndExpand"
+                                         HorizontalOptions="Start"/>
+                            </Grid>
+                        </DataTemplate>
+                    </hc:HorizontalList.ItemTemplate>
+                </hc:HorizontalList>
+            </StackLayout>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:behaviors="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    NavigationPage.HasNavigationBar="false"
+    x:Class="ACRM.mobile.Views.Widgets.LogView"
+    >
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="LogViewLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="LogViewButtonFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <StackLayout VerticalOptions="FillAndExpand"
+                 HorizontalOptions="FillAndExpand"
+                 BackgroundColor="White"
+                 Orientation="Vertical"
+                 Spacing="2">
+
+        <Grid VerticalOptions="FillAndExpand"
+              HorizontalOptions="FillAndExpand"
+              Padding="0"
+              RowSpacing="0"
+              ColumnSpacing="5">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0"
+                   Grid.Row="0"
+                   VerticalOptions="FillAndExpand"
+                   HorizontalOptions="Start"
+                   FontSize="{StaticResource LogViewLabelFontSize}"
+                   Text="{Binding LogText}"
+                   TextColor="Black"/>
+
+            <buttons:SfButton Grid.Column="1"
+                              Grid.Row="0"
+                              HorizontalOptions="End"
+                              VerticalOptions="FillAndExpand"
+                              Margin="0"
+                              Padding="-1"
+                              IsVisible="{Binding IsFullScreenButtonVisible}"
+                              Command="{Binding FullScreenCommand}"
+                              BackgroundColor="Transparent"
+                              FontSize="{StaticResource LogViewLabelFontSize}"
+                              FontFamily="{StaticResource MaterialDesignIcons}"
+                              Text="{Binding FullScreenIconText}"
+                              TextColor="Black"/>
+
+        </Grid>
+
+        <Frame VerticalOptions="FillAndExpand"
+               HorizontalOptions="FillAndExpand"
+               BorderColor="Gray"
+               HasShadow="False"
+               CornerRadius="0"
+               Padding="5">
+            <CollectionView VerticalScrollBarVisibility="Always"
+                            ItemsSource="{Binding AppLogsStrings}">
+
+                <CollectionView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="Scrolled" Command="{Binding ScrolledCommand}"/>
+                </CollectionView.Behaviors>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding .}"
+                               TextColor="Black"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Frame>
+
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="EndAndExpand"
+                     Orientation="Horizontal"
+                     Spacing="5">
+
+            <buttons:SfButton VerticalOptions="FillAndExpand"
+                              HorizontalOptions="End"
+                              Padding="0"
+                              BackgroundColor="Transparent"
+                              Command="{Binding SendLogFileCommand}"
+                              FontSize="{StaticResource LogViewButtonFontSize}"
+                              Text="{Binding SendLogFileText}"
+                              TextColor="Black"/>
+
+            <buttons:SfButton VerticalOptions="FillAndExpand"
+                              HorizontalOptions="End"
+                              Padding="0"
+                              BackgroundColor="Transparent"
+                              Command="{Binding ResetLogFileCommand}"
+                              FontSize="{StaticResource LogViewButtonFontSize}"
+                              Text="{Binding ResetLogFileText}"
+                              TextColor="Black"/>
+
+        </StackLayout>
+
+    </StackLayout>
+    
+</ContentView>

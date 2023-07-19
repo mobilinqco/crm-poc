@@ -1,0 +1,10 @@
+﻿{
+  "dependencies": {
+    "NuGet.Build.Packaging": "0.2.5-dev.8",
+    "NETStandard.Library": "2.1.0",
+    "Microsoft.NETCore.Portable.Compatibility": "1.0.1"
+  },
+  "frameworks": {
+    "netstandard2.1": {}
+  }
+}

@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:widgetmodel="clr-namespace:ACRM.mobile.CustomControls.EditControls.Models;assembly=ACRM.mobile"
+    xmlns:sfCB="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+    x:Class="ACRM.mobile.CustomControls.EditControls.Views.ParticipantEditPanelView">
+    <ContentView.Content>
+        <Grid x:Name="panelGrid" HorizontalOptions="Fill" RowSpacing="0" VerticalOptions="Fill" Margin="0, 0, 0, 0">
+            <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid HorizontalOptions="Fill" Grid.Row="0" 
+                      VerticalOptions="FillAndExpand" Margin="0" Padding="0" BackgroundColor="LightGray">
+                    <Label Margin="20, 5, 20, 5" FontSize="16" Text="{Binding Title}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="Fill"
+                           TextColor="Black"
+                           BackgroundColor="Transparent"
+                           LineBreakMode="TailTruncation"></Label>
+                </Grid>
+             <Grid Grid.Row="1" Margin="20">
+                 <Grid.RowDefinitions>
+                     <RowDefinition Height="Auto"></RowDefinition>
+                      <RowDefinition Height="Auto"></RowDefinition>
+                 </Grid.RowDefinitions>
+                  <StackLayout Grid.Row="0" BindableLayout.ItemsSource="{Binding Participants}" 
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+               <BindableLayout.ItemTemplate>
+                   <DataTemplate>
+                     <Grid HorizontalOptions="FillAndExpand" Margin="0, 0, 0, 0" >
+                      <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="50" />
+                      <ColumnDefinition Width="*" />
+                      <ColumnDefinition Width="Auto" />
+                     </Grid.ColumnDefinitions>
+                       <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
+                     </Grid.RowDefinitions>
+                         <Button Margin="0"  Padding="0" Grid.Row="0" Grid.Column="0"
+                            IsVisible="{Binding AllowDelete}"
+                            BackgroundColor="Transparent"
+                            CommandParameter="{Binding .}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type widgetmodel:RepParticipantEditPanelModel}}, Path= RemoveParticipantCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="30"
+                            HorizontalOptions="Fill"
+                            Text="&#xf0376;"
+                            TextColor="Red"
+                            VerticalOptions="Center"
+                            WidthRequest="50"  />
+                             
+                        <Label Grid.Row="0" Grid.Column="1"
+               FontSize="18"
+               FontAttributes="{Binding LabelFontAttributes}"
+               HorizontalOptions="Fill"
+               TextColor="Black"
+               BackgroundColor="Transparent"
+               LineBreakMode="TailTruncation"
+               HeightRequest="30"
+               VerticalTextAlignment="Center"
+               Text="{Binding Name}"></Label>
+
+                         
+                         <sfCB:SfComboBox WidthRequest="200" ShowBorder="False"
+                                          SelectedIndex="{Binding SelectedRequirementIndex, Mode=TwoWay}"
+                                          BackgroundColor="Transparent" ShowClearButton="False" Margin="0"  Grid.Row="0" Grid.Column="2" x:Name="comboBox"   DropDownItemHeight="45"  DataSource="{Binding Requirements}">
+                             <sfCB:SfComboBox.DropDownButtonSettings>
+                               <sfCB:DropDownButtonSettings>
+                                   <sfCB:DropDownButtonSettings.View>
+                                       <Label Margin="0"  Padding="0" 
+                            
+                            BackgroundColor="Transparent"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="30"
+                            HorizontalOptions="End"
+                            Text="{Binding RequirementIcon}"
+                            TextColor="Silver"
+                            VerticalOptions="Center"
+                            WidthRequest="50"  />
+                                   </sfCB:DropDownButtonSettings.View>
+                               </sfCB:DropDownButtonSettings>
+                             </sfCB:SfComboBox.DropDownButtonSettings>
+                           <sfCB:SfComboBox.CustomView>
+                               <Grid></Grid>
+                           </sfCB:SfComboBox.CustomView>
+                             <sfCB:SfComboBox.ItemTemplate>
+                                 <DataTemplate>
+                <StackLayout Orientation="Horizontal" BackgroundColor="White" HorizontalOptions="CenterAndExpand" Padding="5,0,0,0">
+                    <Label Margin="0"  Padding="0" 
+                            
+                            BackgroundColor="Transparent"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="30"
+                            WidthRequest="40"
+                            HorizontalOptions="Fill"
+                            Text="{Binding ImageSource.glyph}"
+                            TextColor="Silver"
+                            VerticalOptions="Center"
+                              />
+                    <Label Text="{Binding DisplayText}" TextColor="Black" VerticalTextAlignment="Center" HorizontalOptions="Center" FontSize="Medium" WidthRequest="200" />
+                </StackLayout>
+            </DataTemplate>
+                             </sfCB:SfComboBox.ItemTemplate>
+            </sfCB:SfComboBox>
+
+                          <BoxView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HeightRequest="1" HorizontalOptions="Fill"  BackgroundColor="LightGray"></BoxView>
+            
+                     </Grid>
+                    </DataTemplate>
+               </BindableLayout.ItemTemplate>
+                </StackLayout>
+                   <Grid Grid.Row="1" HorizontalOptions="FillAndExpand" Margin="0, 0, 0, 0" >
+                      <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="Auto" />
+                      <ColumnDefinition Width="*" />
+                     </Grid.ColumnDefinitions>
+                 <Button Margin="0"  Grid.Column="0" Padding="0"
+                            
+                            BackgroundColor="Transparent"
+                            CommandParameter="{Binding SelectedValue}"
+                            Command="{Binding AddParticipantCommand}"
+                            FontFamily="{StaticResource MaterialDesignIcons}"
+                            FontSize="30"
+                            HorizontalOptions="Fill"
+                            Text="&#xf0417;"
+                            TextColor="LimeGreen"
+                            VerticalOptions="Center"
+                            WidthRequest="50"  />
+                       <sfCB:SfComboBox Grid.Column="1" Margin="0,0,3,5" ShowBorder="False" 
+                         SuggestionBoxPlacement="Auto"
+                         EnableAutoSize="True"
+                         DataSource="{Binding RepList}"
+                         DisplayMemberPath="DisplayValue"
+                         SelectedItem="{Binding SelectedValue}"
+                         SuggestionMode="Contains"
+                         AllowFiltering="True"
+                         IsEditableMode="False" ></sfCB:SfComboBox>
+                              
+                          
+                       </Grid>
+                </Grid>
+        </Grid>
+
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.Widgets.QueryView"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms"
+    xmlns:views="clr-namespace:ACRM.mobile.Views;assembly=ACRM.mobile"
+    xmlns:widgetmodel="clr-namespace:ACRM.mobile.ViewModels;assembly=ACRM.mobile"
+    xmlns:syncfusion="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms" 
+    xmlns:customControls="clr-namespace:ACRM.mobile.CustomControls;assembly=ACRM.mobile"
+    BackgroundColor="{StaticResource SearchPageBackground}">
+    <ContentView.Resources>
+        <customControls:FileDownloadIconConverter x:Key="FileDownloadIconConverter"/>
+        <customControls:FileTypeIconConverter x:Key="FileTypeIconConverter"/>
+        <valueConverters:BoolToStringConverter x:Key="BoolToStringConverter" />
+        <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter" />
+        <valueConverters:BoolToColorConverter
+            x:Key="BoolToColorConverter"
+            FalseValue="Transparent"
+            TrueValue="White" />
+        <valueConverters:NullToBoolConverter x:Key="NullToBoolConverter" />
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <!--  Content View  -->
+        <Grid BackgroundColor="{StaticResource SearchPageBackground}"
+              Margin="5"
+              HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+            <Grid Margin="0"
+                  BackgroundColor="{StaticResource SearchPageBackground}"
+                  HorizontalOptions="FillAndExpand"
+                  RowSpacing="0"
+                  VerticalOptions="FillAndExpand">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Margin="0"
+                      Grid.Row="0"
+                      BackgroundColor="{StaticResource SearchPageBackground}"
+                      ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0"
+                           Margin="{StaticResource NoResultsLabelMargins}"
+                           BackgroundColor="Transparent"
+                           FontFamily="{StaticResource MaterialDesignIcons}"
+                           FontSize="{StaticResource QueryTitleFontSize}"
+                           HorizontalOptions="FillAndExpand"
+                           Text="{Binding Title}"
+                           TextColor="{StaticResource NoResultTextColor}"
+                           VerticalOptions="CenterAndExpand" />
+                    <Label Grid.Column="1"
+                           Margin="{StaticResource NoResultsLabelMargins}"
+                           BackgroundColor="Transparent"
+                           FontFamily="{StaticResource MaterialDesignIcons}"
+                           FontSize="{StaticResource QueryTitleFontSize}"
+                           HorizontalOptions="CenterAndExpand"
+                           Text="&#xF01DA;"
+                           TextColor="{StaticResource NoResultTextColor}"
+                           VerticalOptions="CenterAndExpand" />
+                </Grid>
+
+
+                <!-- Some fancy line -->
+                <BoxView Grid.Row="1" 
+                     HeightRequest="{StaticResource FancyLineHeight}"
+                     BackgroundColor="{StaticResource BackgroundColor}"
+                     VerticalOptions="Start"
+                     HorizontalOptions="FillAndExpand"
+                     Margin="0"/>
+
+                <!--  Query Results !  -->
+                <syncfusion:SfDataGrid x:Name="dataGrid"
+                                       Grid.Row="2"
+                                       HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="FillAndExpand"
+                                       IsVisible="{Binding HasData}"
+                                       ItemsSource="{Binding QueryData}"
+                                       AllowEditing="False"
+                                       AllowSorting="True"
+                                       NavigationMode="Cell"
+                                       SelectionMode="Single"
+                                       AllowResizingColumn="True"
+                                       ColumnSizer="LastColumnFill"
+                                       >
+                </syncfusion:SfDataGrid>
+                
+
+                <!--  No Result Display  -->
+                <StackLayout Grid.Row="2"
+                             HorizontalOptions="CenterAndExpand"
+                             IsVisible="{Binding EnableNoResultsText}"
+                             VerticalOptions="CenterAndExpand">
+                    <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Margin="{StaticResource NoResultsLabelMargins}"
+                               BackgroundColor="Transparent"
+                               FontFamily="{StaticResource MaterialDesignIcons}"
+                               FontSize="{StaticResource NoResultIconFontSize}"
+                               HorizontalOptions="CenterAndExpand"
+                               Text="&#xF120D;"
+                               TextColor="{StaticResource NoResultTextColor}"
+                               VerticalOptions="CenterAndExpand" />
+
+                        <Label Grid.Row="1"
+                               FontSize="{StaticResource NoResultFontSize}"
+                               HorizontalOptions="Center"
+                               Text="{Binding NoResultsText}"
+                               TextColor="{StaticResource NoResultTextColor}" />
+
+                    </Grid>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2"
+                             HorizontalOptions="CenterAndExpand"
+                             IsVisible="{Binding IsLoading}"
+                             VerticalOptions="CenterAndExpand">
+                    <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                       IsVisible="{Binding IsLoading}"
+                                       Color="{StaticResource ProgressColor}" />
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

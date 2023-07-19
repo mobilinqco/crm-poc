@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ACRM.mobile.Views.Widgets.SerialEntryListingView"
+    xmlns:contentviews="clr-namespace:ACRM.mobile.Views.ContentViews;assembly=ACRM.mobile"
+    xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters.Forms">
+      <ContentView.Resources>
+          <valueConverters:BoolNegationConverter x:Key="BoolNegationConverter"/>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
+           <Grid.RowDefinitions>
+           <RowDefinition Height="Auto"></RowDefinition>
+           <RowDefinition Height="*"></RowDefinition>
+       </Grid.RowDefinitions>
+        <contentviews:SerialEntryDetailsHeader IsVisible="{Binding IsDetailView}" Grid.Row="0" ></contentviews:SerialEntryDetailsHeader>
+        <contentviews:SerialEntryListingHeader IsVisible="{Binding IsDetailView,Converter={StaticResource BoolNegationConverter}}" Grid.Row="0" ></contentviews:SerialEntryListingHeader>
+        <Grid Grid.Row="1" RowSpacing="0" ColumnSpacing="0" HorizontalOptions="FillAndExpand">
+           <Grid.RowDefinitions>
+           <RowDefinition Height="*"></RowDefinition>
+           <RowDefinition Height="Auto"></RowDefinition>
+       </Grid.RowDefinitions>
+             
+         <contentviews:SerialEntryDetailsView IsVisible="{Binding IsDetailView}" Grid.Row="0" ></contentviews:SerialEntryDetailsView>
+          <contentviews:SerialEntryListingContentView IsVisible="{Binding IsDetailView,Converter={StaticResource BoolNegationConverter}}" Grid.Row="0" ></contentviews:SerialEntryListingContentView>
+          <contentviews:SerialEntryListingSumLine IsVisible="{Binding IsDetailView,Converter={StaticResource BoolNegationConverter}}" Grid.Row="1" ></contentviews:SerialEntryListingSumLine>
+       </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

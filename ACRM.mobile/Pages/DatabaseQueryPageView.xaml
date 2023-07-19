@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:PopupPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:utility="clr-namespace:ACRM.mobile.Utils;assembly=ACRM.mobile"
+    xmlns:textinputlayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:customcontrols="clr-namespace:ACRM.mobile.CustomControls"
+    xmlns:syncfusion="clr-namespace:Syncfusion.SfDataGrid.XForms;assembly=Syncfusion.SfDataGrid.XForms"
+    utility:ViewModelLocator.AutoWireViewModel="True"
+    NavigationPage.HasNavigationBar="false"
+    x:Class="ACRM.mobile.Pages.DatabaseQueryPageView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="DatabaseQueryPageViewLabelFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="DatabaseQueryPageViewEntryFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="DatabaseQueryPageViewCloseButtonFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="18" Tablet="18" Desktop="24"></OnIdiom>
+                </On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="DatabaseQueryPageViewButtonFontSize" x:TypeArguments="x:Double">
+                <On Platform="iOS">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="Android">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+                <On Platform="WinPhone, UWP">
+                    <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="16" Desktop="22"></OnIdiom>
+                </On>
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <Grid BackgroundColor="{StaticResource BarBackgroundColor}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Top Navigation Bar -->
+
+            <StackLayout Grid.Column="0"
+                         Grid.Row="0"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="StartAndExpand"
+                         Orientation="Horizontal"
+                         Spacing="5">
+
+                <buttons:SfButton VerticalOptions="FillAndExpand"
+                                  HorizontalOptions="Start"
+                                  Margin="0"
+                                  Padding="0"
+                                  BackgroundColor="Transparent"
+                                  Command="{Binding CloseCommand}"
+                                  FontSize="{StaticResource DatabaseQueryPageViewCloseButtonFontSize}"
+                                  Text="{Binding CloseText}"
+                                  TextColor="White"/>
+
+            </StackLayout>
+
+             <!-- Content -->
+
+            <StackLayout Grid.Column="0"
+                         Grid.Row="1"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         Padding="{StaticResource AppPopupContentPadding}"
+                         BackgroundColor="White"
+                         Orientation="Vertical"
+                         Spacing="2">
+
+                <Label VerticalOptions="Fill"
+                       HorizontalOptions="Start"
+                       FontSize="{StaticResource DatabaseQueryPageViewLabelFontSize}"
+                       Text="SQL"
+                       TextColor="Black"/>
+
+                <textinputlayout:SfTextInputLayout VerticalOptions="Fill"
+                                                   HorizontalOptions="Start"
+                                                   ContainerType="Outlined"
+                                                   OutlineCornerRadius="0">
+                    <Entry Text="{Binding RawSQLText, Mode=TwoWay}"
+                           FontSize="{StaticResource DatabaseQueryPageViewEntryFontSize}"/>
+                </textinputlayout:SfTextInputLayout>
+
+                <buttons:SfButton VerticalOptions="Fill"
+                                  HorizontalOptions="End"
+                                  Padding="0"
+                                  BackgroundColor="Transparent"
+                                  Command="{Binding ExecuteCommand}"
+                                  FontSize="{StaticResource DatabaseQueryPageViewButtonFontSize}"
+                                  Text="Execute SQL"
+                                  TextColor="Black"/>
+
+                <Label VerticalOptions="Fill"
+                       HorizontalOptions="Start"
+                       FontSize="{StaticResource DatabaseQueryPageViewLabelFontSize}"
+                       Text="Response"
+                       TextColor="Black"/>
+
+                <Frame VerticalOptions="FillAndExpand"
+                       HorizontalOptions="FillAndExpand"
+                       BorderColor="Gray"
+                       HasShadow="False"
+                       CornerRadius="0"
+                       Padding="5">
+
+                    <customcontrols:CustomDynamicDataGrid x:Name="DataGrid"
+                                                          ItemsSource="{Binding LoadedQueryResultModels}"
+                                                          AutoGenerateColumns="False"
+                                                          MinimumHeightRequest="0"
+                                                          VerticalOptions="FillAndExpand"
+                                                          HorizontalOptions="FillAndExpand"
+                                                          Padding="5"
+                                                          ColumnSizer="None"
+                                                          AllowLoadMore="True"
+                                                          LoadMoreCommand="{Binding LoadMoreCommand}"
+                                                          LoadMorePosition="Bottom"
+                                                          IsBusy="{Binding IsDataGridBusy}">
+                        <customcontrols:CustomDynamicDataGrid.GridStyle>
+                            <syncfusion:DefaultStyle GridCellBorderWidth="4"
+                                                     HeaderCellBorderWidth="4"/>    
+                        </customcontrols:CustomDynamicDataGrid.GridStyle>
+                    </customcontrols:CustomDynamicDataGrid>
+
+                </Frame>
+
+                <StackLayout VerticalOptions="Fill"
+                             HorizontalOptions="EndAndExpand"
+                             Orientation="Horizontal"
+                             Spacing="5">
+
+                    <buttons:SfButton VerticalOptions="FillAndExpand"
+                                      HorizontalOptions="End"
+                                      Padding="0"
+                                      BackgroundColor="Transparent"
+                                      Command="{Binding CopyCommand}"
+                                      FontSize="{StaticResource DatabaseQueryPageViewButtonFontSize}"
+                                      Text="Copy to Pasteboard"
+                                      TextColor="Black"/>
+
+                    <customcontrols:CustomExportDataGridButton x:Name="SendButton"
+                                                               VerticalOptions="FillAndExpand"
+                                                               HorizontalOptions="End"
+                                                               Padding="0"
+                                                               BackgroundColor="Transparent"
+                                                               FontSize="{StaticResource DatabaseQueryPageViewButtonFontSize}"
+                                                               Text="Send per mail"
+                                                               TextColor="Black">
+
+                        <customcontrols:CustomExportDataGridButton.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="Export" Command="{Binding ExportCommand}"/>
+                        </customcontrols:CustomExportDataGridButton.Behaviors>
+
+                    </customcontrols:CustomExportDataGridButton>
+
+                </StackLayout>
+
+            </StackLayout>
+
+        </Grid>
+
+    </ContentPage.Content>
+</pages:PopupPage>
